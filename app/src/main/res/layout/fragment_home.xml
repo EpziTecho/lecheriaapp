@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nuestros Productos"
+            android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -35,6 +36,7 @@
             android:text="La mejor calidad solo para ti"
             android:textAlignment="center"
             android:textSize="12sp"
+            android:textColor="@color/black"
             android:layout_marginTop="1dp"/>
         <LinearLayout
             android:layout_width="match_parent"

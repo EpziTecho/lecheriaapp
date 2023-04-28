@@ -4,15 +4,228 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="70dp"
     tools:context=".PromoperfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contenido de Ver promos"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/black"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/producto_destacado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:elevation="4dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/baseline_star_24"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Choco trio 3x1"
+                    android:textColor="@color/black"
+                    android:gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/producto_descripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LLevate 3 tazas por el precio de 1, hecha de pura leche de nuestras vacas"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"/>
+
+                <TextView
+                    android:id="@+id/producto_precio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Precio: S/.20.00"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="4dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/producto_destacado">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="6dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/baseline_star_24"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre del producto"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="8dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Descripción del producto"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Precio: $20.00"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="4dp"/>
+
+                </LinearLayout>
+                <!-- Información del primer producto relacionado -->
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp">
+
+                <!-- Información del segundo producto relacionado -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="6dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/baseline_star_24"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre del producto"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="8dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Descripción del producto"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Precio: $20.00"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="4dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp">
+
+                <!-- Información del tercer producto relacionado -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="6dp">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/baseline_star_24"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre del producto"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="8dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Descripción del producto"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="4dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Precio: $20.00"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:paddingTop="4dp"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_quiero_promo"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Quiero esta promo"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

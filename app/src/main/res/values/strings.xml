@@ -18,5 +18,13 @@
         <item>Yogures</item>
         <item>Bebidas</item>
     </string-array>
+
+    <string-array name="left_spinner_sedes">
+        <item>Central</item>
+        <item>Este</item>
+        <item>Oeste</item>
+        <item>Norte</item>
+        <item>Sur</item>
+    </string-array>
     <string name="action_login">Iniciar sesión</string>
 </resources>
