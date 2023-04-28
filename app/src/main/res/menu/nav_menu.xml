@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/baseline_person_24"
+            android:title="Perfil"/>
+
+        <item
+            android:id="@+id/nav_cartacompleta"
+            android:icon="@drawable/baseline_book_24"
+            android:title="Carta Completa"/>
+
+        <item
+            android:id="@+id/nav_promosperfil"
+            android:icon="@drawable/baseline_local_offer_24"
+            android:title="Ver Promos"/>
+
+        <item
+            android:id="@+id/nav_reservacion"
+            android:icon="@drawable/baseline_table_restaurant_24"
+            android:title="Hacer Una Reservacion"/>
+    </group>
+
+    <item
+        android:title=""
+
+        >
+
+        <menu>
+            <item></item>
+            <item></item>
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/baseline_login_24"
+                android:title="Cerrar Sesión"
+                android:orderInCategory="999"
+                />
+        </menu>
+
+    </item>
+
+
+</menu>
