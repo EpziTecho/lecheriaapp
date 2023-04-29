@@ -9,8 +9,7 @@
 
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/baseline_person_24"
-            android:title="Perfil"/>
+           />
 
         <item
             android:id="@+id/nav_cartacompleta"
@@ -24,8 +23,7 @@
 
         <item
             android:id="@+id/nav_reservacion"
-            android:icon="@drawable/baseline_table_restaurant_24"
-            android:title="Hacer Una Reservacion"/>
+            />
     </group>
 
     <item

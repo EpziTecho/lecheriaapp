@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_login"
-        android:icon="@drawable/baseline_login_24"
+        android:icon="@drawable/bell"
         android:title="@string/action_login"
         app:showAsAction="ifRoom"/>
 </menu>
