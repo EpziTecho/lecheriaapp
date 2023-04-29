@@ -1,6 +1,6 @@
 # lecheriaapp
 
-##PLAN DE INVESTIGACION UX
+## PLAN DE INVESTIGACION UX
 
 Un plan de investigación es un documento vivo que va cambiando conforme se va avanzando en la investigación y se realizan hallazgos, así como mediante la introducción de las notas y cuadernos de las entrevistas, los resultados de los tests con usuarios que se hagan, etc.
 
@@ -17,20 +17,20 @@ Para el presente trabajo el plan contendrá las siguientes consideraciones:
   - Guion para el facilitador con las preguntas para los participantes , incluyendo encuesta a los usuarios
   -	Prototipado en baja y alta calidad
 
-##1.	Propósito del plan y descripción del problema 
+## 1.	Propósito del plan y descripción del problema 
 ![image](https://user-images.githubusercontent.com/111802260/235307072-bdbbc2f0-56b1-4770-ae29-361ea081289d.png)
  
-##2. Información sobre cómo se conducirá la investigación, el método empleado y la lógica de la investigación
-###Objetivos de la investigación
+## 2. Información sobre cómo se conducirá la investigación, el método empleado y la lógica de la investigación
+### Objetivos de la investigación
 - Conocer los hábitos de consumo del público objetivo, incluyendo público de tránsito. 
 - Conocer los gustos y preferencias del consumidor, para poder enfocarnos en aquello que representa el diferencial para retener y atraer más clientes. 
 
-###Tipo de investigación 
+### Tipo de investigación 
 Cuantitativa y estadísticamente representativa.
 ###Metodología y técnica utilizada
  Se usó la metodología de design thinking.
  
-##3. Fases de la investigación de acuerdo con la metodología
+## 3. Fases de la investigación de acuerdo con la metodología
 En la primera fase, se trata de investigar y comprender el problema para el que queremos buscar solución. Se continuará usando las entrevistas para repolacion de datos y acercamiento a los usuarios.
 La segunda fase, es definir las personas que van a beneficiarse de la solución no forman parte del proyecto, es aconsejable crear arquetipos o perfiles.
 
