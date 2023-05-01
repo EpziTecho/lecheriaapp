@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lecheriaapp.databinding.ActivityMainBinding;
+import com.example.lecheriaapp.view.LoginFragment;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -57,10 +58,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case R.id.home:
                     replaceFragment(new HomeFragment());
                     break;
-                case R.id.shorts:
+                case R.id.Ubicanos:
                     replaceFragment(new UbicanosFragment());
                     break;
-                case R.id.subscriptions:
+                case R.id.Promos:
                     replaceFragment(new PromocionesFragment());
                     break;
 
@@ -73,15 +74,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            navigationView.setCheckedItem(R.id.home);
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_home:
-                replaceFragment(new HomeFragment());
+            case R.id.nav_IniciarSesion:
+                replaceFragment(new LoginFragment());
                 break;
 
             case R.id.nav_cartacompleta:
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
-    //Boton de inicio de sesion
+    //Boton de Notificaciones
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -122,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_login) {
-            // Aquí manejas el clic en el botón de inicio de sesión
+        if (id == R.id.notificaciones) {
+            // Aquí manejas el clic en el boton de notificaciones
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -8,7 +8,7 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/shorts"
+        android:id="@+id/Ubicanos"
         android:title="Ubícanos"
         android:icon="@drawable/baseline_location_on_24"
         />
@@ -17,7 +17,7 @@
         android:title=""/>-->
 
     <item
-        android:id="@+id/subscriptions"
+        android:id="@+id/Promos"
         android:title="Promos"
         android:icon="@drawable/baseline_star_24" />
 

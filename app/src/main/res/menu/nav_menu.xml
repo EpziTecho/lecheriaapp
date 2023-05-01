@@ -8,7 +8,9 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_IniciarSesion"
+            android:icon="@drawable/baseline_login_24"
+            android:title="Iniciar Sesion"/>
            />
 
         <item
