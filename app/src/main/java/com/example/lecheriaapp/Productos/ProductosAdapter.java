@@ -25,30 +25,37 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
         this.listaProductos = listaProductos;
     }
 
+    // Método que crea una nueva vista de item_producto al ser requerida por el RecyclerView
     @NonNull
     @Override
     public ProductosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Infla la vista del layout item_producto.xml
         View view = LayoutInflater.from(context).inflate(R.layout.item_producto, parent, false);
         return new ProductosViewHolder(view);
     }
 
+    // Método que actualiza el contenido de una vista de item_producto al ser requerido por el RecyclerView
     @Override
     public void onBindViewHolder(@NonNull ProductosViewHolder holder, int position) {
+        // Obtiene los datos del producto en la posición indicada
         Productos producto = listaProductos.get(position);
 
+        // Actualiza los elementos de la vista con los datos del producto
         holder.nombre.setText(producto.getNombre());
         holder.descripcion.setText(producto.getDescripcion());
         holder.precio.setText(producto.getPrecio());
 
-        // Cargar imagen con Glide, Picasso u otra librería similar
+        // Carga la imagen del producto utilizando Glide, una librería para la carga de imágenes
         Glide.with(context).load(producto.getImagen()).into(holder.imagen);
     }
 
+    // Método que indica la cantidad de elementos que hay en la lista de productos
     @Override
     public int getItemCount() {
         return listaProductos.size();
     }
 
+    // Clase que representa una vista de item_producto
     public static class ProductosViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imagen;
@@ -59,6 +66,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
         public ProductosViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            // Obtiene los elementos de la vista y los asigna a las variables
             imagen = itemView.findViewById(R.id.producto_imagen);
             nombre = itemView.findViewById(R.id.producto_nombre);
             descripcion = itemView.findViewById(R.id.producto_descripcion);
@@ -66,4 +74,3 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
         }
     }
 }
-

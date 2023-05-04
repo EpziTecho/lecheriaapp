@@ -29,6 +29,7 @@
     <string name="action_login">Iniciar sesión</string>
 
     <string name="login_button">Iniciar sesión</string>
+    <string name="registro_button">Registrarse</string>
     <string name="password_hint">Contraseña</string>
     <string name="username_hint">Nombre de usuario</string>
 
