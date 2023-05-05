@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lecheriaapp.Productos.Productos;
+import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.Productos.ProductosAdapter;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class PromocionesFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ProductosAdapter adapter;
-    private ArrayList<Productos> productosList;
+    private ArrayList<ProductoModel> productoModelList;
 
     private Spinner leftSpinner;
     private Spinner rightSpinner;
@@ -37,15 +37,15 @@ public class PromocionesFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         // Crear y asignar un ProductosAdapter al RecyclerView
-        productosList = new ArrayList<>();
-        adapter = new ProductosAdapter(getContext(), productosList);
+        productoModelList = new ArrayList<>();
+        adapter = new ProductosAdapter(getContext(), productoModelList);
         recyclerView.setAdapter(adapter);
 
         // Agregar productos de ejemplo
-        productosList.add(new Productos("Producto 1", "Descripción del producto 1", "10.00", "https://loremflickr.com/320/240/desserts"));
-        productosList.add(new Productos("Producto 2", "Descripción del producto 2", "20.00", "https://loremflickr.com/320/240/desserts"));
-        productosList.add(new Productos("Producto 3", "Descripción del producto 3", "30.00", "https://loremflickr.com/320/240/desserts"));
-        productosList.add(new Productos("Producto 4", "Descripción del producto 4", "40.00", "https://loremflickr.com/320/240/desserts"));
+        productoModelList.add(new ProductoModel("Producto 1", "Descripción del producto 1", "10.00", "https://loremflickr.com/320/240/desserts"));
+        productoModelList.add(new ProductoModel("Producto 2", "Descripción del producto 2", "20.00", "https://loremflickr.com/320/240/desserts"));
+        productoModelList.add(new ProductoModel("Producto 3", "Descripción del producto 3", "30.00", "https://loremflickr.com/320/240/desserts"));
+        productoModelList.add(new ProductoModel("Producto 4", "Descripción del producto 4", "40.00", "https://loremflickr.com/320/240/desserts"));
 
         // Notificar al adaptador que se han agregado elementos
         adapter.notifyDataSetChanged();

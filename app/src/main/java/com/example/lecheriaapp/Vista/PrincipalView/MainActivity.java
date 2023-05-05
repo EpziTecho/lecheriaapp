@@ -1,6 +1,5 @@
 package com.example.lecheriaapp.Vista.PrincipalView;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,21 +17,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.lecheriaapp.CartaCompletaFragment;
 import com.example.lecheriaapp.HomeFragment;
+import com.example.lecheriaapp.Presentador.PrincipalPresenter.PresenterPrincipal;
 import com.example.lecheriaapp.PromocionesFragment;
 import com.example.lecheriaapp.PromoperfilFragment;
 import com.example.lecheriaapp.R;
-import com.example.lecheriaapp.ReservacionesFragment;
+import com.example.lecheriaapp.Vista.GestionProductosView.GestionProductosFragment;
 import com.example.lecheriaapp.UbicanosFragment;
 import com.example.lecheriaapp.databinding.ActivityMainBinding;
 import com.example.lecheriaapp.Vista.LoginView.LoginFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference mDatabase;
     private DrawerLayout drawerLayout;
     private ActivityMainBinding binding;
+
+    private PresenterPrincipal presenterPrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.home);
         }
 
-        // Obtener una instancia de FirebaseAuth y DatabaseReference para acceder a la información del usuario actual
+        presenterPrincipal = new PresenterPrincipal(this,mDatabase,mAuth);
+        presenterPrincipal.welcomeMessage();
+       /* // Obtener una instancia de FirebaseAuth y DatabaseReference para acceder a la información del usuario actual
         mAuth= FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
         FirebaseUser usuario = mAuth.getCurrentUser();
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             // Si no hay ningún usuario logueado, mostrar un mensaje informativo
             Toast.makeText(MainActivity.this, "Probandooo xD-- No hay usuario logueado", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
 
@@ -130,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(new PromoperfilFragment());
                 break;
 
-            case R.id.nav_reservacion:
-                replaceFragment(new ReservacionesFragment());
+            case R.id.nav_gestionProductos:
+                replaceFragment(new GestionProductosFragment());
                 break;
 
             case R.id.nav_logout:

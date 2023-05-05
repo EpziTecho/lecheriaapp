@@ -24,7 +24,9 @@
             android:title="Ver Promos"/>
 
         <item
-            android:id="@+id/nav_reservacion"
+            android:id="@+id/nav_gestionProductos"
+            android:icon="@drawable/baseline_local_offer_24"
+            android:title="Gestionar Productos"/>
             />
     </group>
 

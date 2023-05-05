@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.R;
 
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
 public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ProductosViewHolder> {
 
     private Context context;
-    private List<Productos> listaProductos;
+    private List<ProductoModel> listaProductos;
 
-    public ProductosAdapter(Context context, List<Productos> listaProductos) {
+    public ProductosAdapter(Context context, List<ProductoModel> listaProductos) {
         this.context = context;
         this.listaProductos = listaProductos;
     }
@@ -38,7 +39,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
     @Override
     public void onBindViewHolder(@NonNull ProductosViewHolder holder, int position) {
         // Obtiene los datos del producto en la posición indicada
-        Productos producto = listaProductos.get(position);
+        ProductoModel producto = listaProductos.get(position);
 
         // Actualiza los elementos de la vista con los datos del producto
         holder.nombre.setText(producto.getNombre());
