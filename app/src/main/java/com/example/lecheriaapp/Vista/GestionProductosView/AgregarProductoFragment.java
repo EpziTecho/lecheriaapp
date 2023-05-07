@@ -7,11 +7,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresenterGestionProductos;
 import com.example.lecheriaapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
-public class AgregarProductoFragment extends Fragment {
 
+public class AgregarProductoFragment extends Fragment implements  View.OnClickListener{
+
+    private PresenterGestionProductos presenterGestionProductos;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private Button mAddButton;
     public AgregarProductoFragment() {
         // Required empty public constructor
     }
@@ -20,7 +29,25 @@ public class AgregarProductoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.agregarproducto, container, false);
+        View view = inflater.inflate(R.layout.agregarproducto, container, false);
+
+        presenterGestionProductos = new PresenterGestionProductos(getActivity(), mDatabase, mAuth);
+
+        mAddButton = view.findViewById(R.id.btnAgregar);
+        mAddButton.setOnClickListener(this);
+        return view;
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnAgregar:
+                presenterGestionProductos.agregarProducto();
+
+                break;
+
+        }
     }
 }

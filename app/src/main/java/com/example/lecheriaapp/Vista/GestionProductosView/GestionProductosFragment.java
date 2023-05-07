@@ -43,7 +43,7 @@ public class GestionProductosFragment extends Fragment implements  View.OnClickL
         /*Toast.makeText(getActivity(), "Agregando producto", Toast.LENGTH_SHORT).show();*/
         switch (view .getId()){
             case R.id.add_button:
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AgregarProductoFragment()).commit();
+                presenterGestionProductos.agregarProducto();
                 break;
 
 
