@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/inicio_sesion"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="12dp">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -14,9 +15,9 @@
         android:hint="@string/username_hint"
         app:errorEnabled="true"
         app:errorTextAppearance="@style/ErrorAppearance"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username_input"
@@ -36,9 +37,9 @@
         android:hint="@string/password_hint"
         app:errorEnabled="true"
         app:errorTextAppearance="@style/ErrorAppearance"
-        app:layout_constraintTop_toBottomOf="@id/username_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/username_layout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_input"
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,20 +56,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login_button"
-        app:layout_constraintTop_toBottomOf="@id/password_layout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
- <!--boton para registro-->
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/registro_button"
-    android:text="@string/registro_button"
-    app:layout_constraintTop_toBottomOf="@id/login_button"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
-
-
+        app:layout_constraintTop_toBottomOf="@id/password_layout" />
+    <!--boton para registro-->
+    <Button
+        android:id="@+id/registro_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/registro_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
 
 
 </LinearLayout>
