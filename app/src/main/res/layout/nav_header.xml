@@ -16,6 +16,7 @@
         android:src="@drawable/perfilimagen"
         android:layout_gravity="center" />
     <TextView
+        android:id="@+id/tvNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Martin Lope"
@@ -24,6 +25,7 @@
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/tvCorreo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="martinlope@gmail.com"
