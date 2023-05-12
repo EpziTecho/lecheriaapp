@@ -29,7 +29,7 @@ public class PromocionesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_promociones, container, false);
 
-        // Obtener la referencia al RecyclerView del layout
+      /*  // Obtener la referencia al RecyclerView del layout
         recyclerView = root.findViewById(R.id.recyclerView);
 
         // Crear un LayoutManager para mostrar los elementos en dos columnas
@@ -48,7 +48,7 @@ public class PromocionesFragment extends Fragment {
         productoModelList.add(new ProductoModel("Producto 4", "Descripción del producto 4", "40.00", "https://loremflickr.com/320/240/desserts"));
 
         // Notificar al adaptador que se han agregado elementos
-        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();*/
 /*// Obtener la referencia a los Spinners del layout
         leftSpinner = root.findViewById(R.id.leftSpinner);
         rightSpinner = root.findViewById(R.id.rightSpinner);

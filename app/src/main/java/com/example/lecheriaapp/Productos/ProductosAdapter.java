@@ -43,7 +43,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
 
         // Actualiza los elementos de la vista con los datos del producto
         holder.nombre.setText(producto.getNombre());
-        holder.descripcion.setText(producto.getDescripcion());
+        holder.descripcion.setText(producto.getCalorias());
         holder.precio.setText(producto.getPrecio());
 
         // Carga la imagen del producto utilizando Glide, una librería para la carga de imágenes

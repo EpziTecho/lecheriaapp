@@ -116,11 +116,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mDatabase.child("Usuarios").child(currentUser.getUid()).get().addOnCompleteListener(task -> { //Obtener los datos del usuario actual
                 if (task.isSuccessful()) {
                     UserModel userModel = task.getResult().getValue(UserModel.class); //
-                    txtUserName.setText(userModel.getNombre());
-                    txtUserEmail.setText(userModel.getEmail());
-                    /* if (currentUser.getPhotoUrl() != null) {
-                Glide.with(this).load(currentUser.getPhotoUrl()).into(imgUserProfile);
-            }*/
+                    if (userModel != null) {
+                        txtUserName.setText(userModel.getNombre());
+                        txtUserEmail.setText(userModel.getEmail());
+    /* if (currentUser.getPhotoUrl() != null) {
+        Glide.with(this).load(currentUser.getPhotoUrl()).into(imgUserProfile);
+    }*/
+                    } else {
+                        Toast.makeText(this, "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show();
+                    }
                 } else {//Si no se obtienen los datos del usuario actual
                     Toast.makeText(this, "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show();
                 }

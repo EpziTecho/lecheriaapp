@@ -15,9 +15,11 @@ import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.GestionProductosView.AgregarProductoFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -75,35 +77,58 @@ public class PresenterGestionProductos implements View.OnClickListener {
         }
     }
 
-    private void cargaProductoFirebase(String estado,String nombre, String caloria,
+    private void cargaProductoFirebase(String estado, String nombre, String caloria,
                                        float precio, String disponibilidad, String ingredientes) {
-        //Se obtiene la instancia de FirebaseAuth y DatabaseReference
-        mAuth= FirebaseAuth.getInstance();
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-        //Se crea un mapa de valores para el nuevo producto
-        Map<String,Object> producto = new HashMap<>();
-        producto.put("estado",estado);
-        producto.put("nombre",nombre);
-        producto.put("caloria",caloria);
-        producto.put("precio",precio);
-        producto.put("disponibilidad",disponibilidad);
-        producto.put("ingredientes",ingredientes);
-        //Se actualiza la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
-        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("producto").updateChildren(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                //Si se completa la actualización del producto, se muestra un mensaje de confirmación
-                Toast.makeText(mContext, "Producto agregado", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                //Si ocurre un error en la actualización del producto, se muestra un mensaje de error
-                Toast.makeText(mContext, "Error al agregar producto", Toast.LENGTH_SHORT).show();
-            }
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        }) ;
+        // Primero obtenemos el número del último producto creado
+        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DataSnapshot snapshot = task.getResult();
+                    int ultimoProducto = 0;
+                    if (snapshot.exists()) {
+                        ultimoProducto = Integer.parseInt(snapshot.getValue().toString());
+                    }
+
+                    // Creamos un mapa de valores para el nuevo producto
+                    Map<String, Object> producto = new HashMap<>();
+                    producto.put("estado", estado);
+                    producto.put("nombre", nombre);
+                    producto.put("caloria", caloria);
+                    producto.put("precio", precio);
+                    producto.put("disponibilidad", disponibilidad);
+                    producto.put("ingredientes", ingredientes);
+
+                    // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
+                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + (ultimoProducto + 1)).setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            // Si se completa la actualización del producto, se muestra un mensaje de confirmación
+                            Toast.makeText(mContext, "Producto agregado", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Si ocurre un error en la actualización del producto, se muestra un mensaje de error
+                            Toast.makeText(mContext, "Error al agregar producto", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    // Actualizamos el número del último producto creado
+                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(ultimoProducto + 1);
+                } else {
+                    Toast.makeText(mContext, "Error al obtener el último producto", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
+
+
+
 
 
 }
