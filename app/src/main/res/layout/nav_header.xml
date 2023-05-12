@@ -1,35 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="190dp"
-    android:gravity="bottom"
     android:layout_marginTop="20dp"
+    android:background="@drawable/manchas"
+    android:gravity="bottom"
+    android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/ic_home"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    tools:visibility="visible">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/perfilimagen"
-        android:layout_gravity="center" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Martin Lope"
-        android:textColor="@color/black"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="16dp"
         android:layout_gravity="center"
-        android:textStyle="bold"/>
+        app:srcCompat="@drawable/logolecheria"
+        android:scaleType="centerInside"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="martinlope@gmail.com"
+        android:layout_gravity="center"
+        android:text=""
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="16dp"
-        android:layout_gravity="center"/>
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
 </LinearLayout>
