@@ -39,8 +39,13 @@ public class PresenterPrincipal {
             mDatabase.child("Usuarios").child(usuario.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    UserModel userModel = snapshot.getValue(UserModel.class); // Obtener el objeto UserModel de la base de datos
-                    Toast.makeText(mContext, "Bienvenido " + userModel.getNombre(), Toast.LENGTH_SHORT).show();
+                    UserModel userModel = snapshot.getValue(UserModel.class);
+                    if (userModel != null) {
+                        Toast.makeText(mContext, "Bienvenido " + userModel.getNombre(), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(mContext, "UserModel es nulo", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override

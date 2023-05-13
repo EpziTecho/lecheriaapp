@@ -1,8 +1,12 @@
 package com.example.lecheriaapp.Vista.PrincipalView;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,8 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.example.lecheriaapp.CartaCompletaFragment;
 import com.example.lecheriaapp.HomeFragment;
+import com.example.lecheriaapp.Modelo.UserModel;
 import com.example.lecheriaapp.Presentador.PrincipalPresenter.PresenterPrincipal;
 import com.example.lecheriaapp.PromocionesFragment;
 import com.example.lecheriaapp.PromoperfilFragment;
@@ -27,7 +33,9 @@ import com.example.lecheriaapp.databinding.ActivityMainBinding;
 import com.example.lecheriaapp.Vista.LoginView.LoginFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,6 +90,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         });
 
+        // Verificar si hay una sesión iniciada y ocultar el elemento de menú "Iniciar Sesión" si es así, o el elemento de menú "Cerrar Sesión" en caso contrario
+        Menu navMenu = navigationView.getMenu(); //Obtener el menu del navigationView
+        MenuItem loginItem = navMenu.findItem(R.id.nav_IniciarSesion);//Obtener el item del menu del navigationView
+        MenuItem logoutItem = navMenu.findItem(R.id.nav_logout);//Obtener el item del menu del navigationView
+        mAuth = FirebaseAuth.getInstance();//Obtener la instancia de la base de datos para verificar si hay una sesion iniciada o no
+        if (mAuth.getCurrentUser() != null) { //Si el usuario no es nulo
+            loginItem.setVisible(false);//Ocultar el item de iniciar sesion
+            logoutItem.setVisible(true);//Mostrar el item de cerrar sesion
+        } else {//Si el usuario es nulo
+            loginItem.setVisible(true);//Mostrar el item de iniciar sesion
+            logoutItem.setVisible(false);//Ocultar el item de cerrar sesion
+        }
+        //Hacer que Al iniciar Sesion , del usuario logeado se muestre el nombre del usuario  y el correo en el header
+        //Obtener referencia del header en el navigationView
+        View headerView = navigationView.getHeaderView(0);
+        mAuth= FirebaseAuth.getInstance(); //Obtener la instancia de la base de datos
+        mDatabase= FirebaseDatabase.getInstance().getReference(); //Obtener la referencia de la base de datos
+        FirebaseUser currentUser = mAuth.getCurrentUser();//Obtener el usuario actual
+        TextView txtUserName = headerView.findViewById(R.id.tvNombre); //Obtener el nombre del usuario y mostrarlo en el header(TextView)
+        TextView txtUserEmail = headerView.findViewById(R.id.tvCorreo);//Obtener el correo del usuario y mostrarlo en el header(TextView)
+        //Imagenes aun en proceso
+        /*ImageView imgUserProfile = headerView.findViewById(R.id.imgUserProfile);*/
+        if (currentUser != null) { //Si el usuario no es nulo
+            mDatabase.child("Usuarios").child(currentUser.getUid()).get().addOnCompleteListener(task -> { //Obtener los datos del usuario actual
+                if (task.isSuccessful()) {
+                    UserModel userModel = task.getResult().getValue(UserModel.class); //
+                    if (userModel != null) {
+                        txtUserName.setText(userModel.getNombre());
+                        txtUserEmail.setText(userModel.getEmail());
+    /* if (currentUser.getPhotoUrl() != null) {
+        Glide.with(this).load(currentUser.getPhotoUrl()).into(imgUserProfile);
+    }*/
+                    } else {
+                        Toast.makeText(this, "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show();
+                    }
+                } else {//Si no se obtienen los datos del usuario actual
+                    Toast.makeText(this, "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+        }
+
         // Si no se ha guardado ningún estado anterior, crear y mostrar el fragmento de inicio y marcar el elemento "Inicio" como seleccionado
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
@@ -90,28 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         presenterPrincipal = new PresenterPrincipal(this,mDatabase,mAuth);
         presenterPrincipal.welcomeMessage();
-       /* // Obtener una instancia de FirebaseAuth y DatabaseReference para acceder a la información del usuario actual
-        mAuth= FirebaseAuth.getInstance();
-        mDatabase= FirebaseDatabase.getInstance().getReference();
-        FirebaseUser usuario = mAuth.getCurrentUser();
 
-        // Si hay un usuario logueado, mostrar un mensaje de bienvenida con su nombre obtenido desde la base de datos
-        if (usuario!= null) {
-            mDatabase.child("Usuarios").child(usuario.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Toast.makeText(MainActivity.this, "Bienvenido " + snapshot.child("nombre").getValue(), Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Manejo de errores
-                }
-            });
-        } else {
-            // Si no hay ningún usuario logueado, mostrar un mensaje informativo
-            Toast.makeText(MainActivity.this, "Probandooo xD-- No hay usuario logueado", Toast.LENGTH_SHORT).show();
-        }*/
     }
 
 
@@ -134,8 +165,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_logout:
-                //Toast.makeText(this, "Sesion Finalizada ", Toast.LENGTH_SHORT).show();
+                // Cerrar la sesión actual y redirigir a la actividad de inicio de sesión con un mensaje de despedida,
+                // se refresca la actividad para evitar que el usuario pueda volver a ella usando el botón "Atrás"
                 Toast.makeText(this, "Vuelve pronto", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut(); // Cerrar la sesión actual
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent); // Redirigir a la actividad de inicio de sesión
+                finish(); // Finalizar la actividad actual para evitar que el usuario pueda volver a ella usando el botón "Atrás"
+
                 break;
         }
 
