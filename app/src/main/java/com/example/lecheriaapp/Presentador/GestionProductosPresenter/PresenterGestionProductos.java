@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -42,7 +43,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
 
     public void agregarProducto() {
         //Se crea un diálogo para agregar un nuevo producto
-        Dialog dialog = new Dialog(mContext);
+        dialog = new Dialog(mContext);
         //Se establece la vista del diálogo como el layout "agregarproducto"
         dialog.setContentView(R.layout.agregarproducto);
         //Se asignan las referencias de los campos del layout a las variables correspondientes
@@ -55,9 +56,23 @@ public class PresenterGestionProductos implements View.OnClickListener {
         //Se asigna el botón "Agregar" del layout a la variable "mAddButton" y se establece su acción al hacer clic en el botón "Agregar"
         Button mAddButton = dialog.findViewById(R.id.btnAgregar);
         mAddButton.setOnClickListener(this);
+        Button mCancelButton = dialog.findViewById(R.id.btnCancelar);
+        mCancelButton.setOnClickListener(this);
+        // Obtener el objeto de ventana del diálogo y ajustar su ancho y alto
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
         //Se muestra el diálogo en la pantalla
         dialog.show();
     }
+
+    //Cuando le demos click en cancelar, se cierra el dialogo
+    public void cancelar() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -73,6 +88,9 @@ public class PresenterGestionProductos implements View.OnClickListener {
                 String ingredientes = mIngredientes.getText().toString();
                 //Se llama al método "cargaProductoFirebase" para agregar el producto a Firebase
                 cargaProductoFirebase(estado,nombre,caloria,precio,disponibilidad,ingredientes);
+                break;
+            case R.id.btnCancelar:
+                cancelar();
                 break;
         }
     }

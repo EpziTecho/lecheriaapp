@@ -38,16 +38,15 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
-
-            ProductoModel productoModel = arrayListProductos.get(position);
+    public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) { //Aqui se asignan los valores a los elementos del recycler view
+            int reversePosition = arrayListProductos.size() - 1 - position; //Para que se muestren los ultimos productos primero
+            ProductoModel productoModel = arrayListProductos.get(reversePosition);
             holder.mNombreProducto.setText(productoModel.getNombre());
-            holder.mPrecioProducto.setText(productoModel.getPrecio());
+            holder.mPrecioProducto.setText("S/. "+productoModel.getPrecio());
+            holder.mEstadoProducto.setText(productoModel.getEstado());
             //holder.mDescripcionProducto.setText(productoModel.getCalorias());
             /*holder.mImagenProducto.setImageResource(productoModel.getImagen());*/
             holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
-
-
     }
 
     @Override
@@ -60,24 +59,19 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
     }
 
     public class ProductoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        TextView mNombreProducto,mPrecioProducto,mDescripcionProducto;
+        TextView mNombreProducto,mPrecioProducto,mEstadoProducto;
         ImageView mImagenProducto;
-
-        public ProductoViewHolder(@NonNull View itemView) {
+        public ProductoViewHolder(@NonNull View itemView) { //Aqui se enlazan los elementos del recycler view con los del layout
             super(itemView);
-
             itemView.setOnClickListener(this);
             mNombreProducto=itemView.findViewById(R.id.nombreProductoRow);
             mPrecioProducto=itemView.findViewById(R.id.precioProductoRow);
-            //mDescripcionProducto=itemView.findViewById(R.id.descripcionProductoRow);
+            mEstadoProducto=itemView.findViewById(R.id.estadoProductoRow);
             mImagenProducto=itemView.findViewById(R.id.imagenProductoRow);
-
         }
 
         @Override
         public void onClick(View view) {
-
             Intent intent = new Intent(mcontext, DetallesProductoFragment.class);
             mcontext.startActivity(intent);
 

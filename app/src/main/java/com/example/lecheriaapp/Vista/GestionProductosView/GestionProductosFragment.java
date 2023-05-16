@@ -7,9 +7,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresenterGestionProductos;
+import com.example.lecheriaapp.Presentador.ProductosHomePresenter.ProductosHomePresenter;
 import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.RegistroView.RegistroFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +27,8 @@ public class GestionProductosFragment extends Fragment implements  View.OnClickL
     private PresenterGestionProductos presenterGestionProductos;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private RecyclerView recyclerView;
+    private ProductosHomePresenter productosHomePresenter;
 
     public GestionProductosFragment() {
     }
@@ -33,10 +40,20 @@ public class GestionProductosFragment extends Fragment implements  View.OnClickL
         presenterGestionProductos = new PresenterGestionProductos(getActivity(), mDatabase, mAuth);
         mBtnAgregarProducto = view.findViewById(R.id.add_button);
         mBtnAgregarProducto.setOnClickListener(this);
+        productosHomePresenter= new ProductosHomePresenter(getActivity(), mAuth, mDatabase);
 
         return view;
     }
-
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initRecycler();
+    }
+    private void initRecycler() {
+        RecyclerView recyclerView = getView().findViewById(R.id.product_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        productosHomePresenter.cargarRecyclerViewGestion(recyclerView);
+    }
     @Override
     public void onClick(View view) {
 
