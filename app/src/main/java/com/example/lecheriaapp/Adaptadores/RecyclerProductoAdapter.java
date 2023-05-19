@@ -2,6 +2,7 @@ package com.example.lecheriaapp.Adaptadores;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Modelo.ProductoModel;
@@ -39,8 +42,8 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
 
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) { //Aqui se asignan los valores a los elementos del recycler view
-            int reversePosition = arrayListProductos.size() - 1 - position; //Para que se muestren los ultimos productos primero
-            ProductoModel productoModel = arrayListProductos.get(reversePosition);
+
+            ProductoModel productoModel = arrayListProductos.get(position);
             holder.mNombreProducto.setText(productoModel.getNombre());
             holder.mPrecioProducto.setText("S/. "+productoModel.getPrecio());
             holder.mEstadoProducto.setText(productoModel.getEstado());
@@ -61,6 +64,7 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
     public class ProductoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mNombreProducto,mPrecioProducto,mEstadoProducto;
         ImageView mImagenProducto;
+
         public ProductoViewHolder(@NonNull View itemView) { //Aqui se enlazan los elementos del recycler view con los del layout
             super(itemView);
             itemView.setOnClickListener(this);
@@ -72,9 +76,23 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(mcontext, DetallesProductoFragment.class);
-            mcontext.startActivity(intent);
-
+            int position = getAdapterPosition();
+            ProductoModel productoModel = arrayListProductos.get(position);
+            Bundle args = new Bundle();
+            args.putString("nombre", productoModel.getNombre());
+            args.putString("precio", productoModel.getPrecio());
+            args.putString("estado", productoModel.getEstado());
+            args.putString("calorias", productoModel.getCalorias());
+            args.putString("imagen", productoModel.getImagen());
+            DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
+            detallesProductoFragment.setArguments(args);
+            FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, detallesProductoFragment)
+                    .addToBackStack(null)
+                    .commit();
         }
+        }
+
     }
-}
+

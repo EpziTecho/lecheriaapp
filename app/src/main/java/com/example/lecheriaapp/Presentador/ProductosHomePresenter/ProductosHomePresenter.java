@@ -65,35 +65,6 @@ public class ProductosHomePresenter {
         }
     }
 
-    public void cargarRecyclerViewGestion(RecyclerView recyclerView ){
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
 
-        if (user != null) {
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-
-            mDatabase.child("Usuarios").child(user.getUid()).child("productos").addValueEventListener(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //Se ejecuta cada vez que se cambia algo en la base de datos
-                    ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
-                    for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                        ProductoModel productoModel = new ProductoModel();
-                        productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
-                        productoModel.setEstado(snapshot.child("estado").getValue(String.class));
-                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
-                        arrayListProductos.add(productoModel);
-                    }
-                    adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row_gestion, arrayListProductos);
-                    recyclerView.setAdapter(adapter);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-    }
 
 }

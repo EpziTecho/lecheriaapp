@@ -54,8 +54,8 @@
 
         <Button
             android:id="@+id/btnEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/baseline_edit_note_24"
             android:paddingStart="8dp"
@@ -64,8 +64,8 @@
 
         <Button
             android:id="@+id/btnEliminar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:textColor="@android:color/white"
             android:background="@drawable/baseline_delete_24"
             android:paddingStart="8dp"

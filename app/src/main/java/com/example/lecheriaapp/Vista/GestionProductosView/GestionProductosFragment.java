@@ -52,7 +52,7 @@ public class GestionProductosFragment extends Fragment implements  View.OnClickL
     private void initRecycler() {
         RecyclerView recyclerView = getView().findViewById(R.id.product_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        productosHomePresenter.cargarRecyclerViewGestion(recyclerView);
+        presenterGestionProductos.cargarRecyclerViewGestion(recyclerView);
     }
     @Override
     public void onClick(View view) {
