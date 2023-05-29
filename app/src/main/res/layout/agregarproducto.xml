@@ -96,8 +96,7 @@
             android:id="@+id/btnCancelar"/>
 
 
-
-
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </com.google.android.material.card.MaterialCardView>

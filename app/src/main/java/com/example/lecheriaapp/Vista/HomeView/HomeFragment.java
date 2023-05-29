@@ -1,4 +1,4 @@
-package com.example.lecheriaapp;
+package com.example.lecheriaapp.Vista.HomeView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +19,7 @@ import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.Presentador.LoginPresenter.PresentadorLogin;
 import com.example.lecheriaapp.Presentador.ProductosHomePresenter.ProductosHomePresenter;
 import com.example.lecheriaapp.Productos.ProductosAdapter;
+import com.example.lecheriaapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -60,10 +61,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         rightSpinner.setAdapter(rightAdapter);
         productosHomePresenter= new ProductosHomePresenter(getActivity(), mAuth, mDatabase);
 
-
         return view;
-
-
 
     }
 
@@ -73,23 +71,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         initRecycler();
     }
         private void initRecycler() {
-    RecyclerView recyclerView = getView().findViewById(R.id.recyclerViewHome);
+        RecyclerView recyclerView = getView().findViewById(R.id.recyclerViewHome);
 /*
    con grid
-*/
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+*/          GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
             recyclerView.setLayoutManager(gridLayoutManager);
             productosHomePresenter.cargarRecyclerView(recyclerView);
 
 
-
     }
-
-
-
 
     @Override
     public void onClick(View view) {
+
+
 
     }
 }

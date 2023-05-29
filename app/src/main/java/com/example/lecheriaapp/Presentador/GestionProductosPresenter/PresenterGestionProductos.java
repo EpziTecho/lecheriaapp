@@ -4,13 +4,19 @@ import android.app.Dialog;
 import android.content.Context;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lecheriaapp.Adaptadores.RecyclerProductoAdapter;
+import com.example.lecheriaapp.Adaptadores.RecyclerProductoGestionAdapter;
+import com.example.lecheriaapp.Modelo.ProductoModel;
+import com.example.lecheriaapp.Productos.ProductosAdapter;
 import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.GestionProductosView.AgregarProductoFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,9 +26,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +41,8 @@ public class PresenterGestionProductos implements View.OnClickListener {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private Dialog dialog;
+    private RecyclerView recyclerView;
+    private RecyclerProductoGestionAdapter adapter;
     private EditText mNombre, mCaloria, mPrecio, mDisponibilidad, mIngredientes, mEstado;
 
     public PresenterGestionProductos(Context mContext, DatabaseReference mDatabase, FirebaseAuth mAuth) {
@@ -42,7 +53,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
 
     public void agregarProducto() {
         //Se crea un diálogo para agregar un nuevo producto
-        Dialog dialog = new Dialog(mContext);
+        dialog = new Dialog(mContext);
         //Se establece la vista del diálogo como el layout "agregarproducto"
         dialog.setContentView(R.layout.agregarproducto);
         //Se asignan las referencias de los campos del layout a las variables correspondientes
@@ -55,9 +66,23 @@ public class PresenterGestionProductos implements View.OnClickListener {
         //Se asigna el botón "Agregar" del layout a la variable "mAddButton" y se establece su acción al hacer clic en el botón "Agregar"
         Button mAddButton = dialog.findViewById(R.id.btnAgregar);
         mAddButton.setOnClickListener(this);
+        Button mCancelButton = dialog.findViewById(R.id.btnCancelar);
+        mCancelButton.setOnClickListener(this);
+        // Obtener el objeto de ventana del diálogo y ajustar su ancho y alto
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
         //Se muestra el diálogo en la pantalla
         dialog.show();
     }
+
+    //Cuando le demos click en cancelar, se cierra el dialogo
+    public void cancelar() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -73,6 +98,9 @@ public class PresenterGestionProductos implements View.OnClickListener {
                 String ingredientes = mIngredientes.getText().toString();
                 //Se llama al método "cargaProductoFirebase" para agregar el producto a Firebase
                 cargaProductoFirebase(estado,nombre,caloria,precio,disponibilidad,ingredientes);
+                break;
+            case R.id.btnCancelar:
+                cancelar();
                 break;
         }
     }
@@ -127,7 +155,36 @@ public class PresenterGestionProductos implements View.OnClickListener {
     }
 
 
+    public void cargarRecyclerViewGestion(RecyclerView recyclerView ){
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
 
+        if (user != null) {
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+
+            mDatabase.child("Usuarios").child(user.getUid()).child("productos").addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //Se ejecuta cada vez que se cambia algo en la base de datos
+                    ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                    for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                        ProductoModel productoModel = new ProductoModel();
+                        productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                        productoModel.setEstado(snapshot.child("estado").getValue(String.class));
+                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                        arrayListProductos.add(productoModel);
+                    }
+                    adapter = new RecyclerProductoGestionAdapter(mContext, R.layout.producto_row_gestion, arrayListProductos);
+                    recyclerView.setAdapter(adapter);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
 
 
 
