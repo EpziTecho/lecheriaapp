@@ -4,61 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".HomeFragment">
-
+    android:layout_marginBottom="70dp"
+    tools:context=".Vista.HomeView.HomeFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <!-- Contenedor para título y lista -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="685dp"
+        android:layout_below="@id/titleTextView"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_below="@id/titleTextView"
         android:gravity="center"
-        >
+        android:orientation="vertical">
 
         <!-- Título -->
+        <!-- Subtitulo -->
         <TextView
             android:id="@+id/titleTextView"
-            android:layout_width="match_parent"
+            android:layout_width="411dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/poppins_medium"
             android:text="Nuestros Productos"
-            android:textColor="@color/black"
             android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="6dp"/>
-        <!-- Subtitulo -->
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/subtitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:fontFamily="@font/poppins"
             android:text="La mejor calidad solo para ti"
             android:textAlignment="center"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="1dp"/>
+            android:textColor="#7A7A7A"
+            android:textSize="12sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <!-- Filtro desplegable izquierdo -->
+
             <Spinner
                 android:id="@+id/leftSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"/>
+                android:layout_marginRight="8dp" />
 
             <!-- Filtro desplegable derecho -->
             <Spinner
                 android:id="@+id/rightSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"/>
+                android:layout_marginLeft="8dp" />
 
         </LinearLayout>
 
@@ -68,6 +75,7 @@
             android:layout_height="match_parent" />
 
 
-    </LinearLayout>
 
+    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresenterGestionProductos;
 import com.example.lecheriaapp.R;
@@ -21,6 +22,7 @@ public class AgregarProductoFragment extends Fragment implements  View.OnClickLi
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private Button mAddButton;
+    private Button mCancelButton;
     public AgregarProductoFragment() {
         // Required empty public constructor
     }
@@ -32,9 +34,11 @@ public class AgregarProductoFragment extends Fragment implements  View.OnClickLi
         View view = inflater.inflate(R.layout.agregarproducto, container, false);
 
         presenterGestionProductos = new PresenterGestionProductos(getActivity(), mDatabase, mAuth);
-
         mAddButton = view.findViewById(R.id.btnAgregar);
         mAddButton.setOnClickListener(this);
+        mCancelButton = view.findViewById(R.id.btnCancelar);
+        mCancelButton.setOnClickListener(this);
+
         return view;
 
 
@@ -45,7 +49,6 @@ public class AgregarProductoFragment extends Fragment implements  View.OnClickLi
         switch (view.getId()){
             case R.id.btnAgregar:
                 presenterGestionProductos.agregarProducto();
-
                 break;
 
         }

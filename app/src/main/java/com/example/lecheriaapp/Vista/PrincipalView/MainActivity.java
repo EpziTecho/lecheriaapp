@@ -5,7 +5,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +18,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.bumptech.glide.Glide;
-import com.example.lecheriaapp.CartaCompletaFragment;
-import com.example.lecheriaapp.HomeFragment;
+import com.example.lecheriaapp.Vista.CartaCompletaView.CartaCompletaFragment;
+import com.example.lecheriaapp.Vista.HomeView.HomeFragment;
 import com.example.lecheriaapp.Modelo.UserModel;
 import com.example.lecheriaapp.Presentador.PrincipalPresenter.PresenterPrincipal;
 import com.example.lecheriaapp.PromocionesFragment;
