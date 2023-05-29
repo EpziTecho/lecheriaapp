@@ -13,15 +13,15 @@
     tools:visibility="visible">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/logolecheria"
+        android:layout_marginTop="16dp"
         android:scaleType="centerInside"
         app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
+        app:srcCompat="@drawable/logolecheria"
         app:strokeColor="@color/black"
-        app:strokeWidth="2dp"/>
+        app:strokeWidth="2dp" />
 
     <TextView
         android:id="@+id/tvNombre"

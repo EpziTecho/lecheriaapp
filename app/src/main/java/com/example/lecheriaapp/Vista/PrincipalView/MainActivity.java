@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         // Inflar el layout de la actividad usando la clase generada por data binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         // Establecer el layout como el contenido principal de la actividad
