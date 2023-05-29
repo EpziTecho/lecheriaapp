@@ -4,8 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".HomeFragment">
-
+    android:layout_marginBottom="70dp"
+    tools:context=".Vista.HomeView.HomeFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <!-- Contenedor para título y lista -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,5 +77,5 @@
 
 
     </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

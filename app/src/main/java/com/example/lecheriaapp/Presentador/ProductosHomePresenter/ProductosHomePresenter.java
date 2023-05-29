@@ -43,12 +43,12 @@ public class ProductosHomePresenter {
             mDatabase.child("Usuarios").child(user.getUid()).child("productos").addValueEventListener(new ValueEventListener() {
 
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //Se ejecuta cada vez que se cambia algo en la base de datos
                     ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
                     for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                         ProductoModel productoModel = new ProductoModel();
                         productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
-                        productoModel.setCalorias(snapshot.child("calorias").getValue(String.class));
+                        productoModel.setEstado(snapshot.child("estado").getValue(String.class));
                         productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
                         arrayListProductos.add(productoModel);
                     }
@@ -64,6 +64,7 @@ public class ProductosHomePresenter {
             });
         }
     }
+
 
 
 }
