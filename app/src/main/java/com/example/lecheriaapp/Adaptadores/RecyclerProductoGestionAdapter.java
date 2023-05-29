@@ -20,11 +20,8 @@ import com.example.lecheriaapp.Vista.ProductoView.DetallesProductoFragment;
 import java.util.ArrayList;
 
 public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<RecyclerProductoGestionAdapter.ProductoViewGestionHolder> {
-
     private Context mcontext;
-
     private int layoutResource;
-
     private ArrayList<ProductoModel> arrayListProductos;
 
     public RecyclerProductoGestionAdapter(Context mcontext, int layoutResource, ArrayList<ProductoModel> arrayListProductos) {

@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.lecheriaapp.CartaCompletaFragment;
+import com.example.lecheriaapp.Vista.CartaCompletaView.CartaCompletaFragment;
 import com.example.lecheriaapp.Vista.HomeView.HomeFragment;
 import com.example.lecheriaapp.Modelo.UserModel;
 import com.example.lecheriaapp.Presentador.PrincipalPresenter.PresenterPrincipal;
