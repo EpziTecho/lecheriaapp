@@ -3,25 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:background="@drawable/producto_background"
-    android:orientation="vertical"
+
+    android:background="@drawable/gestion_producto_background"
+    android:orientation="horizontal"
     android:layout_marginLeft="17dp"
     android:layout_marginTop="10dp"
     >
-
-
-    <ImageView
-        android:id="@+id/btn_favorito"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/heart_circle_outline" />
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagenProductoRow"
-        android:layout_width="138dp"
-        android:layout_height="84dp"
-        android:layout_gravity="center"
+        android:layout_width="117dp"
+        android:layout_height="77dp"
+        android:paddingLeft="11dp"
+        android:layout_gravity="center_vertical"
         app:shapeAppearanceOverlay="@style/RoundedImageViewProd"
         android:scaleType="centerInside"
         app:strokeWidth="2dp"/>
@@ -29,6 +22,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
         android:orientation="vertical">
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -43,13 +37,7 @@
                 android:text="nombre"
                 android:textColor="@color/black"
                 android:gravity="start"/>
-            <TextView
-                android:id="@+id/calificacionEstrella"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Calificacion"
-                android:gravity="end" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
