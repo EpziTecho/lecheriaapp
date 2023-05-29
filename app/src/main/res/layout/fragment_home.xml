@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/spinner_background"
-                        android:dropDownWidth="40dp"
+
                         />
 
                     <!-- Filtro desplegable derecho -->
