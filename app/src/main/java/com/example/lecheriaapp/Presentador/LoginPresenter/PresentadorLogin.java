@@ -50,6 +50,7 @@ public class PresentadorLogin {
                         } else {
                             Log.w(TAG, "signInWithEmail:failure", task.getException()); // Registrar un mensaje de fallo en el registro de depuración
                             Toast.makeText(mcontext, "Authentication failed.", Toast.LENGTH_SHORT).show(); // Mostrar un mensaje de error al usuario
+                            dialog.dismiss(); // Descartar el cuadro de diálogo de progreso
                         }
                     }
                 });

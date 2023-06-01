@@ -2,14 +2,23 @@ package com.example.lecheriaapp.Modelo;
 
 public class ProductoModel {
     private String nombre;
-
     private String calorias;
     private String precio;
     private String estado;
     private String disponibilidad;
     private String imagen;
 
+    public ProductoModel(String nombre, String calorias, String precio, String estado, String disponibilidad, String imagen) {
+        this.nombre = nombre;
+        this.calorias = calorias;
+        this.precio = precio;
+        this.estado = estado;
+        this.disponibilidad = disponibilidad;
+        this.imagen = imagen;
+    }
+
     public ProductoModel() {
+
     }
 
     public String getCalorias() {

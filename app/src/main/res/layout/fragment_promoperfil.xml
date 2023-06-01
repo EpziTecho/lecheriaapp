@@ -15,55 +15,57 @@
             android:id="@+id/producto_destacado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_margin="8dp"
-                android:padding="16dp"
-                android:elevation="4dp">
+                android:elevation="4dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/baseline_star_24"
-                    android:scaleType="centerCrop"
                     android:layout_gravity="center_horizontal"
-                    />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_star_24" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="4dp"
                     android:text="Choco trio 3x1"
                     android:textColor="@color/black"
-                    android:gravity="center_horizontal"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="4dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/producto_descripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LLevate 3 tazas por el precio de 1, hecha de pura leche de nuestras vacas"
                     android:gravity="center_horizontal"
+                    android:text="LLevate 3 tazas por el precio de 1, hecha de pura leche de nuestras vacas"
                     android:textColor="@color/black"
-                    android:textSize="10sp"/>
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/producto_precio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Precio: S/.20.00"
                     android:gravity="center_horizontal"
+                    android:paddingBottom="4dp"
+                    android:text="Precio: S/.20.00"
                     android:textColor="@color/black"
                     android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="4dp"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

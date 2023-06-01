@@ -11,10 +11,10 @@ import com.example.lecheriaapp.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CartaCompletaFragment#newInstance} factory method to
+ * Use the {@link FavoritosUsuarioFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartaCompletaFragment extends Fragment {
+public class FavoritosUsuarioFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +25,7 @@ public class CartaCompletaFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CartaCompletaFragment() {
+    public FavoritosUsuarioFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +35,11 @@ public class CartaCompletaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CartaCompletaFragment.
+     * @return A new instance of fragment FavoritosUsuarioFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CartaCompletaFragment newInstance(String param1, String param2) {
-        CartaCompletaFragment fragment = new CartaCompletaFragment();
+    public static FavoritosUsuarioFragment newInstance(String param1, String param2) {
+        FavoritosUsuarioFragment fragment = new FavoritosUsuarioFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,6 +60,6 @@ public class CartaCompletaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cartacompleta, container, false);
+        return inflater.inflate(R.layout.fragment_favoritosusuario, container, false);
     }
 }

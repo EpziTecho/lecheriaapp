@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,16 +64,18 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
                 String password = mEtxtPassword.getText().toString().trim();
                 String confirmarPassword = mEtxtConfirmarPassword.getText().toString().trim();
 
-                // Verificar si las contraseñas coinciden
-                if (password.equals(confirmarPassword)) {
+                if (TextUtils.isEmpty(nombre) || TextUtils.isEmpty(usuario) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmarPassword)) {
+                    // Mostrar un mensaje de error para que el usuario complete todos los campos requeridos
+                    Toast.makeText(getActivity(), "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+                } else if (!password.equals(confirmarPassword)) {
+                    // Mostrar un mensaje de error si las contraseñas no coinciden
+                    Toast.makeText(getActivity(), "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
+                } else {
                     // Enviar información al presentador para crear un nuevo usuario
                     presentadorRegistro.singUpUser(email, password, nombre, usuario);
-                } else {
-                    // Mostrar mensaje de error si las contraseñas no coinciden
-                    Toast.makeText(getActivity(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                 }
-
                 break;
+
         }
     }
 }

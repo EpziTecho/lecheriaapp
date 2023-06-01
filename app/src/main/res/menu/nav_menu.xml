@@ -14,9 +14,9 @@
            />
 
         <item
-            android:id="@+id/nav_cartacompleta"
+            android:id="@+id/nav_favoritos"
             android:icon="@drawable/baseline_book_24"
-            android:title="Carta Completa"/>
+            android:title="Favoritos"/>
 
         <item
             android:id="@+id/nav_promosperfil"
@@ -25,7 +25,7 @@
 
         <item
             android:id="@+id/nav_gestionProductos"
-            android:icon="@drawable/baseline_local_offer_24"
+            android:icon="@drawable/ic_baseline_whatshot_24"
             android:title="Gestionar Productos"/>
             />
     </group>
