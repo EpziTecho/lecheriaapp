@@ -15,12 +15,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Canjea tu promo"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:text="Canjea tu promo"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- Lista de pasos para usar la promoción -->
         <ListView
@@ -36,10 +36,10 @@
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:scaleType="centerCrop"
             android:layout_below="@id/lista_pasos"
-            android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/codigo_qr" />
 
     </LinearLayout>
