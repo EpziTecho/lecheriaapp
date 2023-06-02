@@ -2,7 +2,6 @@ package com.example.lecheriaapp.Presentador.GestionProductosPresenter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,18 +9,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lecheriaapp.Adaptadores.RecyclerProductoAdapter;
 import com.example.lecheriaapp.Adaptadores.RecyclerProductoGestionAdapter;
 import com.example.lecheriaapp.Modelo.ProductoModel;
-import com.example.lecheriaapp.Productos.ProductosAdapter;
 import com.example.lecheriaapp.R;
-import com.example.lecheriaapp.Vista.GestionProductosView.AgregarProductoFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

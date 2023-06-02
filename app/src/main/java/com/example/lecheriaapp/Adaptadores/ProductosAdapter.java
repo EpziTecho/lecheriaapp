@@ -1,4 +1,4 @@
-package com.example.lecheriaapp.Productos;
+package com.example.lecheriaapp.Adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;

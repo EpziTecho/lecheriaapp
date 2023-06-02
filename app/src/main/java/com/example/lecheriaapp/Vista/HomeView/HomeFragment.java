@@ -1,24 +1,20 @@
 package com.example.lecheriaapp.Vista.HomeView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Modelo.ProductoModel;
-import com.example.lecheriaapp.Presentador.LoginPresenter.PresentadorLogin;
 import com.example.lecheriaapp.Presentador.ProductosHomePresenter.ProductosHomePresenter;
-import com.example.lecheriaapp.Productos.ProductosAdapter;
+import com.example.lecheriaapp.Adaptadores.ProductosAdapter;
 import com.example.lecheriaapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
