@@ -44,16 +44,8 @@
             android:textColor="@android:color/black"
             android:textSize="14sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="vertical">
-
         <Button
-            android:id="@+id/btnEditar"
+            android:id="@+id/btnEditarProducto"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
@@ -63,7 +55,7 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/btnEliminar"
+            android:id="@+id/btnEliminarProducto"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:textColor="@android:color/white"

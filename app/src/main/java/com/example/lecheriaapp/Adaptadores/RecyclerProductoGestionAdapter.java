@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -48,6 +50,28 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
         //holder.mDescripcionProducto.setText(productoModel.getCalorias());
         /*holder.mImagenProducto.setImageResource(productoModel.getImagen());*/
         holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
+
+        // Establecer clic del botón "Editar"
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acción al hacer clic en el botón "Editar"
+                // Puedes llamar a un método en tu presentador para manejar la acción
+                // por ejemplo: presenterGestionProductos.editarProducto(productoModel);
+                Toast.makeText(mcontext, "Editar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Establecer clic del botón "Eliminar"
+        holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Acción al hacer clic en el botón "Eliminar"
+                // Puedes llamar a un método en tu presentador para manejar la acción
+                // por ejemplo: presenterGestionProductos.eliminarProducto(productoModel);
+                Toast.makeText(mcontext, "Eliminar", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -59,27 +83,32 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
         }
     }
 
-    public class ProductoViewGestionHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+    public class ProductoViewGestionHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mNombreProducto, mPrecioProducto, mEstadoProducto, mDescripcionProducto;
         ImageView mImagenProducto;
+        Button btnEditar, btnEliminar;
 
         public ProductoViewGestionHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            mNombreProducto=itemView.findViewById(R.id.nombreProductoRow);
-            mPrecioProducto=itemView.findViewById(R.id.precioProductoRow);
-            mEstadoProducto=itemView.findViewById(R.id.estadoProductoRow);
-            mImagenProducto=itemView.findViewById(R.id.imagenProductoRow);
-
+            mNombreProducto = itemView.findViewById(R.id.nombreProductoRow);
+            mPrecioProducto = itemView.findViewById(R.id.precioProductoRow);
+            mEstadoProducto = itemView.findViewById(R.id.estadoProductoRow);
+            mImagenProducto = itemView.findViewById(R.id.imagenProductoRow);
+            btnEditar = itemView.findViewById(R.id.btnEditarProducto);
+            btnEliminar = itemView.findViewById(R.id.btnEliminarProducto);
         }
 
         @Override
         public void onClick(View view) {
-
+            // Acción al hacer clic en el elemento de la lista
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                ProductoModel productoModel = arrayListProductos.get(position);
+                // Aquí puedes abrir un fragmento o actividad para mostrar los detalles del producto
+                // por ejemplo: mostrarDetallesProducto(productoModel);
+            }
         }
     }
-
 }
-
-

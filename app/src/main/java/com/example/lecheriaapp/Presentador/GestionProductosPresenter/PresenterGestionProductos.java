@@ -179,7 +179,4 @@ public class PresenterGestionProductos implements View.OnClickListener {
             });
         }
     }
-
-
-
 }
