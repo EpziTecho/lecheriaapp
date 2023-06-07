@@ -50,6 +50,8 @@ public class ProductosHomePresenter {
                         productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
                         productoModel.setEstado(snapshot.child("estado").getValue(String.class));
                         productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                        productoModel.setCalorias(snapshot.child("calorias").getValue(String.class));
+                        productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                         arrayListProductos.add(productoModel);
                     }
 

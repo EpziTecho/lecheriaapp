@@ -56,8 +56,6 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
         holder.mNombreProducto.setText(productoModel.getNombre());
         holder.mPrecioProducto.setText("S/. "+productoModel.getPrecio());
         holder.mEstadoProducto.setText(productoModel.getEstado());
-        //holder.mDescripcionProducto.setText(productoModel.getCalorias());
-        /*holder.mImagenProducto.setImageResource(productoModel.getImagen());*/
         holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
 
         // Establecer clic del botón "Editar"
