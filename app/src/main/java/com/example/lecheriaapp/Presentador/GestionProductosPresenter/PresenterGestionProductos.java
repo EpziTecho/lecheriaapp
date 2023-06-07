@@ -203,34 +203,38 @@ public class PresenterGestionProductos implements View.OnClickListener {
                         ultimoProducto = Integer.parseInt(snapshot.getValue().toString());
                     }
 
-                    // Creamos un mapa de valores para el nuevo producto
-                    Map<String, Object> producto = new HashMap<>();
-                    producto.put("estado", estado);
-                    producto.put("nombre", nombre);
-                    producto.put("caloria", caloria);
-                    producto.put("precio", precio);
-                    producto.put("disponibilidad", disponibilidad);
-                    producto.put("ingredientes", ingredientes);
+                    if (ultimoProducto > 0) {
+                        // Si hay productos existentes, actualizamos el último producto creado
+                        actualizarProductoFirebase(estado, nombre, caloria, precio, disponibilidad, ingredientes, ultimoProducto);
+                    } else {
+                        // Si no hay productos existentes, creamos un nuevo producto
+                        // Creamos un mapa de valores para el nuevo producto
+                        Map<String, Object> producto = new HashMap<>();
+                        producto.put("estado", estado);
+                        producto.put("nombre", nombre);
+                        producto.put("caloria", caloria);
+                        producto.put("precio", precio);
+                        producto.put("disponibilidad", disponibilidad);
+                        producto.put("ingredientes", ingredientes);
 
-                    int nuevoNumeroProducto = ultimoProducto + 1;
+                        // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
+                        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + (ultimoProducto + 1)).setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // Si se completa la actualización del producto, se muestra un mensaje de confirmación
+                                Toast.makeText(mContext, "Producto agregado", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Si ocurre un error en la actualización del producto, se muestra un mensaje de error
+                                Toast.makeText(mContext, "Error al agregar producto", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                    // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
-                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + obtenerNumeroProducto(nuevoNumeroProducto)).setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            // Si se completa la actualización del producto, se muestra un mensaje de confirmación
-                            Toast.makeText(mContext, "Producto agregado", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Si ocurre un error en la actualización del producto, se muestra un mensaje de error
-                            Toast.makeText(mContext, "Error al agregar producto", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    // Actualizamos el número del último producto creado
-                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(nuevoNumeroProducto);
+                        // Actualizamos el número del último producto creado
+                        mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(ultimoProducto + 1);
+                    }
                 } else {
                     Toast.makeText(mContext, "Error al obtener el último producto", Toast.LENGTH_SHORT).show();
                 }
@@ -238,14 +242,6 @@ public class PresenterGestionProductos implements View.OnClickListener {
         });
     }
 
-    private String obtenerNumeroProducto(int numeroProducto) {
-        String numeroProductoString = String.valueOf(numeroProducto);
-        if (numeroProductoString.length() < 2) {
-            return "0" + numeroProductoString;
-        } else {
-            return numeroProductoString;
-        }
-    }
 
 
     public void cargarRecyclerViewGestion(RecyclerView recyclerView ){
