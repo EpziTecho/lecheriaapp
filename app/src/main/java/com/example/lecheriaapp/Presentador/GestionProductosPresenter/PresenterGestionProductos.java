@@ -76,6 +76,94 @@ public class PresenterGestionProductos implements View.OnClickListener {
             dialog.dismiss();
         }
     }
+    public void editarProducto(String nombre, String caloria, float precio, String disponibilidad, String ingredientes, String estado, int posicion) {
+        //Se crea un diálogo para editar el producto
+        dialog = new Dialog(mContext);
+        //Se establece la vista del diálogo como el layout "editarproducto"
+        dialog.setContentView(R.layout.editarproducto);
+        //Se asignan las referencias de los campos del layout a las variables correspondientes
+        mNombre = dialog.findViewById(R.id.textNombreProducto);
+        mCaloria = dialog.findViewById(R.id.textCalorias);
+        mPrecio = dialog.findViewById(R.id.textPrecio);
+        mDisponibilidad = dialog.findViewById(R.id.textDisponibilidad);
+        mIngredientes = dialog.findViewById(R.id.textIngredientes);
+        mEstado = dialog.findViewById(R.id.textEstado);
+
+        // Setear los valores actuales del producto en los campos del diálogo
+        mNombre.setText(nombre);
+        mCaloria.setText(caloria);
+        mPrecio.setText(String.valueOf(precio));
+        mDisponibilidad.setText(disponibilidad);
+        mIngredientes.setText(ingredientes);
+        mEstado.setText(estado);
+
+        //Se asigna el botón "Guardar" del layout a la variable "mSaveButton" y se establece su acción al hacer clic en el botón "Guardar"
+        Button mSaveButton = dialog.findViewById(R.id.btnLayoutEditarProducto);
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Obtener los nuevos valores de los campos del layout
+                String nuevoEstado = mEstado.getText().toString();
+                String nuevoNombre = mNombre.getText().toString();
+                String nuevaCaloria = mCaloria.getText().toString();
+                float nuevoPrecio = Float.parseFloat(mPrecio.getText().toString());
+                String nuevaDisponibilidad = mDisponibilidad.getText().toString();
+                String nuevosIngredientes = mIngredientes.getText().toString();
+
+                // Llamar al método "actualizarProductoFirebase" para actualizar el producto en Firebase
+                actualizarProductoFirebase(nuevoEstado, nuevoNombre, nuevaCaloria, nuevoPrecio, nuevaDisponibilidad, nuevosIngredientes, posicion);
+
+                // Cerrar el diálogo
+                dialog.dismiss();
+            }
+        });
+
+        // Obtener el objeto de ventana del diálogo y ajustar su ancho y alto
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        //Se muestra el diálogo en la pantalla
+        dialog.show();
+    }
+
+    private void actualizarProductoFirebase(String estado, String nombre, String caloria,
+                                            float precio, String disponibilidad, String ingredientes, int position) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // Obtenemos la referencia del producto a actualizar
+        DatabaseReference productoRef = mDatabase.child("Usuarios")
+                .child(mAuth.getCurrentUser().getUid())
+                .child("productos")
+                .child("producto" + (position + 1));
+
+        // Creamos un mapa de valores para el producto actualizado
+        Map<String, Object> producto = new HashMap<>();
+        producto.put("estado", estado);
+        producto.put("nombre", nombre);
+        producto.put("caloria", caloria);
+        producto.put("precio", precio);
+        producto.put("disponibilidad", disponibilidad);
+        producto.put("ingredientes", ingredientes);
+
+        // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del producto actualizado
+        productoRef.setValue(producto)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // Si se completa la actualización del producto, se muestra un mensaje de confirmación
+                        Toast.makeText(mContext, "Producto actualizado", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Si ocurre un error en la actualización del producto, se muestra un mensaje de error
+                        Toast.makeText(mContext, "Error al actualizar producto", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 
 
     @Override
@@ -124,8 +212,10 @@ public class PresenterGestionProductos implements View.OnClickListener {
                     producto.put("disponibilidad", disponibilidad);
                     producto.put("ingredientes", ingredientes);
 
+                    int nuevoNumeroProducto = ultimoProducto + 1;
+
                     // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
-                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + (ultimoProducto + 1)).setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + obtenerNumeroProducto(nuevoNumeroProducto)).setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             // Si se completa la actualización del producto, se muestra un mensaje de confirmación
@@ -140,12 +230,21 @@ public class PresenterGestionProductos implements View.OnClickListener {
                     });
 
                     // Actualizamos el número del último producto creado
-                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(ultimoProducto + 1);
+                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(nuevoNumeroProducto);
                 } else {
                     Toast.makeText(mContext, "Error al obtener el último producto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private String obtenerNumeroProducto(int numeroProducto) {
+        String numeroProductoString = String.valueOf(numeroProducto);
+        if (numeroProductoString.length() < 2) {
+            return "0" + numeroProductoString;
+        } else {
+            return numeroProductoString;
+        }
     }
 
 

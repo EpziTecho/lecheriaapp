@@ -81,12 +81,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             // Verificar si el usuario ha iniciado sesión y agregar un producto si no lo ha hecho
             mAuth = FirebaseAuth.getInstance();
             if (mAuth.getCurrentUser() == null) {
-                ProductoModel producto = new ProductoModel("producto1", "calorias1", "precio1", "estado1", "disponibilidad1", "https://loremflickr.com/320/240/desserts");
-                ProductoModel producto2 = new ProductoModel("producto2", "calorias2", "precio2", "estado2", "disponibilidad2", "https://loremflickr.com/320/240/desserts");
-                ProductoModel producto3 = new ProductoModel("producto3", "calorias3", "precio3", "estado3", "disponibilidad3", "https://loremflickr.com/320/240/desserts");
-                ProductoModel producto4 = new ProductoModel("producto4", "calorias4", "precio4", "estado4", "disponibilidad4", "https://loremflickr.com/320/240/desserts");
-                ProductoModel producto5 = new ProductoModel("producto5", "calorias5", "precio5", "estado5", "disponibilidad5", "https://loremflickr.com/320/240/desserts");
-                ProductoModel producto6 = new ProductoModel("producto6", "calorias6", "precio6", "estado6", "disponibilidad6", "https://loremflickr.com/320/240/desserts");
+                ProductoModel producto = new ProductoModel("producto1", "calorias1", "precio1", "estado1", "disponibilidad1","Ingrediente1", "https://loremflickr.com/320/240/desserts");
+                ProductoModel producto2 = new ProductoModel("producto2", "calorias2", "precio2", "estado2", "disponibilidad2","Ingrediente2", "https://loremflickr.com/320/240/desserts");
+                ProductoModel producto3 = new ProductoModel("producto3", "calorias3", "precio3", "estado3", "disponibilidad3","Ingrediente3", "https://loremflickr.com/320/240/desserts");
+                ProductoModel producto4 = new ProductoModel("producto4", "calorias4", "precio4", "estado4", "disponibilidad4","Ingrediente4", "https://loremflickr.com/320/240/desserts");
+                ProductoModel producto5 = new ProductoModel("producto5", "calorias5", "precio5", "estado5", "disponibilidad5","Ingrediente5", "https://loremflickr.com/320/240/desserts");
+                ProductoModel producto6 = new ProductoModel("producto6", "calorias6", "precio6", "estado6", "disponibilidad6","Ingrediente6", "https://loremflickr.com/320/240/desserts");
                 productoModelList.add(producto);
                 productoModelList.add(producto2);
                 productoModelList.add(producto3);

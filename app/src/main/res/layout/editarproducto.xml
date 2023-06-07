@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:padding="16dp"
+            android:text="Agregar Producto"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tituloEstado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Estado" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textEstado"/>
+
+        <TextView
+            android:id="@+id/titulonombre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Nombre comercial" />
+
+        <EditText
+            android:id="@+id/textNombreProducto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/titulocalorias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Calorias" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textCalorias"/>
+
+        <TextView
+            android:id="@+id/tituloPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Precio" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textPrecio"/>
+
+        <TextView
+            android:id="@+id/titulodisponibilidad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Disponibilidad en sedes" />
+        <EditText  android:layout_width="match_parent"
+            android:id="@+id/textDisponibilidad"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/tituloAgregarIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Agregar Ingredientes" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/textIngredientes"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Guardar"
+            android:id="@+id/btnLayoutEditarProducto"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Cancelar"
+            android:id="@+id/btnCancelar"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</com.google.android.material.card.MaterialCardView>

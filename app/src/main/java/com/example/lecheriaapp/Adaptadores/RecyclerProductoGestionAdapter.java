@@ -1,5 +1,6 @@
 package com.example.lecheriaapp.Adaptadores;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,20 +17,28 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Modelo.ProductoModel;
+import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresenterGestionProductos;
 import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.ProductoView.DetallesProductoFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
 public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<RecyclerProductoGestionAdapter.ProductoViewGestionHolder> {
     private Context mcontext;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
     private int layoutResource;
     private ArrayList<ProductoModel> arrayListProductos;
+    private PresenterGestionProductos presenterGestionProductos;
 
     public RecyclerProductoGestionAdapter(Context mcontext, int layoutResource, ArrayList<ProductoModel> arrayListProductos) {
         this.mcontext = mcontext;
         this.layoutResource = layoutResource;
         this.arrayListProductos = arrayListProductos;
+        // Inicializa el presentador aquí
+        presenterGestionProductos = new PresenterGestionProductos(mcontext, databaseReference, firebaseAuth);
     }
 
 
@@ -42,7 +51,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerProductoGestionAdapter.ProductoViewGestionHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerProductoGestionAdapter.ProductoViewGestionHolder holder, @SuppressLint("RecyclerView") int position) {
         ProductoModel productoModel = arrayListProductos.get(position);
         holder.mNombreProducto.setText(productoModel.getNombre());
         holder.mPrecioProducto.setText("S/. "+productoModel.getPrecio());
@@ -58,7 +67,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
                 // Acción al hacer clic en el botón "Editar"
                 // Puedes llamar a un método en tu presentador para manejar la acción
                 // por ejemplo: presenterGestionProductos.editarProducto(productoModel);
-                Toast.makeText(mcontext, "Editar", Toast.LENGTH_SHORT).show();
+                presenterGestionProductos.editarProducto(productoModel.getNombre(), productoModel.getCalorias(), Float.parseFloat(productoModel.getPrecio()), productoModel.getDisponibilidad(), productoModel.getIngredientes(), productoModel.getEstado(), position);
             }
         });
 
