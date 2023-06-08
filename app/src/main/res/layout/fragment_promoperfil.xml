@@ -7,7 +7,7 @@
     android:layout_marginLeft="0dp"
     android:layout_marginBottom="70dp"
     android:layerType="none"
-    tools:context=".PromoperfilFragment">
+    tools:context=".Vista.PrincipalView.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -48,7 +48,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/baseline_star_24"
                     app:srcCompat="@drawable/image_8" />
 
                 <LinearLayout
@@ -128,7 +127,6 @@
                         android:layout_width="109dp"
                         android:layout_height="100dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/baseline_star_24"
                         app:srcCompat="@drawable/image_11" />
 
                     <TextView
@@ -183,7 +181,6 @@
                         android:layout_width="111dp"
                         android:layout_height="100dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/baseline_star_24"
                         app:srcCompat="@drawable/image12" />
 
                     <TextView
@@ -244,7 +241,6 @@
                         android:layout_width="99dp"
                         android:layout_height="77dp"
                         android:scaleType="center"
-                        android:src="@drawable/baseline_star_24"
                         app:srcCompat="@drawable/group_31" />
 
                     <TextView

@@ -1,4 +1,4 @@
-package com.example.lecheriaapp;
+package com.example.lecheriaapp.Vista.UbicanosView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.lecheriaapp.R;
 
 
 public class UbicanosFragment extends Fragment {
