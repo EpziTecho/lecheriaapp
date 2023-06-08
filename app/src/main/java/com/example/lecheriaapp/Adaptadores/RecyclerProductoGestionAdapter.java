@@ -76,7 +76,8 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
                 // Acción al hacer clic en el botón "Eliminar"
                 // Puedes llamar a un método en tu presentador para manejar la acción
                 // por ejemplo: presenterGestionProductos.eliminarProducto(productoModel);
-                Toast.makeText(mcontext, "Eliminar", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mcontext, "Eliminar", Toast.LENGTH_SHORT).show();
+                presenterGestionProductos.eliminarProductoFirebase(position);
             }
         });
     }

@@ -127,6 +127,39 @@ public class PresenterGestionProductos implements View.OnClickListener {
         dialog.show();
     }
 
+    public void eliminarProductoFirebase(int posicion) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        // Obtenemos la referencia del producto a actualizar
+        DatabaseReference productoRef = mDatabase.child("Usuarios")
+                .child(mAuth.getCurrentUser().getUid())
+                .child("productos")
+                .child("producto" + getFormattedNumber(posicion));
+
+        // Creamos un mapa de valores para actualizar el estado del producto a "ELIMINADO"
+        Map<String, Object> producto = new HashMap<>();
+        producto.put("estado", "ELIMINADO");
+
+        // Actualizamos la referencia del producto en la base de datos de Firebase con el nuevo estado
+        productoRef.updateChildren(producto)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // Si se completa la actualización del producto, se muestra un mensaje de confirmación
+                        Toast.makeText(mContext, "Producto eliminado", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Si ocurre un error en la actualización del producto, se muestra un mensaje de error
+                        Toast.makeText(mContext, "Error al eliminar producto", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
     private void actualizarProductoFirebase(String estado, String nombre, String caloria,
                                             float precio, String disponibilidad, String ingredientes, int position) {
         mAuth = FirebaseAuth.getInstance();
