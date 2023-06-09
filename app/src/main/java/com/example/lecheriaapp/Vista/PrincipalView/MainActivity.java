@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
 
-
         // Inflar el layout de la actividad usando la clase generada por data binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         // Establecer el layout como el contenido principal de la actividad
@@ -92,47 +91,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         // Verificar si hay una sesión iniciada y ocultar el elemento de menú "Iniciar Sesión" si es así, o el elemento de menú "Cerrar Sesión" en caso contrario
-        Menu navMenu = navigationView.getMenu(); //Obtener el menu del navigationView
-        MenuItem loginItem = navMenu.findItem(R.id.nav_IniciarSesion);//Obtener el item del menu del navigationView
-        MenuItem logoutItem = navMenu.findItem(R.id.nav_logout);//Obtener el item del menu del navigationView
-        mAuth = FirebaseAuth.getInstance();//Obtener la instancia de la base de datos para verificar si hay una sesion iniciada o no
-        if (mAuth.getCurrentUser() != null) { //Si el usuario no es nulo
-            loginItem.setVisible(false);//Ocultar el item de iniciar sesion
-            logoutItem.setVisible(true);//Mostrar el item de cerrar sesion
-        } else {//Si el usuario es nulo
-            loginItem.setVisible(true);//Mostrar el item de iniciar sesion
-            logoutItem.setVisible(false);//Ocultar el item de cerrar sesion
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Menu navMenu = navigationView.getMenu();
+        MenuItem loginItem = navMenu.findItem(R.id.nav_IniciarSesion);
+        MenuItem logoutItem = navMenu.findItem(R.id.nav_logout);
+        MenuItem gestionProductosItem = navMenu.findItem(R.id.nav_gestionProductos);
+        MenuItem gestionProductosItemOculto1 = navMenu.findItem(R.id.nav_favoritos);
+        MenuItem gestionProductosItemOculto2 = navMenu.findItem(R.id.nav_promosperfil);
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            loginItem.setVisible(false);
+            logoutItem.setVisible(true);
+
+            String currentUserId = mAuth.getCurrentUser().getUid();
+            mDatabase.child("Usuarios").child(currentUserId).child("rol").get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    String rol = task.getResult().getValue(String.class);
+                    if (rol != null) {
+                        if (rol.equals("admin")) {
+                            gestionProductosItem.setVisible(true);
+                            gestionProductosItemOculto1.setVisible(false);
+                            gestionProductosItemOculto2.setVisible(false);
+                        } else if (rol.equals("cliente")) {
+                            gestionProductosItem.setVisible(false);
+                            gestionProductosItemOculto1.setVisible(true);
+                            gestionProductosItemOculto2.setVisible(true);
+                        } else {
+                            gestionProductosItem.setVisible(false);
+                            gestionProductosItemOculto1.setVisible(false);
+                            gestionProductosItemOculto2.setVisible(false);
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Error al obtener el rol del usuario", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            loginItem.setVisible(true);
+            logoutItem.setVisible(false);
+            gestionProductosItem.setVisible(false);
+            gestionProductosItemOculto1.setVisible(false);
+            gestionProductosItemOculto2.setVisible(false);
         }
+
         //Hacer que Al iniciar Sesion , del usuario logeado se muestre el nombre del usuario  y el correo en el header
         //Obtener referencia del header en el navigationView
         View headerView = navigationView.getHeaderView(0);
-        mAuth= FirebaseAuth.getInstance(); //Obtener la instancia de la base de datos
-        mDatabase= FirebaseDatabase.getInstance().getReference(); //Obtener la referencia de la base de datos
-        FirebaseUser currentUser = mAuth.getCurrentUser();//Obtener el usuario actual
-        TextView txtUserName = headerView.findViewById(R.id.tvNombre); //Obtener el nombre del usuario y mostrarlo en el header(TextView)
-        TextView txtUserEmail = headerView.findViewById(R.id.tvCorreo);//Obtener el correo del usuario y mostrarlo en el header(TextView)
-        //Imagenes aun en proceso
-        /*ImageView imgUserProfile = headerView.findViewById(R.id.imgUserProfile);*/
-        if (currentUser != null) { //Si el usuario no es nulo
-            mDatabase.child("Usuarios").child(currentUser.getUid()).get().addOnCompleteListener(task -> { //Obtener los datos del usuario actual
+        mAuth= FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        TextView txtUserName = headerView.findViewById(R.id.tvNombre);
+        TextView txtUserEmail = headerView.findViewById(R.id.tvCorreo);
+        if (currentUser != null) {
+            mDatabase.child("Usuarios").child(currentUser.getUid()).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    UserModel userModel = task.getResult().getValue(UserModel.class); //
+                    UserModel userModel = task.getResult().getValue(UserModel.class);
                     if (userModel != null) {
-                        txtUserName.setText(userModel.getNombre());
-                        txtUserEmail.setText(userModel.getEmail());
-    /* if (currentUser.getPhotoUrl() != null) {
-        Glide.with(this).load(currentUser.getPhotoUrl()).into(imgUserProfile);
-    }*/
-                    } else {
-                        Toast.makeText(this, "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show();
+                        String userName = userModel.getNombre();
+                        String userEmail = userModel.getEmail();
+                        txtUserName.setText(userName);
+                        txtUserEmail.setText(userEmail);
                     }
-                } else {//Si no se obtienen los datos del usuario actual
-                    Toast.makeText(this, "Error al obtener los datos del usuario", Toast.LENGTH_SHORT).show();
                 }
             });
-
-
-
         }
 
         // Si no se ha guardado ningún estado anterior, crear y mostrar el fragmento de inicio y marcar el elemento "Inicio" como seleccionado

@@ -2,24 +2,19 @@ package com.example.lecheriaapp.Adaptadores;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresenterGestionProductos;
 import com.example.lecheriaapp.R;
-import com.example.lecheriaapp.Vista.ProductoView.DetallesProductoFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -65,7 +60,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
                 // Acción al hacer clic en el botón "Editar"
                 // Puedes llamar a un método en tu presentador para manejar la acción
                 // por ejemplo: presenterGestionProductos.editarProducto(productoModel);
-                presenterGestionProductos.editarProducto(productoModel.getNombre(), productoModel.getCalorias(), Float.parseFloat(productoModel.getPrecio()), productoModel.getDisponibilidad(), productoModel.getIngredientes(), productoModel.getEstado(), position);
+                presenterGestionProductos.editarProducto(productoModel.getNombre(), productoModel.getCaloria(), Float.parseFloat(productoModel.getPrecio()), productoModel.getDisponibilidad(), productoModel.getIngredientes(), productoModel.getEstado(), position);
             }
         });
 
