@@ -1,4 +1,4 @@
-package com.example.lecheriaapp;
+package com.example.lecheriaapp.Vista.PromocionSelecionadaView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+
+import com.example.lecheriaapp.R;
+
 public class PromocionSeleccionadaFragment extends Fragment {
     private ListView mListaPasos;
     private ArrayAdapter<String> mPasosAdapter;

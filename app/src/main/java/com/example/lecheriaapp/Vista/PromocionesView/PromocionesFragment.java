@@ -1,4 +1,4 @@
-package com.example.lecheriaapp;
+package com.example.lecheriaapp.Vista.PromocionesView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,11 +8,11 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Modelo.ProductoModel;
-import com.example.lecheriaapp.Productos.ProductosAdapter;
+import com.example.lecheriaapp.Adaptadores.ProductosAdapter;
+import com.example.lecheriaapp.R;
 
 import java.util.ArrayList;
 

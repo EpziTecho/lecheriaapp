@@ -1,4 +1,4 @@
-package com.example.lecheriaapp;
+package com.example.lecheriaapp.Vista.PromoPerfilView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+
+import com.example.lecheriaapp.R;
+import com.example.lecheriaapp.Vista.PromocionSelecionadaView.PromocionSeleccionadaFragment;
 
 public class PromoperfilFragment extends Fragment {
 

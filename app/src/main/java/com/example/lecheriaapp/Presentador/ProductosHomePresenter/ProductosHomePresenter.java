@@ -33,7 +33,7 @@ public class ProductosHomePresenter {
 
     }
 
-    public void cargarRecyclerView(RecyclerView recyclerView){
+    public void cargarRecyclerView(RecyclerView recyclerView) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -43,14 +43,19 @@ public class ProductosHomePresenter {
             mDatabase.child("Usuarios").child(user.getUid()).child("productos").addValueEventListener(new ValueEventListener() {
 
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) { //Se ejecuta cada vez que se cambia algo en la base de datos
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
-                    for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                        ProductoModel productoModel = new ProductoModel();
-                        productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
-                        productoModel.setEstado(snapshot.child("estado").getValue(String.class));
-                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
-                        arrayListProductos.add(productoModel);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String estado = snapshot.child("estado").getValue(String.class);
+                        if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                            ProductoModel productoModel = new ProductoModel();
+                            productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                            productoModel.setEstado(estado);
+                            productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                            productoModel.setCalorias(snapshot.child("calorias").getValue(String.class));
+                            productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                            arrayListProductos.add(productoModel);
+                        }
                     }
 
                     adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
