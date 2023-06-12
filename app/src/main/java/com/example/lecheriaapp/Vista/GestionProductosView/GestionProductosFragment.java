@@ -32,9 +32,7 @@ public class GestionProductosFragment extends Fragment implements  View.OnClickL
     private DatabaseReference mDatabase;
     private RecyclerView recyclerView;
     private ProductosHomePresenter productosHomePresenter;
-    private Spinner leftSpinnerEstado;
-    private Spinner leftSpinnerSede;
-    private Spinner leftSpinnerCategoria;
+
 
     public GestionProductosFragment() {
     }
@@ -48,27 +46,7 @@ public class GestionProductosFragment extends Fragment implements  View.OnClickL
         mBtnAgregarProducto = view.findViewById(R.id.add_button);
         mBtnAgregarProducto.setOnClickListener(this);
         productosHomePresenter= new ProductosHomePresenter(getActivity(), mAuth, mDatabase);
-        /*
-        // Obtener la referencia a los Spinners del layout
-        leftSpinnerEstado = view.findViewById(R.id.textEstado1);
-        leftSpinnerSede = view.findViewById(R.id.textDisponibilidad1);
-        leftSpinnerCategoria = view.findViewById(R.id.textCategoria1);
-        // Crear un ArrayAdapter para cada Spinner con los datos deseados
-        ArrayAdapter<CharSequence> estadoAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.left_spinner_estado, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> sedeAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.left_spinner_items, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> categoriaAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.right_spinner_items, android.R.layout.simple_spinner_item);
-        // Especificar el diseño del menú desplegable de los Spinners
-        estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sedeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categoriaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Establecer los ArrayAdapter como adaptador de cada Spinner
-        leftSpinnerEstado.setAdapter(estadoAdapter);
-        leftSpinnerSede.setAdapter(sedeAdapter);
-        leftSpinnerCategoria.setAdapter(categoriaAdapter);
-         */
+
         return view;
     }
     @Override
