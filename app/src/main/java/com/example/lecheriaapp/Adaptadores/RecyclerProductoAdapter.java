@@ -1,7 +1,6 @@
 package com.example.lecheriaapp.Adaptadores;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,8 +46,6 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
             holder.mNombreProducto.setText(productoModel.getNombre());
             holder.mPrecioProducto.setText("S/. "+productoModel.getPrecio());
             holder.mEstadoProducto.setText(productoModel.getEstado());
-            //holder.mDescripcionProducto.setText(productoModel.getCalorias());
-            /*holder.mImagenProducto.setImageResource(productoModel.getImagen());*/
             holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
     }
 
@@ -82,7 +79,9 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
             args.putString("nombre", productoModel.getNombre());
             args.putString("precio", productoModel.getPrecio());
             args.putString("estado", productoModel.getEstado());
-            args.putString("calorias", productoModel.getCalorias());
+            args.putString("caloria", productoModel.getCaloria());
+            args.putString("ingredientes", productoModel.getIngredientes());
+            args.putString("disponibilidad", productoModel.getDisponibilidad());
             args.putString("imagen", productoModel.getImagen());
             DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
             detallesProductoFragment.setArguments(args);

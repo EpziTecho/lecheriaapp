@@ -23,7 +23,11 @@ public class DetallesProductoFragment extends Fragment {
         // Obtener referencias a las vistas del diseño
         TextView nombreTextView = rootView.findViewById(R.id.producto_nombre);
         TextView precioTextView = rootView.findViewById(R.id.producto_precio);
-        TextView estadoTextView = rootView.findViewById(R.id.producto_descripcion);
+        TextView estadoTextView = rootView.findViewById(R.id.producto_estado);
+        TextView ingredientesTextView = rootView.findViewById(R.id.producto_ingredientes);
+        TextView caloriasTextView = rootView.findViewById(R.id.producto_calorias);
+        TextView disponibilidadTextView = rootView.findViewById(R.id.producto_disponibilidad);
+
 
         // Obtener los argumentos pasados al fragmento
         Bundle args = getArguments();
@@ -32,11 +36,20 @@ public class DetallesProductoFragment extends Fragment {
             String nombre = args.getString("nombre");
             String precio = args.getString("precio");
             String estado = args.getString("estado");
+            String calorias = args.getString("caloria");
+            String disponibilidad = args.getString("disponibilidad");
+            String ingredientes = args.getString("ingredientes");
+            String imagen = args.getString("imagen");
+
 
             // Asignar los datos a las vistas
             nombreTextView.setText(nombre);
             precioTextView.setText("S/. " + precio);
             estadoTextView.setText(estado);
+            ingredientesTextView.setText(ingredientes);
+            caloriasTextView.setText(calorias);
+            disponibilidadTextView.setText(disponibilidad);
+
         }
 
         return rootView;
