@@ -38,7 +38,7 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/buscar_prod"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:iconifiedByDefault="false"
             app:queryHint="¿Buscas algun producto?"
             android:padding="8dp" />
