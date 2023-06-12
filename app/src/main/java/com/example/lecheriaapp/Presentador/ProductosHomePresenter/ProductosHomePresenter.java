@@ -40,8 +40,6 @@ public class ProductosHomePresenter {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("admin").endAt("adminSMP");
-
         if (user != null) {
             mDatabase.child("Usuarios").child(user.getUid()).child("rol").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -50,14 +48,69 @@ public class ProductosHomePresenter {
 
                     if (rol != null && rol.equals("cliente")) {
                         // Cargar productos de usuarios con rol "admin" y "adminSMP"
-                        cargarProductos(query, recyclerView);
+                        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("admin").endAt("adminSMP");
+                        query.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                    String uid = userSnapshot.getKey();
+                                    DatabaseReference productosRef = mDatabase.child("Usuarios").child(uid).child("productos");
+                                    productosRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                                String estado = snapshot.child("estado").getValue(String.class);
+                                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                                    ProductoModel productoModel = new ProductoModel();
+                                                    productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                                                    productoModel.setEstado(estado);
+                                                    productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                                                    productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                                                    productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
+                                                    productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                                    arrayListProductos.add(productoModel);
+                                                }
+                                            }
+                                            adapter.notifyDataSetChanged();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            // Manejar error de lectura de la base de datos
+                                        }
+                                    });
+                                }
+                                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                                recyclerView.setAdapter(adapter);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                // Manejar error de lectura de la base de datos
+                            }
+                        });
                     } else {
                         // Cargar productos del usuario actual
                         mDatabase.child("Usuarios").child(user.getUid()).child("productos").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                ArrayList<ProductoModel> arrayListProductos = obtenerProductos(dataSnapshot);
-                                actualizarAdapter(arrayListProductos, recyclerView);
+                                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    String estado = snapshot.child("estado").getValue(String.class);
+                                    if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                        ProductoModel productoModel = new ProductoModel();
+                                        productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                                        productoModel.setEstado(estado);
+                                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                                        productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                                        productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
+                                        productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                        arrayListProductos.add(productoModel);
+                                    }
+                                }
+                                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                                recyclerView.setAdapter(adapter);
                             }
 
                             @Override
@@ -75,63 +128,49 @@ public class ProductosHomePresenter {
             });
         } else {
             // No se ha iniciado sesión, cargar productos de usuarios con el rol "admin" y "adminSMP"
-            cargarProductos(query, recyclerView);
-        }
-    }
+            Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("admin").endAt("adminSMP");
+            query.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        String uid = userSnapshot.getKey();
+                        DatabaseReference productosRef = mDatabase.child("Usuarios").child(uid).child("productos");
+                        productosRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    String estado = snapshot.child("estado").getValue(String.class);
+                                    if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                        ProductoModel productoModel = new ProductoModel();
+                                        productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                                        productoModel.setEstado(estado);
+                                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                                        productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                                        productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
+                                        productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                        arrayListProductos.add(productoModel);
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
 
-    private void cargarProductos(Query query, RecyclerView recyclerView) {
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    String uid = userSnapshot.getKey();
-                    DatabaseReference productosRef = mDatabase.child("Usuarios").child(uid).child("productos");
-                    productosRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ArrayList<ProductoModel> arrayListProductos = obtenerProductos(dataSnapshot);
-                            actualizarAdapter(arrayListProductos, recyclerView);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            // Manejar error de lectura de la base de datos
-                        }
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // Manejar error de lectura de la base de datos
+                            }
+                        });
+                    }
+                    adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                    recyclerView.setAdapter(adapter);
                 }
-                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
-                recyclerView.setAdapter(adapter);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Manejar error de lectura de la base de datos
-            }
-        });
-    }
-
-    private ArrayList<ProductoModel> obtenerProductos(DataSnapshot dataSnapshot) {
-        ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
-        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-            String estado = snapshot.child("estado").getValue(String.class);
-            if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
-                ProductoModel productoModel = new ProductoModel();
-                productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
-                productoModel.setEstado(estado);
-                productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
-                productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
-                productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
-                productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
-                arrayListProductos.add(productoModel);
-            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    // Manejar error de lectura de la base de datos
+                }
+            });
         }
-        return arrayListProductos;
-    }
-
-    private void actualizarAdapter(ArrayList<ProductoModel> arrayListProductos, RecyclerView recyclerView) {
-        adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
-        recyclerView.setAdapter(adapter);
     }
 
 
