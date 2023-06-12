@@ -50,6 +50,8 @@ public class PresentadorRegistro {
                             crearUsuario.put("nombre",nombreCompleto);
                             crearUsuario.put("username",username);
                             crearUsuario.put("email",email);
+                            crearUsuario.put("password",password);
+                            crearUsuario.put("rol","cliente");
                             // Almacenar la información del usuario en la base de datos bajo el UID del usuario registrado
                             mDatabase.child("Usuarios").child(task.getResult().getUser().getUid()).updateChildren(crearUsuario);
                             // Crear un intent para abrir la actividad principal y luego iniciarla

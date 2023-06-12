@@ -6,6 +6,7 @@ public class UserModel {
     private String nombre;
     private String email;
     private String usuario;
+    private String rol;
 
     public UserModel() {
     }
@@ -14,6 +15,14 @@ public class UserModel {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public void setNombre(String nombre) {

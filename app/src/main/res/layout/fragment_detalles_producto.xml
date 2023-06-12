@@ -6,56 +6,83 @@
     android:layout_height="match_parent"
     tools:context=".Vista.ProductoView.DetallesProductoFragment">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="343dp"
         android:layout_margin="8dp"
-        android:padding="16dp"
         android:background="@drawable/producto_background"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/producto_imagen"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/baseline_star_24"
-            android:scaleType="center"
             android:layout_gravity="center_horizontal"
-            />
+            android:scaleType="center"
+            android:src="@drawable/baseline_star_24" />
 
         <TextView
             android:id="@+id/producto_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="4dp"
             android:text="Nombre del producto"
             android:textColor="@color/black"
-            android:gravity="center_horizontal"
             android:textSize="12sp"
-            android:textStyle="bold"
-            android:paddingTop="10dp"
-            android:paddingBottom="4dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/producto_precio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Precio del producto"
             android:gravity="center_horizontal"
+            android:paddingBottom="4dp"
+            android:text="Precio del producto"
             android:textColor="@color/black"
             android:textSize="10sp"
-            android:textStyle="bold"
-            android:paddingBottom="4dp" />
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/producto_descripcion"
+            android:id="@+id/producto_estado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción del producto"
             android:gravity="center_horizontal"
+            android:text="Descripción del producto"
             android:textColor="@color/black"
             android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/producto_ingredientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Descripción del producto"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/producto_disponibilidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Descripción del producto"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/producto_calorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Descripción del producto"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
 
     </LinearLayout>
 
