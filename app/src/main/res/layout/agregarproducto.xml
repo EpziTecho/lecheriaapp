@@ -30,11 +30,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Estado" />
-        <EditText
+        <Spinner
+            android:id="@+id/textEstado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/spinner_background"/>
+        <!-- foto del producto  -->
+        <TextView
+            android:id="@+id/tituloimagen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/textEstado"/>
+            android:text="Foto del producto"
+            android:layout_marginTop="9dp"/>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/selectedImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/img_no_disponible"
 
+            android:layout_gravity="center"
+
+            app:shapeAppearanceOverlay="@style/RoundedImageViewRoundedProd"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+
+
+            />
+
+        <Button
+            android:id="@+id/selectImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Seleccionar imagen"
+
+            />
         <TextView
             android:id="@+id/titulonombre"
             android:layout_width="match_parent"
@@ -44,7 +75,8 @@
         <EditText
             android:id="@+id/textNombreProducto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/text_background"/>
 
         <TextView
             android:id="@+id/titulocalorias"
@@ -54,7 +86,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/textCalorias"/>
+            android:id="@+id/textCalorias"
+            android:background="@drawable/text_background"/>
 
         <TextView
             android:id="@+id/tituloPrecio"
@@ -64,36 +97,83 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/textPrecio"/>
+            android:id="@+id/textPrecio"
+            android:background="@drawable/text_background"/>
 
-        <TextView
-            android:id="@+id/titulodisponibilidad"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Disponibilidad en sedes" />
-        <EditText  android:layout_width="match_parent"
-            android:id="@+id/textDisponibilidad"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+
+            android:orientation="horizontal">
+            <!-- Spinner Sede  -->
+            <!--<TextView
+                android:id="@+id/titulodisponibilidad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Disponibilidad en sedes" />-->
+            <Spinner
+                android:id="@+id/textDisponibilidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/spinner_background"
+                />
+            <!-- Spinner Categoria  -->
+            <!--<TextView
+                android:id="@+id/titulocategoria"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Categoria" />-->
+            <Spinner
+                android:id="@+id/textCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/spinner_background"
+
+                />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tituloAgregarIngredientes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Agregar Ingredientes" />
+            android:text="Agregar Ingredientes"
+            />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/textIngredientes"/>
-        <Button
+            android:id="@+id/textIngredientes"
+            android:background="@drawable/text_background"/>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Agregar"
-            android:id="@+id/btnAgregar"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Cancelar"
-            android:id="@+id/btnCancelar"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+
+            >
+            <Button
+                android:id="@+id/btnAgregar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agregar"
+                android:layout_marginRight="8dp"
+
+                />
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:layout_marginRight="8dp"/>
+        </LinearLayout>
+
+
+
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

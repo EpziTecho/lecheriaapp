@@ -13,10 +13,6 @@
                     <size android:width="167dp"/>
                 </shape>
             </item>
-            <item
-                android:drawable="@drawable/baseline_despliegue"
-                android:gravity="end"/>
-
         </layer-list>
     </item>
 </selector>
