@@ -26,9 +26,7 @@ public class AgregarProductoFragment extends Fragment implements  View.OnClickLi
     private Button mAddButton;
     private Button mCancelButton;
 
-    private Spinner leftSpinnerEstado;
-    private Spinner leftSpinnerSede;
-    private Spinner leftSpinnerCategoria;
+
     public AgregarProductoFragment() {
         // Required empty public constructor
     }
@@ -44,26 +42,6 @@ public class AgregarProductoFragment extends Fragment implements  View.OnClickLi
         mAddButton.setOnClickListener(this);
         mCancelButton = view.findViewById(R.id.btnCancelar);
         mCancelButton.setOnClickListener(this);
-
-        // Obtener la referencia a los Spinners del layout
-        leftSpinnerEstado = view.findViewById(R.id.textEstado);
-        leftSpinnerSede = view.findViewById(R.id.textDisponibilidad);
-        leftSpinnerCategoria = view.findViewById(R.id.textCategoria);
-        // Crear un ArrayAdapter para cada Spinner con los datos deseados
-        ArrayAdapter<CharSequence> estadoAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.left_spinner_estado, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> sedeAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.left_spinner_items, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> categoriaAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.right_spinner_items, android.R.layout.simple_spinner_item);
-        // Especificar el diseño del menú desplegable de los Spinners
-        estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sedeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categoriaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Establecer los ArrayAdapter como adaptador de cada Spinner
-        leftSpinnerEstado.setAdapter(estadoAdapter);
-        leftSpinnerSede.setAdapter(sedeAdapter);
-        leftSpinnerCategoria.setAdapter(categoriaAdapter);
 
 
 
