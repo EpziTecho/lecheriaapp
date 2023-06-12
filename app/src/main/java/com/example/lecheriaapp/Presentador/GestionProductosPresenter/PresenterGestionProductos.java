@@ -294,7 +294,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
                         productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
                         productoModel.setEstado(snapshot.child("estado").getValue(String.class));
                         productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
-                        productoModel.setCalorias(snapshot.child("caloria").getValue(String.class));
+                        productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                         productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                         arrayListProductos.add(productoModel);
