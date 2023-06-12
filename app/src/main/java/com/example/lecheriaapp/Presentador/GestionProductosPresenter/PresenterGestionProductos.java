@@ -55,9 +55,9 @@ public class PresenterGestionProductos implements View.OnClickListener {
         mNombre = dialog.findViewById(R.id.textNombreProducto);
         mCaloria = dialog.findViewById(R.id.textCalorias);
         mPrecio = dialog.findViewById(R.id.textPrecio);
-        mDisponibilidad = dialog.findViewById(R.id.textDisponibilidad);
+        //mDisponibilidad = dialog.findViewById(R.id.textDisponibilidad);
         mIngredientes = dialog.findViewById(R.id.textIngredientes);
-        mEstado = dialog.findViewById(R.id.textEstado);
+        //mEstado = dialog.findViewById(R.id.textEstado);
         //Se asigna el botón "Agregar" del layout a la variable "mAddButton" y se establece su acción al hacer clic en el botón "Agregar"
         Button mAddButton = dialog.findViewById(R.id.btnAgregar);
         mAddButton.setOnClickListener(this);
@@ -86,17 +86,17 @@ public class PresenterGestionProductos implements View.OnClickListener {
         mNombre = dialog.findViewById(R.id.textNombreProducto1);
         mCaloria = dialog.findViewById(R.id.textCalorias1);
         mPrecio = dialog.findViewById(R.id.textPrecio1);
-        mDisponibilidad = dialog.findViewById(R.id.textDisponibilidad1);
+        //mDisponibilidad = dialog.findViewById(R.id.textDisponibilidad1);
         mIngredientes = dialog.findViewById(R.id.textIngredientes1);
-        mEstado = dialog.findViewById(R.id.textEstado1);
+        //mEstado = dialog.findViewById(R.id.textEstado1);
 
         // Setear los valores actuales del producto en los campos del diálogo
         mNombre.setText(nombre);
         mCaloria.setText(caloria);
         mPrecio.setText(String.valueOf(precio));
-        mDisponibilidad.setText(disponibilidad);
+        //mDisponibilidad.setText(disponibilidad);
         mIngredientes.setText(ingredientes);
-        mEstado.setText(estado);
+        //mEstado.setText(estado);
 
         //Se asigna el botón "Guardar" del layout a la variable "mSaveButton" y se establece su acción al hacer clic en el botón "Guardar"
         Button mSaveButton = dialog.findViewById(R.id.btnLayoutEditarProducto1);
