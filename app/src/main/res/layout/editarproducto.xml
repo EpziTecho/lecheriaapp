@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:text="Estado" />
         <Spinner
-            android:id="@+id/textEstado1"
+            android:id="@+id/spinnerEstado1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
@@ -121,7 +121,7 @@
                 android:layout_height="match_parent"
                 android:text="Disponibilidad en sedes" />-->
             <Spinner
-                android:id="@+id/textDisponibilidad1"
+                android:id="@+id/spinnerDisponibilidad1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
