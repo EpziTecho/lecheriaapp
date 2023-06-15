@@ -11,8 +11,6 @@ public class UserModel {
     public UserModel() {
     }
 
-
-
     public String getNombre() {
         return nombre;
     }
