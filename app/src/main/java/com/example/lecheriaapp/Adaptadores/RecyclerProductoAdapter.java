@@ -99,6 +99,7 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
                     args.putString("caloria", productoModel.getCaloria());
                     args.putString("ingredientes", productoModel.getIngredientes());
                     args.putString("disponibilidad", productoModel.getDisponibilidad());
+                    args.putString("categoria", productoModel.getCategoria());
                     args.putString("imagen", productoModel.getImagen());
                     DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
                     detallesProductoFragment.setArguments(args);

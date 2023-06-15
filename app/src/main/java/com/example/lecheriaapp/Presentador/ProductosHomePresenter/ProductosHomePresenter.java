@@ -69,6 +69,7 @@ public class ProductosHomePresenter {
                                                     productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                                                     productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                                     productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                                    productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
                                                     arrayListProductos.add(productoModel);
                                                 }
                                             }
@@ -106,6 +107,7 @@ public class ProductosHomePresenter {
                                         productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                         productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                        productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
                                         arrayListProductos.add(productoModel);
                                     }
                                 }
@@ -149,6 +151,7 @@ public class ProductosHomePresenter {
                                         productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                         productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                        productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
                                         arrayListProductos.add(productoModel);
                                     }
                                 }

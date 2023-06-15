@@ -134,7 +134,7 @@
                 android:layout_height="match_parent"
                 android:text="Categoria" />-->
             <Spinner
-                android:id="@+id/textCategoria"
+                android:id="@+id/spinnerCategoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

@@ -41,7 +41,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
     private RecyclerView recyclerView;
     private RecyclerProductoGestionAdapter adapter;
     private EditText mNombre, mCaloria, mPrecio, mIngredientes;
-    private Spinner mDisponibilidad, mEstado;
+    private Spinner mDisponibilidad, mEstado,mCategoria;
 
     public PresenterGestionProductos(Context mContext, DatabaseReference mDatabase, FirebaseAuth mAuth) {
         this.mContext = mContext;
@@ -61,6 +61,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
         mIngredientes = dialog.findViewById(R.id.textIngredientes);
        mDisponibilidad = dialog.findViewById(R.id.spinnerDisponibilidad);
        mEstado = dialog.findViewById(R.id.spinnerEstado);
+        mCategoria = dialog.findViewById(R.id.spinnerCategoria);
 
         // Crear un adaptador para el spinner de disponibilidad
         ArrayAdapter<CharSequence> disponibilidadAdapter = ArrayAdapter.createFromResource(mContext,
@@ -73,6 +74,12 @@ public class PresenterGestionProductos implements View.OnClickListener {
                 R.array.left_spinner_estado, android.R.layout.simple_spinner_item);
         estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mEstado.setAdapter(estadoAdapter);
+        //Creear un adaptador para el spinner de categoria
+        ArrayAdapter<CharSequence> categoriaAdapter = ArrayAdapter.createFromResource(mContext,
+                R.array.right_spinner_items,android.R.layout.simple_spinner_item);
+        categoriaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCategoria.setAdapter(categoriaAdapter);
+
         // Obtener el objeto de ventana del diálogo y ajustar su ancho y alto
         //Se asigna el botón "Agregar" del layout a la variable "mAddButton" y se establece su acción al hacer clic en el botón "Agregar"
         Button mAddButton = dialog.findViewById(R.id.btnAgregar);
@@ -93,7 +100,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
             dialog.dismiss();
         }
     }
-    public void editarProducto(String nombre, String caloria, float precio, String disponibilidad, String ingredientes, String estado, int posicion) {
+    public void editarProducto(String nombre, String caloria, float precio, String disponibilidad, String categoria, String ingredientes, String estado, int posicion) {
         // Se crea un diálogo para editar el producto
         dialog = new Dialog(mContext);
         // Se establece la vista del diálogo como el layout "editarproducto"
@@ -105,6 +112,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
         mDisponibilidad = dialog.findViewById(R.id.spinnerDisponibilidad1);
         mIngredientes = dialog.findViewById(R.id.textIngredientes1);
         mEstado = dialog.findViewById(R.id.spinnerEstado1);
+        mCategoria = dialog.findViewById(R.id.spinnerCategoria1);
 
         // Setear los valores actuales del producto en los campos del diálogo
         mNombre.setText(nombre);
@@ -132,6 +140,16 @@ public class PresenterGestionProductos implements View.OnClickListener {
         int estadoIndex = estadoAdapter.getPosition(estado);
         mEstado.setSelection(estadoIndex);
 
+        // Crear un adaptador para el spinner de categoría
+        ArrayAdapter<CharSequence> categoriaAdapter = ArrayAdapter.createFromResource(mContext,
+                R.array.right_spinner_items, android.R.layout.simple_spinner_item);
+        categoriaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCategoria.setAdapter(categoriaAdapter);
+
+        // Seleccionar el valor actual del spinner de categoría
+        int categoriaIndex = categoriaAdapter.getPosition(categoria);
+        mCategoria.setSelection(categoriaIndex);
+
         // Se asigna el botón "Guardar" del layout a la variable "mSaveButton" y se establece su acción al hacer clic en el botón "Guardar"
         Button mSaveButton = dialog.findViewById(R.id.btnLayoutEditarProducto1);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -143,10 +161,11 @@ public class PresenterGestionProductos implements View.OnClickListener {
                 String nuevaCaloria = mCaloria.getText().toString();
                 float nuevoPrecio = Float.parseFloat(mPrecio.getText().toString());
                 String nuevaDisponibilidad = mDisponibilidad.getSelectedItem().toString();
+                String nuevaCategoria = mCategoria.getSelectedItem().toString();
                 String nuevosIngredientes = mIngredientes.getText().toString();
 
                 // Llamar al método "actualizarProductoFirebase" para actualizar el producto en Firebase
-                actualizarProductoFirebase(nuevoEstado, nuevoNombre, nuevaCaloria, nuevoPrecio, nuevaDisponibilidad, nuevosIngredientes, posicion);
+                actualizarProductoFirebase(nuevoEstado, nuevoNombre, nuevaCaloria, nuevoPrecio, nuevaDisponibilidad, nuevaCategoria, nuevosIngredientes, posicion);
 
                 // Cerrar el diálogo
                 dialog.dismiss();
@@ -196,7 +215,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
 
 
     private void actualizarProductoFirebase(String estado, String nombre, String caloria,
-                                            float precio, String disponibilidad, String ingredientes, int position) {
+                                            float precio, String disponibilidad,String categoria, String ingredientes, int position) {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -213,6 +232,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
         producto.put("caloria", caloria);
         producto.put("precio", precio);
         producto.put("disponibilidad", disponibilidad);
+        producto.put("categoria", categoria);
         producto.put("ingredientes", ingredientes);
 
         // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del producto actualizado
@@ -246,8 +266,9 @@ public class PresenterGestionProductos implements View.OnClickListener {
                 float precio = Float.parseFloat(mPrecio.getText().toString());
                 String disponibilidad = mDisponibilidad.getSelectedItem().toString();
                 String ingredientes = mIngredientes.getText().toString();
+                String categoria = mCategoria.getSelectedItem().toString();
                 //Se llama al método "cargaProductoFirebase" para agregar el producto a Firebase
-                cargaProductoFirebase(estado,nombre,caloria,precio,disponibilidad,ingredientes);
+                cargaProductoFirebase(estado,nombre,caloria,precio,disponibilidad,categoria,ingredientes);
                 break;
             case R.id.btnCancelar:
                 cancelar();
@@ -256,7 +277,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
     }
 
     private void cargaProductoFirebase(String estado, String nombre, String caloria,
-                                       float precio, String disponibilidad, String ingredientes) {
+                                       float precio, String disponibilidad,String categoria, String ingredientes) {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -281,6 +302,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
                     producto.put("caloria", caloria);
                     producto.put("precio", precio);
                     producto.put("disponibilidad", disponibilidad);
+                    producto.put("categoria", categoria);
                     producto.put("ingredientes", ingredientes);
 
                     // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
@@ -332,6 +354,7 @@ public class PresenterGestionProductos implements View.OnClickListener {
                         productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                         productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                        productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
                         arrayListProductos.add(productoModel);
                     }
                     adapter = new RecyclerProductoGestionAdapter(mContext, R.layout.producto_row_gestion, arrayListProductos);

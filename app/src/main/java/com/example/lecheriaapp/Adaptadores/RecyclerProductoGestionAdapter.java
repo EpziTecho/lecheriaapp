@@ -60,7 +60,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
                 // Acción al hacer clic en el botón "Editar"
                 // Puedes llamar a un método en tu presentador para manejar la acción
                 // por ejemplo: presenterGestionProductos.editarProducto(productoModel);
-                presenterGestionProductos.editarProducto(productoModel.getNombre(), productoModel.getCaloria(), Float.parseFloat(productoModel.getPrecio()), productoModel.getDisponibilidad(), productoModel.getIngredientes(), productoModel.getEstado(), position);
+                presenterGestionProductos.editarProducto(productoModel.getNombre(), productoModel.getCaloria(), Float.parseFloat(productoModel.getPrecio()), productoModel.getDisponibilidad(),productoModel.getCategoria(), productoModel.getIngredientes(), productoModel.getEstado(), position);
             }
         });
 

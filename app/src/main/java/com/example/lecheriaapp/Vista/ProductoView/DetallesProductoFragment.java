@@ -27,6 +27,7 @@ public class DetallesProductoFragment extends Fragment {
         TextView ingredientesTextView = rootView.findViewById(R.id.producto_ingredientes);
         TextView caloriasTextView = rootView.findViewById(R.id.producto_calorias);
         TextView disponibilidadTextView = rootView.findViewById(R.id.producto_disponibilidad);
+        TextView categoriaTextView = rootView.findViewById(R.id.producto_categoria);
 
 
         // Obtener los argumentos pasados al fragmento
@@ -36,9 +37,10 @@ public class DetallesProductoFragment extends Fragment {
             String nombre = args.getString("nombre");
             String precio = args.getString("precio");
             String estado = args.getString("estado");
+            String ingredientes = args.getString("ingredientes");
             String calorias = args.getString("caloria");
             String disponibilidad = args.getString("disponibilidad");
-            String ingredientes = args.getString("ingredientes");
+            String categoria = args.getString("categoria");
             String imagen = args.getString("imagen");
 
 
@@ -49,6 +51,8 @@ public class DetallesProductoFragment extends Fragment {
             ingredientesTextView.setText(ingredientes);
             caloriasTextView.setText(calorias);
             disponibilidadTextView.setText(disponibilidad);
+            categoriaTextView.setText(categoria);
+
 
         }
 
