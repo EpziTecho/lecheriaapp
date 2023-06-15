@@ -10,123 +10,160 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context=".Vista.UbicanosView.UbicanosFragment">
-
-        <!-- Título -->
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ubicanos"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:padding="16dp"/>
-
-        <!-- Imagen -->
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:src="@drawable/mapaimg"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"/>
-
-        <!-- Información y botones -->
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:background="@color/white"
+            tools:context=".Vista.UbicanosView.UbicanosFragment">
 
-            <!-- Título de información -->
+            <!-- Título -->
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ubicanos"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="16dp"/>
+
+            <!-- Mapa-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="4dp">
+                android:layout_height="250dp"
+                android:orientation="vertical">
 
-                <!-- Filtro desplegable izquierdo de sede -->
-                <Spinner
-                    android:id="@+id/leftSpinnerSede"
-                    android:layout_width="wrap_content"
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+
+                <!-- Botones -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:background="@drawable/spinner_background"
-                    android:dropDownWidth="40dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
+                    <Button
+                        android:id="@+id/button1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Botón 1"
+                        android:textSize="12sp"/>
 
-            </LinearLayout>
-            <!-- Subtítulo 1 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Av arequipa 456 piso 3"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingBottom="4dp"/>
+                    <Button
+                        android:id="@+id/button2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Botón 2"
+                        android:textSize="12sp"/>
 
-            <!-- Texto 1 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Texto 1"
-                android:textSize="14sp"
-                android:paddingBottom="8dp"/>
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Botón 3"
+                        android:textSize="12sp"/>
 
-            <!-- Subtítulo 2 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Subtítulo 2"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingBottom="4dp"/>
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Botón 4"
+                        android:textSize="12sp"/>
 
-            <!-- Texto 2 -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Texto 2"
-                android:textSize="14sp"
-                android:paddingBottom="16dp"/>
-
-            <!-- Botones -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-
-                >
-
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ver Carta"
-                    android:textSize="12sp"
-                    android:layout_marginRight="60dp"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Empezar Ruta"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="60dp"/>
+                </LinearLayout>
 
             </LinearLayout>
 
+            <!-- Información y botones -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Título de información -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="left"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="4dp">
+
+                    <!-- Filtro desplegable izquierdo de sede -->
+                    <!--<Spinner
+                        android:id="@+id/leftSpinnerSede"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/spinner_background"
+                        android:dropDownWidth="40dp"/>-->
+
+                </LinearLayout>
+                <!-- Subtítulo 1 -->
+                <TextView
+                    android:id="@+id/titulo_direccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Av arequipa 456 piso 3"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="4dp"/>
+
+                <!-- Texto 1 -->
+                <TextView
+                    android:id="@+id/subtitulo_direccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Texto 1"
+                    android:textSize="14sp"
+                    android:paddingBottom="8dp"/>
+
+                <!-- Texto 2 -->
+                <TextView
+                    android:id="@+id/titulo_descripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Texto 2"
+                    android:textSize="14sp"
+                    android:paddingBottom="16dp"/>
+
+                <!-- Botones -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver Carta"
+                        android:textSize="12sp"
+                        android:layout_marginRight="60dp"/>
+
+                    <Button
+                        android:id="@+id/btnEmpezarRuta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Empezar Ruta"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="60dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
     </ScrollView>
 </FrameLayout>

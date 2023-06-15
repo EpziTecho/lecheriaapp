@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding.bottomNavigationView.setBackground(null);
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
+
             // Cambiar el fragmento mostrado en función del elemento seleccionado en el menú de navegación inferior
             switch (item.getItemId()) {
                 case R.id.home:
