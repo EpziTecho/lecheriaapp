@@ -10,11 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Modelo.ProductoModel;
+import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresentadorEditarProductos;
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresenterGestionProductos;
 import com.example.lecheriaapp.R;
+import com.example.lecheriaapp.Vista.GestionProductosView.EditarProductosFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -27,6 +33,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
     private int layoutResource;
     private ArrayList<ProductoModel> arrayListProductos;
     private PresenterGestionProductos presenterGestionProductos;
+    private PresentadorEditarProductos presentadorEditarProductos;
 
     public RecyclerProductoGestionAdapter(Context mcontext, int layoutResource, ArrayList<ProductoModel> arrayListProductos) {
         this.mcontext = mcontext;
@@ -34,6 +41,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
         this.arrayListProductos = arrayListProductos;
         // Inicializa el presentador aquí
         presenterGestionProductos = new PresenterGestionProductos(mcontext, databaseReference, firebaseAuth);
+        presentadorEditarProductos = new PresentadorEditarProductos(mcontext);
     }
 
 
@@ -49,7 +57,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
     public void onBindViewHolder(@NonNull RecyclerProductoGestionAdapter.ProductoViewGestionHolder holder, @SuppressLint("RecyclerView") int position) {
         ProductoModel productoModel = arrayListProductos.get(position);
         holder.mNombreProducto.setText(productoModel.getNombre());
-        holder.mPrecioProducto.setText("S/. "+productoModel.getPrecio());
+        holder.mPrecioProducto.setText(productoModel.getPrecio());
         holder.mEstadoProducto.setText(productoModel.getEstado());
         holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
 
@@ -57,10 +65,21 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
         holder.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Acción al hacer clic en el botón "Editar"
-                // Puedes llamar a un método en tu presentador para manejar la acción
-                // por ejemplo: presenterGestionProductos.editarProducto(productoModel);
-                presenterGestionProductos.editarProducto(productoModel.getNombre(), productoModel.getCaloria(), Float.parseFloat(productoModel.getPrecio()), productoModel.getDisponibilidad(), productoModel.getIngredientes(), productoModel.getEstado(), position);
+                // Abrir el fragmento EditarProductosFragment con los datos del producto
+                String nombre = productoModel.getNombre();
+                String calorias = productoModel.getCaloria();
+                String precio = productoModel.getPrecio();
+                String disponibilidad = productoModel.getDisponibilidad();
+                String categoria = productoModel.getCategoria();
+                String ingredientes = productoModel.getIngredientes();
+                String estado = productoModel.getEstado();
+
+                Fragment editarFragment = EditarProductosFragment.newInstance(nombre, calorias, precio, disponibilidad, categoria, ingredientes, estado, position);
+                FragmentManager fragmentManager = ((AppCompatActivity) mcontext).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, editarFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 

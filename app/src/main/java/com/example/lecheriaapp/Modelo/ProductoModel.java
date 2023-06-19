@@ -6,17 +6,19 @@ public class ProductoModel {
     private String precio;
     private String estado;
     private String disponibilidad;
-    private String Ingredientes;
+    private String ingredientes;
     private String imagen;
+    private String categoria;
 
-    public ProductoModel(String nombre, String caloria, String precio, String estado, String disponibilidad, String Ingredientes, String imagen) {
+    public ProductoModel(String nombre, String caloria, String precio, String estado, String disponibilidad, String ingredientes, String imagen, String categoria) {
         this.nombre = nombre;
         this.caloria = caloria;
         this.precio = precio;
         this.estado = estado;
         this.disponibilidad = disponibilidad;
-        this.Ingredientes = Ingredientes;
+        this.ingredientes = ingredientes;
         this.imagen = imagen;
+        this.categoria = categoria;
     }
 
     public ProductoModel() {
@@ -38,8 +40,6 @@ public class ProductoModel {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-
 
     public String getPrecio() {
         return precio;
@@ -66,11 +66,11 @@ public class ProductoModel {
     }
 
     public String getIngredientes() {
-        return Ingredientes;
+        return ingredientes;
     }
 
     public void setIngredientes(String ingredientes) {
-        Ingredientes = ingredientes;
+        this.ingredientes = ingredientes;
     }
 
     public String getImagen() {
@@ -80,5 +80,12 @@ public class ProductoModel {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-}
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+}

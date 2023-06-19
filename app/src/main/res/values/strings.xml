@@ -8,6 +8,7 @@
     <string-array name="left_spinner_estado">
         <item>Disponible</item>
         <item>No Disponible</item>
+        <item>En promocion</item>
         <item>Eliminado</item>
     </string-array>
     <string-array name="left_spinner_items">

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Adaptadores.RecyclerProductoAdapter;
@@ -22,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoritosUsuarioFragment extends Fragment {
+public class FavoritosUsuarioFragment extends Fragment implements RecyclerProductoAdapter.FavoritosUpdateListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerProductoAdapter mAdapter;
@@ -69,9 +68,15 @@ public class FavoritosUsuarioFragment extends Fragment {
                     }
 
                     mAdapter = new RecyclerProductoAdapter(getContext(), R.layout.item_favorito, new ArrayList<>(favoritosList));
+                    mAdapter.setFavoritosUpdateListener(this); // Establecer el listener
                     mRecyclerView.setAdapter(mAdapter);
                 }
             });
         }
+    }
+
+    @Override
+    public void onFavoritosUpdated() {
+        cargarFavoritos(); // Actualizar la lista de favoritos cuando se produzca un cambio
     }
 }
