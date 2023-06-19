@@ -1,12 +1,11 @@
 package com.example.lecheriaapp.Modelo;
 
 public class UserModel {
-
-
     private String nombre;
     private String email;
     private String usuario;
     private String rol;
+    private String imagenUri; // Nuevo atributo para almacenar la URL o el Uri de la imagen
 
     public UserModel() {
     }
@@ -41,5 +40,13 @@ public class UserModel {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getImagenUri() {
+        return imagenUri;
+    }
+
+    public void setImagenUri(String imagenUri) {
+        this.imagenUri = imagenUri;
     }
 }

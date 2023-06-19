@@ -46,7 +46,7 @@
         />
 
     <Button
-        android:id="@+id/selectImageButton"
+        android:id="@+id/selectImageButtonRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seleccionar imagen"

@@ -65,7 +65,7 @@ public class ProductosHomePresenter {
                                                     ProductoModel productoModel = new ProductoModel();
                                                     productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
                                                     productoModel.setEstado(estado);
-                                                    productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                                                    productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(String.class)));
                                                     productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                                                     productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                                     productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
@@ -103,7 +103,7 @@ public class ProductosHomePresenter {
                                         ProductoModel productoModel = new ProductoModel();
                                         productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
                                         productoModel.setEstado(estado);
-                                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                                        productoModel.setPrecio(String.valueOf(Float.parseFloat(snapshot.child("precio").getValue(String.class))));
                                         productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                         productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
@@ -147,7 +147,7 @@ public class ProductosHomePresenter {
                                         ProductoModel productoModel = new ProductoModel();
                                         productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
                                         productoModel.setEstado(estado);
-                                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(Float.class)));
+                                        productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(String.class)));
                                         productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
                                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                         productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
@@ -176,42 +176,6 @@ public class ProductosHomePresenter {
         }
     }
 
-    private void agregarAFavoritos(ProductoModel producto) {
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            String clienteId = user.getUid();
-            DatabaseReference favoritosRef = mDatabase.child("Favoritos").child(clienteId);
-            favoritosRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (!dataSnapshot.exists()) {
-                        // El nodo de favoritos del cliente no existe, crearlo
-                        favoritosRef.child(producto.getNombre()).setValue(producto);
-                    } else {
-                        // El nodo de favoritos del cliente ya existe, verificar si el producto ya está agregado
-                        boolean productoExiste = false;
-                        for (DataSnapshot productoSnapshot : dataSnapshot.getChildren()) {
-                            ProductoModel productoFavorito = productoSnapshot.getValue(ProductoModel.class);
-                            if (productoFavorito != null && productoFavorito.getNombre().equals(producto.getNombre())) {
-                                productoExiste = true;
-                                break;
-                            }
-                        }
-
-                        if (!productoExiste) {
-                            // El producto no está agregado a favoritos, agregarlo
-                            favoritosRef.child(producto.getNombre()).setValue(producto);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Manejar error de lectura/escritura de la base de datos
-                }
-            });
-        }
-    }
 
 
 }
