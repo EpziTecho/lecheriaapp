@@ -1,96 +1,101 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/Widget.Material3.CardView.Outlined"
+    style="?attr/materialCardViewStyle"
     android:layout_width="195dp"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:focusable="auto"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        style="@style/Widget.Material3.CardView.Elevated"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alwaysDrawnWithCache="false"
-        android:animateLayoutChanges="false"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_favorito"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="#00FFFFFF"
-            android:foreground="@drawable/favoritoseleccionado"
-            android:foregroundGravity="center"
-            android:padding="0dp"
-            android:text="Button"
-            android:translationZ="5dp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:translationY="-20dp">
+            android:layout_height="wrap_content"
+            android:alwaysDrawnWithCache="false"
+            android:animateLayoutChanges="false"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imagenProductoRow"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btn_favorito"
+                android:layout_width="62dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="2dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="0dp"
-                android:cropToPadding="false"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/image2" />
-
-            <TextView
-                android:id="@+id/nombreProductoRow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chocofit tapa"
-                android:textColor="#0E0E0E"
-                android:textStyle="bold" />
+                android:layout_gravity="right"
+                android:background="#00FFFFFF"
+                android:foreground="@drawable/favoritoseleccionado"
+                android:foregroundGravity="center"
+                android:padding="0dp"
+                android:text="Button"
+                android:translationZ="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:translationY="-20dp">
+
+                <ImageView
+                    android:id="@+id/imagenProductoRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="2dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/image2" />
 
                 <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="71dp"
+                    android:id="@+id/nombreProductoRow"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="365 cal "
+                    android:text="Chocofit tapa"
+                    android:textColor="#0E0E0E"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="71dp"
+                        android:layout_height="wrap_content"
+                        android:text="365 cal "
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/precioProductoRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        android:text="S/.9.00"
+                        android:textAlignment="viewEnd"
+                        android:textColor="#050505"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/estadoProductoRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Disponible en:"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/precioProductoRow"
+                    android:id="@+id/textView7"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_weight="1"
-                    android:text="S/.9.00"
-                    android:textAlignment="viewEnd"
-                    android:textColor="#050505"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content"
+                    android:text="Todas las sedes" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/estadoProductoRow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Disponible en:"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Todas las sedes" />
-
         </LinearLayout>
-
-    </LinearLayout>
-
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
