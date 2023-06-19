@@ -1,90 +1,139 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/detallesProductoFragment"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Vista.ProductoView.DetallesProductoFragment">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_margin="8dp"
+    android:padding="16dp"
+    android:background="@drawable/producto_background"
+    android:elevation="4dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/producto_imagen"
+        android:layout_width="320dp"
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewProd"
+        android:scaleType="centerInside"
+        app:strokeWidth="2dp"
+        android:layout_marginTop="15dp"
+        />
+
+    <!--Los que esta comentado son los id que se utilizan en home o favoritos -->
+    <!-- android:id="@+id/nombreProductoRow" -->
+    <TextView
+        android:id="@+id/producto_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="Chocofit tapa"
+        android:textColor="#0E0E0E"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="343dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/producto_background"
-        android:elevation="4dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/producto_imagen"
-            android:layout_width="100dp"
+        <LinearLayout
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewprod"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:text="Descripcion:"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/producto_ingredientes"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="center"
-            android:src="@drawable/baseline_star_24" />
-
-        <TextView
-            android:id="@+id/producto_nombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="4dp"
-            android:text="Nombre del producto"
+            android:text="Descripción del producto,"
             android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <!-- android:id="@+id/NumeroCalorias" -->
+            <TextView
+                android:id="@+id/producto_calorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="365 cal " />
+
+        </LinearLayout>
+        <!-- android:id="@+id/precioProductoRow" -->
         <TextView
+
             android:id="@+id/producto_precio"
-            android:layout_width="match_parent"
+            android:layout_width="66dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingBottom="4dp"
-            android:text="Precio del producto"
-            android:textColor="@color/black"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:layout_marginLeft="52dp"
+            android:layout_weight="1"
+            android:text="S/.9.00"
+            android:textColor="#050505"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="right"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+        s
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Disponible en:"
+                android:textSize="14sp"
+                android:gravity="center"
+                />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/producto_estado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Descripción del producto"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/producto_ingredientes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Descripción del producto"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/producto_disponibilidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Descripción del producto"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-        <TextView
-            android:id="@+id/producto_calorias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="Descripción del producto"
-            android:textColor="@color/black"
-            android:textSize="10sp" />
-
-
+            android:layout_marginLeft="22dp"
+            android:text="Disponible"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:gravity="center"
+            />
     </LinearLayout>
-
-
-</FrameLayout>
+    <TextView
+        android:id="@+id/producto_disponibilidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Descripción del producto"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+</LinearLayout>
