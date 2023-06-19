@@ -1,6 +1,7 @@
 package com.example.lecheriaapp.Vista.GestionProductosView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 
 public class GestionProductosFragment extends Fragment implements  View.OnClickListener{
 
-    private Button mBtnAgregarProducto, mBtnEditarProducto, mBtnEliminarProducto;
+    private Button mBtnAgregarProducto;
     private PresenterGestionProductos presenterGestionProductos;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -59,13 +60,14 @@ public class GestionProductosFragment extends Fragment implements  View.OnClickL
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         presenterGestionProductos.cargarRecyclerViewGestion(recyclerView);
     }
+
     @Override
     public void onClick(View view) {
 
         /*Toast.makeText(getActivity(), "Agregando producto", Toast.LENGTH_SHORT).show();*/
         switch (view .getId()){
             case R.id.add_button:
-                presenterGestionProductos.agregarProducto();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AgregarProductoFragment()).commit();
                 break;
 
 

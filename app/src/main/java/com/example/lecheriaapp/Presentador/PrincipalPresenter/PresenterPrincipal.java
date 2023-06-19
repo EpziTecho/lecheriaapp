@@ -55,7 +55,7 @@ public class PresenterPrincipal {
             });
         } else {
             // Si no hay ningún usuario logueado, mostrar un mensaje informativo
-            Toast.makeText(mContext, "Probandooo xD-- No hay usuario logueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "No olvides iniciar Sesion para disfrutar de todas las funcionalidades", Toast.LENGTH_SHORT).show();
         }
     }
 
