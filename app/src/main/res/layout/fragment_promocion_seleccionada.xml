@@ -31,7 +31,14 @@
             android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
             android:lineSpacingExtra="4dp"
-            android:textSize="16sp" />
+            android:textSize="16sp" >
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </ListView>
 
         <ImageView
             android:layout_width="300dp"
