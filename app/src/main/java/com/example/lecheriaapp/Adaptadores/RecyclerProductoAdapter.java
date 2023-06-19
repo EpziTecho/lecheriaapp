@@ -112,6 +112,11 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
         }
     }
 
+    public void actualizarLista(ArrayList<ProductoModel> nuevaLista) {
+        arrayListProductos = nuevaLista;
+        notifyDataSetChanged();
+    }
+
     private void agregarAFavoritos(ProductoModel producto) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
