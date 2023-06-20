@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresentadorEditarProductos;
 import com.example.lecheriaapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -56,7 +60,7 @@ public class EditarProductosFragment extends Fragment implements View.OnClickLis
 
     private static final int REQUEST_PERMISSIONS = 1;
 
-    public static EditarProductosFragment newInstance(String nombre, String calorias, String precio, String disponibilidad, String categoria, String ingredientes, String estado, int posicion) {
+    public static EditarProductosFragment newInstance(String nombre, String calorias, String precio, String disponibilidad, String categoria, String ingredientes, String estado,String imagen, int posicion) {
         EditarProductosFragment fragment = new EditarProductosFragment();
         Bundle args = new Bundle();
         args.putString("nombre", nombre);
@@ -66,6 +70,7 @@ public class EditarProductosFragment extends Fragment implements View.OnClickLis
         args.putString("categoria", categoria);
         args.putString("ingredientes", ingredientes);
         args.putString("estado", estado);
+        args.putString("imageUrl", imagen);
         args.putInt("posicion", posicion);
         fragment.setArguments(args);
         return fragment;
@@ -135,10 +140,15 @@ public class EditarProductosFragment extends Fragment implements View.OnClickLis
                 mSpinnerCategoria.setSelection(categoriaPosition);
             }
         }
+// Obtener la URL de la imagen del producto
+        String imageUrl = args.getString("imageUrl");
 
-        // Obtener la referencia al almacenamiento Firebase
-        mStorageRef = FirebaseStorage.getInstance().getReference();
-
+// Si la URL de la imagen no es nula, carga y muestra la imagen utilizando Glide
+        if (imageUrl != null) {
+            Glide.with(requireContext())
+                    .load(imageUrl)
+                    .into(mImageView);
+        }
         return view;
     }
 
@@ -159,7 +169,7 @@ public class EditarProductosFragment extends Fragment implements View.OnClickLis
                 Map<String, Object> productoData = new HashMap<>();
                 productoData.put("nombre", nombreProducto);
                 productoData.put("caloria", calorias);
-                productoData.put("precio", Float.parseFloat(precio));
+                productoData.put("precio", precio);
                 productoData.put("disponibilidad", disponibilidad);
                 productoData.put("categoria", categoria);
                 productoData.put("ingredientes", ingredientes);

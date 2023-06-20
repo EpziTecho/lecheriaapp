@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresentadorEditarProductos;
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresenterGestionProductos;
@@ -59,7 +60,12 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
         holder.mNombreProducto.setText(productoModel.getNombre());
         holder.mPrecioProducto.setText(productoModel.getPrecio());
         holder.mEstadoProducto.setText(productoModel.getEstado());
-        holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
+        // Cargar la imagen utilizando Glide
+        Glide.with(mcontext)
+                .load(productoModel.getImageUrl())  // Aquí deberías proporcionar la URL o el archivo local de la imagen
+                .placeholder(R.drawable.baseline_table_restaurant_24)  // Imagen de carga por defecto
+                .error(R.drawable.baseline_book_24)  // Imagen de error si no se puede cargar la imagen
+                .into(holder.mImagenProducto);
 
         // Establecer clic del botón "Editar"
         holder.btnEditar.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +79,9 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
                 String categoria = productoModel.getCategoria();
                 String ingredientes = productoModel.getIngredientes();
                 String estado = productoModel.getEstado();
+                String imagen = productoModel.getImageUrl();
 
-                Fragment editarFragment = EditarProductosFragment.newInstance(nombre, calorias, precio, disponibilidad, categoria, ingredientes, estado, position);
+                Fragment editarFragment = EditarProductosFragment.newInstance(nombre, calorias, precio, disponibilidad, categoria, ingredientes, estado, imagen,position);
                 FragmentManager fragmentManager = ((AppCompatActivity) mcontext).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, editarFragment);

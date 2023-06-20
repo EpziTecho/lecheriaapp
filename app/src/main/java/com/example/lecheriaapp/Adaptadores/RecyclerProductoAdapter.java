@@ -14,7 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.LoginView.LoginFragment;
@@ -62,7 +63,13 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
         holder.mNombreProducto.setText(productoModel.getNombre());
         holder.mPrecioProducto.setText("S/. " + productoModel.getPrecio());
         holder.mEstadoProducto.setText(productoModel.getEstado());
-        holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
+        if (productoModel.getImageUrl() != null) {
+            Glide.with(mcontext)
+                    .load(productoModel.getImageUrl())
+                    .placeholder(R.drawable.baseline_table_restaurant_24)
+                    .error(R.drawable.baseline_delete_24)
+                    .into(holder.mImagenProducto);
+        }
 
         // Establecer clic en el botón de favoritos
         holder.mBotonFavoritos.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +115,7 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
                     args.putString("ingredientes", productoModel.getIngredientes());
                     args.putString("disponibilidad", productoModel.getDisponibilidad());
                     args.putString("categoria", productoModel.getCategoria());
-                    args.putString("imagen", productoModel.getImagen());
+                    args.putString("imagen", productoModel.getImageUrl());
                     DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
                     detallesProductoFragment.setArguments(args);
                     FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
@@ -185,7 +192,6 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
                     .commit();
         }
     }
-
 
     public interface FavoritosUpdateListener {
         void onFavoritosUpdated();

@@ -47,7 +47,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
         holder.precio.setText(producto.getPrecio());
 
         // Carga la imagen del producto utilizando Glide, una librería para la carga de imágenes
-        Glide.with(context).load(producto.getImagen()).into(holder.imagen);
+        Glide.with(context).load(producto.getImageUrl()).into(holder.imagen);
     }
 
     // Método que indica la cantidad de elementos que hay en la lista de productos
