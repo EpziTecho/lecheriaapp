@@ -19,11 +19,12 @@
         />
     <Button
         android:id="@+id/btn_favorito"
-        android:layout_width="97dp"
-        android:layout_height="wrap_content"
-        android:translationX="75dp"
-        android:translationY="-105dp"
-        app:srcCompat="@drawable/favoritoseleccionado" />
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:background="#00FFFFFF"
+        android:translationX="100dp"
+        android:translationY="-100dp"
+        android:foreground="@drawable/favoritonoseleccionado" />
 
     <TextView
         android:id="@+id/nombreProductoRow"

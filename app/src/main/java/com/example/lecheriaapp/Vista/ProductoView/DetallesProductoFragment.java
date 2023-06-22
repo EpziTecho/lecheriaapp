@@ -7,12 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.lecheriaapp.R;
 
 public class DetallesProductoFragment extends Fragment {
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +29,7 @@ public class DetallesProductoFragment extends Fragment {
         TextView caloriasTextView = rootView.findViewById(R.id.producto_calorias);
         TextView disponibilidadTextView = rootView.findViewById(R.id.producto_disponibilidad);
         TextView categoriaTextView = rootView.findViewById(R.id.producto_categoria);
-
+        ImageView imagenImageView = rootView.findViewById(R.id.producto_imagen);
 
         // Obtener los argumentos pasados al fragmento
         Bundle args = getArguments();
@@ -41,8 +42,9 @@ public class DetallesProductoFragment extends Fragment {
             String calorias = args.getString("caloria");
             String disponibilidad = args.getString("disponibilidad");
             String categoria = args.getString("categoria");
-            String imagen = args.getString("imagen");
 
+            // Obtener la URL de la imagen del producto
+            String imageUrl = args.getString("imageUrl");
 
             // Asignar los datos a las vistas
             nombreTextView.setText(nombre);
@@ -53,7 +55,10 @@ public class DetallesProductoFragment extends Fragment {
             disponibilidadTextView.setText(disponibilidad);
             categoriaTextView.setText(categoria);
 
-
+            // Cargar la imagen utilizando Glide
+            Glide.with(requireContext())
+                    .load(imageUrl)
+                    .into(imagenImageView);
         }
 
         return rootView;

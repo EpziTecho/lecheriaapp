@@ -69,6 +69,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     initRecyclerCentro();
                 } else if (sede.equals("SMP")) {
                     initRecyclerSMP();
+                } else if(sede.equals("Callao")){
+                   initRecyclerCallao();
+                } else if(sede.equals("Ate")) {
+                   initRecyclerAte();
                 }
             }
             @Override
@@ -119,7 +123,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         productosHomePresenter.mostrarProductosAdminSMP(recyclerView);
     }
+    private void initRecyclerCallao() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
 
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
+
+        productosHomePresenter.mostrarProductosAdminCallao(recyclerView);
+    }
+    private void initRecyclerAte() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
+
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
+
+        productosHomePresenter.mostrarProductosAdminAte(recyclerView);
+    }
     @Override
     public void onClick(View view) {
 

@@ -60,6 +60,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
         holder.mNombreProducto.setText(productoModel.getNombre());
         holder.mPrecioProducto.setText(productoModel.getPrecio());
         holder.mEstadoProducto.setText(productoModel.getEstado());
+        holder.mCaloria.setText(productoModel.getCaloria()+" Kcal");
         // Cargar la imagen utilizando Glide
         Glide.with(mcontext)
                 .load(productoModel.getImageUrl())  // Aquí deberías proporcionar la URL o el archivo local de la imagen
@@ -114,7 +115,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
 
     public class ProductoViewGestionHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView mNombreProducto, mPrecioProducto, mEstadoProducto, mDescripcionProducto;
+        TextView mNombreProducto, mPrecioProducto, mEstadoProducto, mDescripcionProducto,mCaloria;
         ImageView mImagenProducto;
         Button btnEditar, btnEliminar;
 
@@ -125,6 +126,7 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
             mPrecioProducto = itemView.findViewById(R.id.precioProductoRow);
             mEstadoProducto = itemView.findViewById(R.id.estadoProductoRow);
             mImagenProducto = itemView.findViewById(R.id.imagenProductoRow);
+            mCaloria = itemView.findViewById(R.id.caloriaProductoRow);
             btnEditar = itemView.findViewById(R.id.btnEditarProducto);
             btnEliminar = itemView.findViewById(R.id.btnEliminarProducto);
         }
