@@ -55,32 +55,25 @@ public class PresentadorAgregarProductos {
                         ultimoProducto = snapshot.getValue(Integer.class);
                     }
 
-                    // Incrementamos el número del último producto creado
-                    ultimoProducto++;
-
                     // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
-                    String productoId = getFormattedNumber(ultimoProducto);
-                    if (productoId.equals("00")) {
-                        productoId = "01";
-                    }
+                    String productoId = getFormattedNumber(ultimoProducto + 1);
                     mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + productoId).setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            // Si se completa la actualización del producto, se muestra un mensaje de confirmación
-                            Toast.makeText(mContext, "Producto agregado", Toast.LENGTH_SHORT).show();
-                            FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
-                            fragmentManager.beginTransaction().replace(R.id.fragment_container, new GestionProductosFragment()).commit();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Si ocurre un error en la actualización del producto, se muestra un mensaje de error
-                            Toast.makeText(mContext, "Error al agregar producto", Toast.LENGTH_SHORT).show();
+                            if (task.isSuccessful()) {
+                                // Si se completa la actualización del producto, se muestra un mensaje de confirmación
+                                Toast.makeText(mContext, "Producto agregado", Toast.LENGTH_SHORT).show();
+                                FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
+                                fragmentManager.beginTransaction().replace(R.id.fragment_container, new GestionProductosFragment()).commit();
+                            } else {
+                                // Si ocurre un error en la actualización del producto, se muestra un mensaje de error
+                                Toast.makeText(mContext, "Error al agregar producto", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
 
                     // Actualizamos el número del último producto creado
-                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(ultimoProducto);
+                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(ultimoProducto + 1);
                 } else {
                     Toast.makeText(mContext, "Error al obtener el último producto", Toast.LENGTH_SHORT).show();
                 }

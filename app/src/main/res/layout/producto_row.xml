@@ -31,7 +31,8 @@
         android:background="#00FFFFFF"
         android:foreground="@drawable/favoritonoseleccionado"
         android:translationX="60dp"
-        android:translationY="-100dp" />
+        android:translationY="-100dp"
+        />
 
     <TextView
         android:id="@+id/nombreProductoRow"
@@ -52,7 +53,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/NumeroCalorias"
+                android:id="@+id/caloriasproductorow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="365 cal " />
@@ -72,7 +73,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/disponibilidadproductorow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Disponible en:"

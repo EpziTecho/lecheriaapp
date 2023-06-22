@@ -13,8 +13,10 @@
     </string-array>
     <string-array name="left_spinner_items">
         <item>Todas las sedes</item>
-        <item>Sede SMP</item>
-        <item>Sede Callao</item>
+        <item>Centro</item>
+        <item>SMP</item>
+        <item>Ate</item>
+        <item>Callao</item>
     </string-array>
     <string-array name="right_spinner_items">
         <item>Todos los productos</item>
@@ -26,11 +28,11 @@
     </string-array>
 
     <string-array name="left_spinner_sedes">
-        <item>Central</item>
-        <item>Este</item>
-        <item>Oeste</item>
-        <item>Norte</item>
-        <item>Sur</item>
+        <item>Todas las sedes</item>
+        <item>Centro</item>
+        <item>SMP</item>
+        <item>Ate</item>
+        <item>Callao</item>
     </string-array>
     <string name="action_login">Iniciar sesión</string>
 

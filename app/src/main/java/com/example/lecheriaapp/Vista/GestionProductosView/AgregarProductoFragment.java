@@ -1,5 +1,6 @@
 package com.example.lecheriaapp.Vista.GestionProductosView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -85,6 +86,12 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnAgregar) {
+            // Crear un diálogo de progreso para mostrar mientras se realiza el registro del usuario
+            final ProgressDialog dialog = new ProgressDialog(requireContext());
+            dialog.setMessage("Agregando producto...");
+            dialog.setCancelable(false);
+            dialog.show();
+
             String nombreProducto = mTextNombreProducto.getText().toString().trim();
             String calorias = mTextCalorias.getText().toString().trim();
             String precio = mTextPrecio.getText().toString().trim();
@@ -125,8 +132,8 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
                         );
 
                         // Mostrar mensaje de éxito
-                        Toast.makeText(getActivity(), "Producto agregado", Toast.LENGTH_SHORT).show();
-
+                        dialog.dismiss();
+                       // Toast.makeText(getActivity(), "Producto agregado", Toast.LENGTH_SHORT).show();
                         // Ir al fragmento de gestión de productos
                         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.fragment_container, new GestionProductosFragment()).commit();
