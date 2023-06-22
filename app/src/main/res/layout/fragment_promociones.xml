@@ -55,54 +55,15 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp">
 
-                    <LinearLayout
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_productospromocion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:elevation="4dp"
-                        android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_gravity="center_horizontal"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/baseline_star_24" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="4dp"
-                            android:text="Choco trio 3x1"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/producto_descripcion"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="LLevate 3 tazas por el precio de 1, hecha de pura leche de nuestras vacas"
-                            android:textColor="@color/black"
-                            android:textSize="10sp" />
-
-                        <TextView
-                            android:id="@+id/producto_precio"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:paddingBottom="4dp"
-                            android:text="Precio: S/.20.00"
-                            android:textColor="@color/black"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
+                        android:padding="16dp"
+                        android:background="@drawable/producto_background"
+                        android:elevation="4dp"/>
 
                 </androidx.cardview.widget.CardView>
 

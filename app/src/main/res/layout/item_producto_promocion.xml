@@ -48,5 +48,39 @@
         android:gravity="center_horizontal"
         android:textColor="@color/black"
         android:textSize="10sp" />
+    <TextView
+        android:id="@+id/producto_categoria"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción del producto"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+    <TextView
+        android:id="@+id/producto_estado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción del producto"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/producto_disponibilidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción del producto"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+    <TextView
+        android:id="@+id/producto_calorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripción del producto"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+
 
 </LinearLayout>

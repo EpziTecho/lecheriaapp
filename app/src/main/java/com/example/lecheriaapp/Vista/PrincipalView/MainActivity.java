@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_promosperfil:
-                replaceFragment(new PromoperfilFragment());
+                replaceFragment(new PromocionesFragment());
                 break;
 
             case R.id.nav_gestionProductos:

@@ -57,7 +57,8 @@ public class PresentadorAgregarProductos {
 
                     // Actualizamos la referencia del producto en la base de datos de Firebase con los valores del nuevo producto
                     String productoId = getFormattedNumber(ultimoProducto + 1);
-                    mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + productoId).setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    DatabaseReference productoRef = mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("productos").child("producto" + productoId);
+                    productoRef.setValue(producto).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -74,6 +75,14 @@ public class PresentadorAgregarProductos {
 
                     // Actualizamos el número del último producto creado
                     mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("ultimoProducto").setValue(ultimoProducto + 1);
+
+                    // Verificar si el estado del producto es "En promoción"
+                    String estado = (String) producto.get("estado");
+                    if (estado != null && estado.equals("En promocion")) {
+                        // Crear un nodo de promociones y agregar el producto allí
+                        DatabaseReference promocionesRef = mDatabase.child("Usuarios").child(mAuth.getCurrentUser().getUid()).child("promociones");
+                        promocionesRef.child("producto" + productoId).setValue(producto);
+                    }
                 } else {
                     Toast.makeText(mContext, "Error al obtener el último producto", Toast.LENGTH_SHORT).show();
                 }
