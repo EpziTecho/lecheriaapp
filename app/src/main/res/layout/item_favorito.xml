@@ -6,23 +6,25 @@
     android:focusable="auto"
     android:orientation="vertical">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagenProductoRow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="84dp"
         android:layout_marginHorizontal="2dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="0dp"
         android:cropToPadding="false"
-        app:srcCompat="@drawable/image2" />
-
+        app:shapeAppearanceOverlay="@style/RoundedImageViewProd"
+        app:srcCompat="@drawable/image2"
+        />
     <Button
         android:id="@+id/btn_favorito"
-        android:layout_width="97dp"
-        android:layout_height="wrap_content"
-        android:translationX="75dp"
-        android:translationY="-105dp"
-        app:srcCompat="@drawable/favoritoseleccionado" />
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:background="#00FFFFFF"
+        android:translationX="100dp"
+        android:translationY="-100dp"
+        android:foreground="@drawable/favoritonoseleccionado" />
 
     <TextView
         android:id="@+id/nombreProductoRow"

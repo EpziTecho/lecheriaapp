@@ -5,7 +5,7 @@ public class UserModel {
     private String email;
     private String usuario;
     private String rol;
-    private String imagenUri; // Nuevo atributo para almacenar la URL o el Uri de la imagen
+    private String imagen; // Nuevo atributo para almacenar la URL o el Uri de la imagen
 
     public UserModel() {
     }
@@ -42,11 +42,11 @@ public class UserModel {
         this.usuario = usuario;
     }
 
-    public String getImagenUri() {
-        return imagenUri;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenUri(String imagenUri) {
-        this.imagenUri = imagenUri;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

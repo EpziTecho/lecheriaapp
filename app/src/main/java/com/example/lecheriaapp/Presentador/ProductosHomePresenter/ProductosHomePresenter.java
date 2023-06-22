@@ -48,7 +48,7 @@ public class ProductosHomePresenter {
 
                     if (rol != null && rol.equals("cliente")) {
                         // Cargar productos de usuarios con rol "admin" y "adminSMP"
-                        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("admin").endAt("adminSMP");
+                        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("AdminCentro").endAt("AdminSMP");
                         query.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -70,6 +70,7 @@ public class ProductosHomePresenter {
                                                     productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                                     productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
                                                     productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
+                                                    productoModel.setImageUrl(snapshot.child("imageUrl").getValue(String.class));
                                                     arrayListProductos.add(productoModel);
                                                 }
                                             }
@@ -108,6 +109,7 @@ public class ProductosHomePresenter {
                                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                         productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
                                         productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
+                                        productoModel.setImageUrl(snapshot.child("imageUrl").getValue(String.class));
                                         arrayListProductos.add(productoModel);
                                     }
                                 }
@@ -130,7 +132,7 @@ public class ProductosHomePresenter {
             });
         } else {
             // No se ha iniciado sesión, cargar productos de usuarios con el rol "admin" y "adminSMP"
-            Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("admin").endAt("adminSMP");
+            Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("Admin Centro").endAt("AdminSMP");
             query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -152,6 +154,7 @@ public class ProductosHomePresenter {
                                         productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
                                         productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
                                         productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
+                                        productoModel.setImageUrl(snapshot.child("imageUrl").getValue(String.class));
                                         arrayListProductos.add(productoModel);
                                     }
                                 }
@@ -175,7 +178,204 @@ public class ProductosHomePresenter {
             });
         }
     }
+    public void mostrarProductosAdminCentro(RecyclerView recyclerView) {
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("AdminCentro").endAt("AdminCentro");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child("Usuarios").child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    ProductoModel productoModel = new ProductoModel();
+                                    productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                                    productoModel.setEstado(estado);
+                                    productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(String.class)));
+                                    productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                                    productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
+                                    productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                    productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
+                                    productoModel.setImageUrl(snapshot.child("imageUrl").getValue(String.class));
+                                    arrayListProductos.add(productoModel);
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
+
+    public void mostrarProductosAdminSMP(RecyclerView recyclerView) {
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("AdminSMP").endAt("AdminSMP");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child("Usuarios").child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    ProductoModel productoModel = new ProductoModel();
+                                    productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                                    productoModel.setEstado(estado);
+                                    productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(String.class)));
+                                    productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                                    productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
+                                    productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                    productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
+                                    productoModel.setImageUrl(snapshot.child("imageUrl").getValue(String.class));
+                                    arrayListProductos.add(productoModel);
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
+
+    public void mostrarProductosAdminCallao(RecyclerView recyclerView) {
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("AdminCallao").endAt("AdminCallao");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child("Usuarios").child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    ProductoModel productoModel = new ProductoModel();
+                                    productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                                    productoModel.setEstado(estado);
+                                    productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(String.class)));
+                                    productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                                    productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
+                                    productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                    productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
+                                    productoModel.setImageUrl(snapshot.child("imageUrl").getValue(String.class));
+                                    arrayListProductos.add(productoModel);
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
+    public void mostrarProductosAdminAte(RecyclerView recyclerView) {
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("AdminAte").endAt("AdminAte");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child("Usuarios").child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    ProductoModel productoModel = new ProductoModel();
+                                    productoModel.setNombre(snapshot.child("nombre").getValue(String.class));
+                                    productoModel.setEstado(estado);
+                                    productoModel.setPrecio(String.valueOf(snapshot.child("precio").getValue(String.class)));
+                                    productoModel.setIngredientes(snapshot.child("ingredientes").getValue(String.class));
+                                    productoModel.setDisponibilidad(snapshot.child("disponibilidad").getValue(String.class));
+                                    productoModel.setCaloria(snapshot.child("caloria").getValue(String.class));
+                                    productoModel.setCategoria(snapshot.child("categoria").getValue(String.class));
+                                    productoModel.setImageUrl(snapshot.child("imageUrl").getValue(String.class));
+                                    arrayListProductos.add(productoModel);
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
 
 
 }

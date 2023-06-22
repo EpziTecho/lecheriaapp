@@ -79,7 +79,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/NumeroCalorias"
+            android:id="@+id/caloriaProductoRow"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:text="365 cal "
