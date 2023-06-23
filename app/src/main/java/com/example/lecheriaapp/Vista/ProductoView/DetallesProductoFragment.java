@@ -22,7 +22,7 @@ public class DetallesProductoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_detalles_producto, container, false);
 
         // Obtener referencias a las vistas del diseño
-        TextView nombreTextView = rootView.findViewById(R.id.producto_nombre);
+       TextView nombreTextView = rootView.findViewById(R.id.producto_nombre);
         TextView precioTextView = rootView.findViewById(R.id.producto_precio);
         TextView estadoTextView = rootView.findViewById(R.id.producto_estado);
         TextView ingredientesTextView = rootView.findViewById(R.id.producto_ingredientes);
