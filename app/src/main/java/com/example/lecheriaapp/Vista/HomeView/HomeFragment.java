@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -22,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private ProductosAdapter adapter;
@@ -31,7 +32,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private DatabaseReference mDatabase;
     private ProductosHomePresenter productosHomePresenter;
 
-    private Spinner leftSpinner;
+    private Spinner spinnerSedes;
     private Spinner rightSpinner;
 
     public HomeFragment() {
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.recyclerViewHome);
         // Obtener la referencia a los Spinners del layout
-        leftSpinner = view.findViewById(R.id.leftSpinner);
+        spinnerSedes = view.findViewById(R.id.leftSpinner);
         rightSpinner = view.findViewById(R.id.rightSpinner);
         // Crear un ArrayAdapter para cada Spinner con los datos deseados
         ArrayAdapter<CharSequence> leftAdapter = ArrayAdapter.createFromResource(getContext(),
@@ -53,9 +54,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         rightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Establecer los ArrayAdapter como adaptador de cada Spinner
-        leftSpinner.setAdapter(leftAdapter);
+        spinnerSedes.setAdapter(leftAdapter);
         rightSpinner.setAdapter(rightAdapter);
-        productosHomePresenter= new ProductosHomePresenter(getActivity(), mAuth, mDatabase);
+        productosHomePresenter = new ProductosHomePresenter(getActivity(), mAuth, mDatabase);
+
+        // Agregar listener al spinner de Sedes
+        spinnerSedes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String sede = parent.getItemAtPosition(position).toString();
+                if (sede.equals("Todas las sedes")) {
+                    initRecyclerTodos();
+                } else if (sede.equals("Centro")) {
+                    initRecyclerCentro();
+                } else if (sede.equals("SMP")) {
+                    initRecyclerSMP();
+                } else if(sede.equals("Callao")){
+                   initRecyclerCallao();
+                } else if(sede.equals("Ate")) {
+                   initRecyclerAte();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No se seleccionó ningún item
+            }
+        });
 
         return view;
 
@@ -64,26 +88,63 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initRecycler();
-
+       initRecyclerTodos();
     }
-        private void initRecycler() {
-        RecyclerView recyclerView = getView().findViewById(R.id.recyclerViewHome);
+
+    private void initRecyclerTodos() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-            productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
 
-            recyclerView.setAdapter(adapter);
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
 
-            productosHomePresenter = new ProductosHomePresenter(getActivity(), mAuth, mDatabase);
-            productosHomePresenter.cargarRecyclerView(recyclerView);
+        productosHomePresenter.cargarRecyclerView(recyclerView);
     }
 
+    private void initRecyclerCentro() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
+
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
+
+        productosHomePresenter.mostrarProductosAdminCentro(recyclerView);
+    }
+
+    private void initRecyclerSMP() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
+
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
+
+        productosHomePresenter.mostrarProductosAdminSMP(recyclerView);
+    }
+    private void initRecyclerCallao() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
+
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
+
+        productosHomePresenter.mostrarProductosAdminCallao(recyclerView);
+    }
+    private void initRecyclerAte() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
+
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
+
+        productosHomePresenter.mostrarProductosAdminAte(recyclerView);
+    }
     @Override
     public void onClick(View view) {
 
-
-
     }
 }
-
