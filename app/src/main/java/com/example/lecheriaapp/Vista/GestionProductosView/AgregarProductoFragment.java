@@ -87,10 +87,7 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
     public void onClick(View view) {
         if (view.getId() == R.id.btnAgregar) {
             // Crear un diálogo de progreso para mostrar mientras se realiza el registro del usuario
-            final ProgressDialog dialog = new ProgressDialog(requireContext());
-            dialog.setMessage("Agregando producto...");
-            dialog.setCancelable(false);
-            dialog.show();
+
 
             String nombreProducto = mTextNombreProducto.getText().toString().trim();
             String calorias = mTextCalorias.getText().toString().trim();
@@ -102,6 +99,10 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
 
             if (!nombreProducto.isEmpty() && !calorias.isEmpty() && !ingredientes.isEmpty() && !estado.isEmpty() && !disponibilidad.isEmpty() && !categoria.isEmpty() && imageUri != null) {
                 // Subir la imagen a Firebase Storage
+                final ProgressDialog dialog = new ProgressDialog(requireContext());
+                dialog.setMessage("Agregando producto...");
+                dialog.setCancelable(false);
+                dialog.show();
                 StorageReference imageRef = mStorageRef.child("productos").child(imageUri.getLastPathSegment());
                 UploadTask uploadTask = imageRef.putFile(imageUri);
                 uploadTask.addOnSuccessListener(taskSnapshot -> {

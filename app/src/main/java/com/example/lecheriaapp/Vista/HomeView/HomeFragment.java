@@ -34,6 +34,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private Spinner spinnerSedes;
     private Spinner rightSpinner;
+    private Spinner spinnerCategorias;
 
     public HomeFragment() {
     }
@@ -44,18 +45,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // Obtener la referencia a los Spinners del layout
         spinnerSedes = view.findViewById(R.id.leftSpinner);
         rightSpinner = view.findViewById(R.id.rightSpinner);
+        spinnerCategorias = view.findViewById(R.id.rightSpinner);
         // Crear un ArrayAdapter para cada Spinner con los datos deseados
         ArrayAdapter<CharSequence> leftAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.left_spinner_items, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> rightAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.right_spinner_items, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> categoriasAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.right_spinner_items, android.R.layout.simple_spinner_item);
         // Especificar el diseño del menú desplegable de los Spinners
         leftAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         rightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoriasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Establecer los ArrayAdapter como adaptador de cada Spinner
         spinnerSedes.setAdapter(leftAdapter);
         rightSpinner.setAdapter(rightAdapter);
+        spinnerCategorias.setAdapter(categoriasAdapter);
         productosHomePresenter = new ProductosHomePresenter(getActivity(), mAuth, mDatabase);
 
         // Agregar listener al spinner de Sedes
@@ -69,26 +75,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     initRecyclerCentro();
                 } else if (sede.equals("SMP")) {
                     initRecyclerSMP();
-                } else if(sede.equals("Callao")){
-                   initRecyclerCallao();
-                } else if(sede.equals("Ate")) {
-                   initRecyclerAte();
+                } else if (sede.equals("Callao")) {
+                    initRecyclerCallao();
+                } else if (sede.equals("Ate")) {
+                    initRecyclerAte();
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // No se seleccionó ningún item
             }
         });
 
-        return view;
+        // Agregar listener al spinner de Categorías
+        spinnerCategorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String categoria = parent.getItemAtPosition(position).toString();
+                mostrarProductosPorCategoria(categoria);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No se seleccionó ninguna categoría
+            }
+        });
+
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       initRecyclerTodos();
+        initRecyclerTodos();
     }
 
     private void initRecyclerTodos() {
@@ -123,6 +143,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         productosHomePresenter.mostrarProductosAdminSMP(recyclerView);
     }
+
     private void initRecyclerCallao() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -133,6 +154,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         productosHomePresenter.mostrarProductosAdminCallao(recyclerView);
     }
+
     private void initRecyclerAte() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -143,6 +165,54 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         productosHomePresenter.mostrarProductosAdminAte(recyclerView);
     }
+
+    private void mostrarProductosPorCategoria(String categoria) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
+
+        adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
+        recyclerView.setAdapter(adapter);
+
+        // Obtener las selecciones de los Spinners
+        String sede = spinnerSedes.getSelectedItem().toString();
+        String categoriaSeleccionada = spinnerCategorias.getSelectedItem().toString();
+
+        if (sede.equals("Todas las sedes") && categoriaSeleccionada.equals("Todos los productos")) {
+            // Mostrar todos los productos de todas las sedes
+            initRecyclerTodos();
+        } else {
+            // Filtrar productos por sede y categoría
+            if (sede.equals("Todas las sedes")) {
+                // Filtrar por categoría en todas las sedes
+                productosHomePresenter.mostrarProductosPorCategoriaEnTodasLasSedes(categoria, recyclerView);
+            } else if (categoriaSeleccionada.equals("Todos los productos")) {
+                // Mostrar todos los productos de la sede seleccionada
+                if (sede.equals("Centro")) {
+                    initRecyclerCentro();
+                } else if (sede.equals("SMP")) {
+                    initRecyclerSMP();
+                } else if (sede.equals("Callao")) {
+                    initRecyclerCallao();
+                } else if (sede.equals("Ate")) {
+                    initRecyclerAte();
+                }
+            } else {
+                // Filtrar por categoría en la sede seleccionada
+                if (sede.equals("Centro")) {
+                    productosHomePresenter.mostrarProductosPorCategoriaCentro(categoria, recyclerView);
+                } else if (sede.equals("SMP")) {
+                    productosHomePresenter.mostrarProductosPorCategoriaSMP(categoria, recyclerView);
+                } else if (sede.equals("Callao")) {
+                    productosHomePresenter.mostrarProductosPorCategoriaCallao(categoria, recyclerView);
+                } else if (sede.equals("Ate")) {
+                    productosHomePresenter.mostrarProductosPorCategoriaAte(categoria, recyclerView);
+                }
+            }
+        }
+    }
+
+
     @Override
     public void onClick(View view) {
 

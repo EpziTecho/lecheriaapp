@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vista.InfoEmpresa.InfoEmpresa">
+    tools:context=".Vista.InfoEmpresa.InfoEmpresaFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

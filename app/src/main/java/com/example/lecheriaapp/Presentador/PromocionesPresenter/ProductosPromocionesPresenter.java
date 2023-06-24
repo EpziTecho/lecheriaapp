@@ -74,5 +74,40 @@ public class ProductosPromocionesPresenter implements View.OnClickListener {
             }
         });
     }
+    public void cargarRecyclerProductosRelacionados(RecyclerView recyclerView) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mDatabase.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    DataSnapshot promocionesSnapshot = userSnapshot.child("promociones");
+                    for (DataSnapshot productoSnapshot : promocionesSnapshot.getChildren()) {
+                        ProductoModel productoModel = new ProductoModel();
+                        productoModel.setNombre(productoSnapshot.child("nombre").getValue(String.class));
+                        productoModel.setEstado(productoSnapshot.child("estado").getValue(String.class));
+                        productoModel.setPrecio(String.valueOf(productoSnapshot.child("precio").getValue(String.class)));
+                        productoModel.setIngredientes(productoSnapshot.child("ingredientes").getValue(String.class));
+                        productoModel.setDisponibilidad(productoSnapshot.child("disponibilidad").getValue(String.class));
+                        productoModel.setCaloria(productoSnapshot.child("caloria").getValue(String.class));
+                        productoModel.setCategoria(productoSnapshot.child("categoria").getValue(String.class));
+                        productoModel.setImageUrl(productoSnapshot.child("imageUrl").getValue(String.class));
+                        arrayListProductos.add(productoModel);
+                    }
+                }
+
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.recycler_horizontal_productos_relacionados, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle onCancelled event if needed
+            }
+        });
+    }
 }
 

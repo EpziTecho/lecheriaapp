@@ -376,6 +376,220 @@ public class ProductosHomePresenter {
             }
         });
     }
+    public void mostrarProductosPorCategoriaAte(String categoria, RecyclerView recyclerView) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        Query query = mDatabase.orderByChild("rol").startAt("AdminAte").endAt("AdminAte");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    String categoriaProducto = snapshot.child("categoria").getValue(String.class);
+                                    if (categoriaProducto != null && categoriaProducto.equalsIgnoreCase(categoria)) {
+                                        ProductoModel productoModel = snapshot.getValue(ProductoModel.class);
+                                        arrayListProductos.add(productoModel);
+                                    }
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
+
+    public void mostrarProductosPorCategoriaCentro(String categoria, RecyclerView recyclerView) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        Query query = mDatabase.orderByChild("rol").startAt("AdminCentro").endAt("AdminCentro");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    String categoriaProducto = snapshot.child("categoria").getValue(String.class);
+                                    if (categoriaProducto != null && categoriaProducto.equalsIgnoreCase(categoria)) {
+                                        ProductoModel productoModel = snapshot.getValue(ProductoModel.class);
+                                        arrayListProductos.add(productoModel);
+                                    }
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
+    public void mostrarProductosPorCategoriaSMP(String categoria, RecyclerView recyclerView) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        Query query = mDatabase.orderByChild("rol").startAt("AdminSMP").endAt("AdminSMP");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    String categoriaProducto = snapshot.child("categoria").getValue(String.class);
+                                    if (categoriaProducto != null && categoriaProducto.equalsIgnoreCase(categoria)) {
+                                        ProductoModel productoModel = snapshot.getValue(ProductoModel.class);
+                                        arrayListProductos.add(productoModel);
+                                    }
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
+    public void mostrarProductosPorCategoriaCallao(String categoria, RecyclerView recyclerView) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        Query query = mDatabase.orderByChild("rol").startAt("AdminCallao").endAt("AdminCallao");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    String categoriaProducto = snapshot.child("categoria").getValue(String.class);
+                                    if (categoriaProducto != null && categoriaProducto.equalsIgnoreCase(categoria)) {
+                                        ProductoModel productoModel = snapshot.getValue(ProductoModel.class);
+                                        arrayListProductos.add(productoModel);
+                                    }
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
+
+    public void mostrarProductosPorCategoriaEnTodasLasSedes(String categoria, RecyclerView recyclerView) {
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<ProductoModel> arrayListProductos = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    DatabaseReference productosRef = mDatabase.child(uid).child("productos");
+                    productosRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String estado = snapshot.child("estado").getValue(String.class);
+                                if (!estado.equalsIgnoreCase("ELIMINADO") && !estado.equalsIgnoreCase("eliminado")) {
+                                    String categoriaProducto = snapshot.child("categoria").getValue(String.class);
+                                    if (categoriaProducto != null && categoriaProducto.equalsIgnoreCase(categoria)) {
+                                        ProductoModel productoModel = snapshot.getValue(ProductoModel.class);
+                                        arrayListProductos.add(productoModel);
+                                    }
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Manejar error de lectura de la base de datos
+                        }
+                    });
+                }
+                adapter = new RecyclerProductoAdapter(mContext, R.layout.producto_row, arrayListProductos);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar error de lectura de la base de datos
+            }
+        });
+    }
 }

@@ -21,6 +21,10 @@
             android:id="@+id/nav_gestionProductos"
             android:icon="@drawable/ic_baseline_whatshot_24"
             android:title="Gestionar Productos" />
+        <item
+            android:id="@+id/nav_infoEmpresa"
+            android:icon="@drawable/baseline_despliegue"
+            android:title="Info/Nosotros" />
     </group>
     <group android:checkableBehavior="single">
     <item

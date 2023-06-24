@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Adaptadores.RecyclerProductoAdapter;
@@ -53,8 +54,9 @@ public class PromocionesFragment extends Fragment {
     }
 
     private void initRecyclerPromociones() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        //linearlayout
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(linearLayoutManager);
         productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
         adapter = new RecyclerProductoAdapter(getContext(), R.layout.item_producto_promocion, productoModelList);
         recyclerView.setAdapter(adapter);

@@ -1,7 +1,7 @@
 package com.example.lecheriaapp.Adaptadores;
 
 import android.content.Context;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,8 @@ import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.LoginView.LoginFragment;
 import com.example.lecheriaapp.Vista.ProductoView.DetallesProductoFragment;
+import com.example.lecheriaapp.Vista.PromocionesView.DetallesProductoPromocionesFragment;
+import com.example.lecheriaapp.Vista.PromocionesView.PromocionesFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -115,23 +118,52 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
                     int position = getAdapterPosition();
                     ProductoModel productoModel = arrayListProductos.get(position);
 
-                    // Abrir fragmento de detalles del producto
-                    Bundle args = new Bundle();
-                    args.putString("nombre", productoModel.getNombre());
-                    args.putString("precio", productoModel.getPrecio());
-                    args.putString("estado", productoModel.getEstado());
-                    args.putString("caloria", productoModel.getCaloria());
-                    args.putString("ingredientes", productoModel.getIngredientes());
-                    args.putString("disponibilidad", productoModel.getDisponibilidad());
-                    args.putString("categoria", productoModel.getCategoria());
-                    args.putString("imageUrl", productoModel.getImageUrl());
-                    DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
-                    detallesProductoFragment.setArguments(args);
-                    FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, detallesProductoFragment)
-                            .addToBackStack(null)
-                            .commit();
+                    // Verificar el fragmento actual
+                    Fragment fragment = ((FragmentActivity) mcontext).getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                    if (fragment instanceof PromocionesFragment) {
+                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                        if (currentUser != null) {
+
+                        // Estás en el fragmento PromocionesFragment
+                        // Abrir fragmento de detalles del producto para PromocionesFragment
+                        Bundle args = new Bundle();
+                        args.putString("nombre", productoModel.getNombre());
+                        args.putString("precio", productoModel.getPrecio());
+                        args.putString("estado", productoModel.getEstado());
+                        args.putString("caloria", productoModel.getCaloria());
+                        args.putString("ingredientes", productoModel.getIngredientes());
+                        args.putString("disponibilidad", productoModel.getDisponibilidad());
+                        args.putString("categoria", productoModel.getCategoria());
+                        args.putString("imageUrl", productoModel.getImageUrl());
+                        DetallesProductoPromocionesFragment detallesProductoFragment = new DetallesProductoPromocionesFragment();
+                        detallesProductoFragment.setArguments(args);
+                        FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, detallesProductoFragment)
+                                .addToBackStack(null)
+                                .commit();}else{
+                            Toast.makeText(mcontext, "Inicie sesión para ver los detalles del producto", Toast.LENGTH_SHORT).show();
+                            redirigirALoginFragment();
+                        }
+                    } else {
+                        // Abrir fragmento de detalles del producto para otros fragmentos
+                        Bundle args = new Bundle();
+                        args.putString("nombre", productoModel.getNombre());
+                        args.putString("precio", productoModel.getPrecio());
+                        args.putString("estado", productoModel.getEstado());
+                        args.putString("caloria", productoModel.getCaloria());
+                        args.putString("ingredientes", productoModel.getIngredientes());
+                        args.putString("disponibilidad", productoModel.getDisponibilidad());
+                        args.putString("categoria", productoModel.getCategoria());
+                        args.putString("imageUrl", productoModel.getImageUrl());
+                        DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
+                        detallesProductoFragment.setArguments(args);
+                        FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, detallesProductoFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 }
             });
         }
@@ -237,7 +269,17 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
     }
 
 
+    private void redirigirALoginFragment() {
+        // Crear el fragmento LoginFragment
+        LoginFragment loginFragment = new LoginFragment();
 
+        // Reemplazar el fragmento actual con LoginFragment
+        FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, loginFragment)
+                .addToBackStack(null)
+                .commit();
+    }
     public interface FavoritosUpdateListener {
         void onFavoritosUpdated();
     }

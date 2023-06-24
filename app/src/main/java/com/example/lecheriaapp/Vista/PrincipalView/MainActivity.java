@@ -26,8 +26,8 @@ import com.example.lecheriaapp.Vista.FavoritosUsuarioView.FavoritosUsuarioFragme
 import com.example.lecheriaapp.Vista.HomeView.HomeFragment;
 import com.example.lecheriaapp.Modelo.UserModel;
 import com.example.lecheriaapp.Presentador.PrincipalPresenter.PresenterPrincipal;
+import com.example.lecheriaapp.Vista.InfoEmpresa.InfoEmpresaFragment;
 import com.example.lecheriaapp.Vista.PromocionesView.PromocionesFragment;
-import com.example.lecheriaapp.Vista.PromoPerfilView.PromoperfilFragment;
 import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.GestionProductosView.GestionProductosFragment;
 import com.example.lecheriaapp.Vista.UbicanosView.UbicanosFragment;
@@ -211,6 +211,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_gestionProductos:
                 replaceFragment(new GestionProductosFragment());
+                break;
+            case R.id.nav_infoEmpresa:
+                replaceFragment(new InfoEmpresaFragment());
                 break;
 
             case R.id.nav_logout:
