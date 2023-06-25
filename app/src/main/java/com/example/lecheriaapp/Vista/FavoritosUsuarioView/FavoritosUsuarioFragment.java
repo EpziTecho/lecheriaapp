@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lecheriaapp.Adaptadores.RecyclerProductoAdapter;
@@ -44,7 +45,7 @@ public class FavoritosUsuarioFragment extends Fragment implements RecyclerProduc
         View view = inflater.inflate(R.layout.fragment_favoritosusuario, container, false);
 
         mRecyclerView = view.findViewById(R.id.recycler_favoritos);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         cargarFavoritos();
 

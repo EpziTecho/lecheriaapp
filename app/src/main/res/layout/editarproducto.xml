@@ -156,7 +156,7 @@
                     android:id="@+id/tituloAgregarIngredientes1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Agregar Ingredientes" />
+                    android:text="Descripción" />
 
                 <EditText
                     android:id="@+id/textIngredientes1"
