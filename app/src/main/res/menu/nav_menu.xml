@@ -1,53 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn = "navigation_view">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:checkableBehavior="single">
-
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_IniciarSesion"
             android:icon="@drawable/baseline_login_24"
-            android:title="Iniciar Sesion"/>
-           />
+            android:title="Iniciar Sesión" />
 
         <item
-            android:id="@+id/nav_cartacompleta"
-            android:icon="@drawable/baseline_book_24"
-            android:title="Carta Completa"/>
+            android:id="@+id/nav_favoritos"
+            android:icon="@drawable/baseline_edit_note_24"
+            android:title="Favoritos" />
 
         <item
             android:id="@+id/nav_promosperfil"
             android:icon="@drawable/baseline_local_offer_24"
-            android:title="Ver Promos"/>
+            android:title="Ver Promos" />
 
         <item
             android:id="@+id/nav_gestionProductos"
-            android:icon="@drawable/baseline_local_offer_24"
-            android:title="Gestionar Productos"/>
-            />
+            android:icon="@drawable/ic_baseline_whatshot_24"
+            android:title="Gestionar Productos" />
+        <item
+            android:id="@+id/nav_infoEmpresa"
+            android:icon="@drawable/baseline_despliegue"
+            android:title="Info/Nosotros" />
     </group>
-
+    <group android:checkableBehavior="single">
     <item
-        android:title=""
-
-        >
-
-        <menu>
-            <item></item>
-            <item></item>
-
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/baseline_login_24"
-                android:title="Cerrar Sesión"
-                android:orderInCategory="999"
-                />
-        </menu>
-
-    </item>
-
-
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/baseline_login_24"
+        android:title="Cerrar Sesión"
+        android:orderInCategory="999" />
+    </group>
 </menu>

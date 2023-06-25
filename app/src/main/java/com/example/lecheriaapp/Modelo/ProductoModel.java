@@ -1,23 +1,36 @@
 package com.example.lecheriaapp.Modelo;
 
 public class ProductoModel {
-private String nombre;
-    private String descripcion;
+    private String nombre;
+    private String caloria;
     private String precio;
-    private String imagen;
+    private String estado;
+    private String disponibilidad;
+    private String ingredientes;
+    private String imageUrl;
+    private String categoria;
 
-    public ProductoModel(String nombre, String descripcion, String precio, String imagen) {
+    public ProductoModel(String nombre, String caloria, String precio, String estado, String disponibilidad, String ingredientes, String imageUrl, String categoria) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
+        this.caloria = caloria;
         this.precio = precio;
-        this.imagen = imagen;
+        this.estado = estado;
+        this.disponibilidad = disponibilidad;
+        this.ingredientes = ingredientes;
+        this.imageUrl = imageUrl;
+        this.categoria = categoria;
     }
 
     public ProductoModel() {
-        this.nombre = "";
-        this.descripcion = "";
-        this.precio = "";
-        this.imagen = "";
+
+    }
+
+    public String getCaloria() {
+        return caloria;
+    }
+
+    public void setCaloria(String caloria) {
+        this.caloria = caloria;
     }
 
     public String getNombre() {
@@ -28,14 +41,6 @@ private String nombre;
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getPrecio() {
         return precio;
     }
@@ -44,11 +49,43 @@ private String nombre;
         this.precio = precio;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(String disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    public String getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(String ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

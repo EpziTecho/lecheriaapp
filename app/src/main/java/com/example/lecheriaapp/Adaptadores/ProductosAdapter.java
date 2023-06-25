@@ -1,4 +1,4 @@
-package com.example.lecheriaapp.Productos;
+package com.example.lecheriaapp.Adaptadores;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -43,11 +43,10 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
 
         // Actualiza los elementos de la vista con los datos del producto
         holder.nombre.setText(producto.getNombre());
-        holder.descripcion.setText(producto.getDescripcion());
+        holder.descripcion.setText(producto.getCaloria());
         holder.precio.setText(producto.getPrecio());
-
         // Carga la imagen del producto utilizando Glide, una librería para la carga de imágenes
-        Glide.with(context).load(producto.getImagen()).into(holder.imagen);
+        Glide.with(context).load(producto.getImageUrl()).into(holder.imagen);
     }
 
     // Método que indica la cantidad de elementos que hay en la lista de productos
@@ -63,6 +62,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
         public TextView nombre;
         public TextView descripcion;
         public TextView precio;
+        public TextView disponibilidad;
 
         public ProductosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +72,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
             nombre = itemView.findViewById(R.id.producto_nombre);
             descripcion = itemView.findViewById(R.id.producto_descripcion);
             precio = itemView.findViewById(R.id.producto_precio);
+            //disponibilidad = itemView.findViewById(R.id.producto_disponibilidad);
         }
     }
 }

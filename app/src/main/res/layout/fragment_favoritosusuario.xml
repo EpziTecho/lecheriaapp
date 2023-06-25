@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="70dp"
+    tools:context=".Vista.FavoritosUsuarioView.FavoritosUsuarioFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mis favoritos"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:padding="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_favoritos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </ScrollView>
+        </LinearLayout>
+
+
+</FrameLayout>

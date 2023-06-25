@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="190dp"
-    android:gravity="bottom"
     android:layout_marginTop="20dp"
+    android:background="@drawable/manchas"
+    android:gravity="bottom"
+    android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/ic_home"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    tools:visibility="visible">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/perfilimagen"
-        android:layout_gravity="center" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Martin Lope"
-        android:textColor="@color/black"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ivFoto"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-        android:textStyle="bold"/>
+        android:layout_marginTop="16dp"
+        android:elevation="15dp"
+        android:scaleType="centerInside"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewRounded"
+        app:srcCompat="@drawable/logolecheria"
+        app:strokeWidth="2dp" />
 
     <TextView
+        android:id="@+id/tvNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="martinlope@gmail.com"
+        android:layout_gravity="center"
+        android:elevation="10sp"
+        android:text=""
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textStyle="bold"
+
+
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvCorreo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="16dp"
-        android:layout_gravity="center"/>
+        android:elevation="10sp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="14sp" />
 
 </LinearLayout>
