@@ -149,11 +149,11 @@
             android:id="@+id/tituloAgregarIngredientes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Agregar Ingredientes"
+            android:text="Descripcion"
             />
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:id="@+id/textIngredientes"
             android:background="@drawable/text_background"/>
         <LinearLayout
