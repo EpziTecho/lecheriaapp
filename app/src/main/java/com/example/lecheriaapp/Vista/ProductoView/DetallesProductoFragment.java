@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class DetallesProductoFragment extends Fragment {
         TextView disponibilidadTextView = rootView.findViewById(R.id.producto_disponibilidad);
         TextView categoriaTextView = rootView.findViewById(R.id.producto_categoria);
         ImageView imagenImageView = rootView.findViewById(R.id.producto_imagen);
+        Button botonFavorito = rootView.findViewById(R.id.btn_favorito);
 
         // Obtener los argumentos pasados al fragmento
         Bundle args = getArguments();

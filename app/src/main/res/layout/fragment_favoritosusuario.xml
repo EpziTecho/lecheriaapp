@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="70dp"
-    tools:context=".Vista.PromoPerfilView.PromoperfilFragment">
+    tools:context=".Vista.FavoritosUsuarioView.FavoritosUsuarioFragment">
 
     <TextView
         android:id="@+id/title"
@@ -18,22 +18,20 @@
         android:gravity="center_horizontal"
         android:padding="16dp" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_favoritos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
+                android:layout_height="match_parent" />
+            </ScrollView>
         </LinearLayout>
 
-    </ScrollView>
 
 </FrameLayout>

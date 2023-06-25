@@ -38,6 +38,7 @@
         android:id="@+id/nombreProductoRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
         android:text="Chocofit tapa"
         android:textColor="#0E0E0E"
         android:textStyle="bold" />
@@ -56,6 +57,7 @@
                 android:id="@+id/caloriasproductorow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:text="365 cal " />
 
         </LinearLayout>
@@ -71,13 +73,26 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
 
-    <TextView
-        android:id="@+id/disponibilidadproductorow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Disponible en:"
-        android:textSize="10sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Sede:"
+            android:textSize="10sp" />
+        <TextView
+            android:id="@+id/disponibilidadproductorow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="callao"
+            android:textSize="10sp" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/estadoProductoRow"
