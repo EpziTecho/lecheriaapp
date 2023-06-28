@@ -41,7 +41,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
@@ -239,7 +240,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    //Boton de Notificaciones
+
+    // Boton de Notificaciones
+    private boolean seHaHechoClicEnNotificaciones = false;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -251,8 +255,80 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.notificaciones) {
             // Aquí manejas el clic en el botón de notificaciones
+            ObtenerUsuarioRol(); // Obtener el rol del usuario
+            seHaHechoClicEnNotificaciones = true; // Se establece la variable en verdadero
+            // Cambiar el color del botón de notificaciones
+            item.setIcon(R.drawable.baseline_notifications_none_24);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void ObtenerUsuarioRol() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            // No hay usuario con sesión iniciada, mostrar Toast
+            Toast.makeText(MainActivity.this, "No hay usuario con sesión iniciada", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String uid = currentUser.getUid();
+        DatabaseReference userRef = mDatabase.child("Usuarios").child(uid);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserModel userModel = dataSnapshot.getValue(UserModel.class);
+                if (userModel != null) {
+                    String userRol = userModel.getRol();
+                    if (userRol.equals("AdminCallao") || userRol.equals("AdminAte") || userRol.equals("AdminSMP") || userRol.equals("AdminCentro") || userRol.equals("cliente")) {
+                        String nombre = userModel.getNombre();
+                        String title = "Notificación para " + nombre;
+                        String content = "Próximas actualizaciones de la app Lecheria";
+
+                        showNotificationDialog(title, content);
+                    } else {
+                        // El usuario no tiene el rol "AdminCallao"
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Manejar el error, si es necesario
+            }
+        });
+    }
+
+    private void showNotificationDialog(String title, String content) {
+        // Aquí implementas la lógica para mostrar el diálogo de notificaciones
+        // Puedes utilizar las clases y métodos de Android para crear y mostrar el diálogo, como AlertDialog.Builder
+        // Aquí hay un ejemplo básico:
+
+        // Crear un objeto AlertDialog.Builder para construir el diálogo
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);
+        builder.setMessage(content);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Acciones a realizar al hacer clic en el botón "Aceptar"
+                dialog.dismiss(); // Cerrar el diálogo
+            }
+        });
+
+        // Mostrar el diálogo
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // Mostrar una notificación pendiente si el usuario no ha hecho clic en el botón de notificaciones
+        if (!seHaHechoClicEnNotificaciones) {
+            // Aquí puedes mostrar una notificación en la interfaz de tu actividad o en otro lugar visible para el usuario
+            // Por ejemplo, puedes utilizar un TextView en tu layout para mostrar el indicador de notificación
+            // textViewNotificaciones.setVisibility(View.VISIBLE);
+            // textViewNotificaciones.setText("¡Tienes notificaciones pendientes!");
+
+            // También puedes mostrar una notificación en la barra de notificaciones del dispositivo
+            // Resto del código
+        }
     }
 }
