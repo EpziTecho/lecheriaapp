@@ -18,7 +18,12 @@ import com.example.lecheriaapp.Presentador.ProductosHomePresenter.ProductosHomeP
 import com.example.lecheriaapp.Adaptadores.ProductosAdapter;
 import com.example.lecheriaapp.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -101,6 +106,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 // No se seleccionó ninguna categoría
             }
         });
+
+        obtenerRolUsuario();
 
         return view;
     }
@@ -211,7 +218,46 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
+    private void obtenerRolUsuario() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userId = user.getUid();
 
+            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(userId);
+            ValueEventListener valueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        String rol = dataSnapshot.child("rol").getValue(String.class);
+                        configurarSpinnerSegunRol(rol);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Maneja el error al obtener los datos del usuario
+                }
+            };
+
+            usersRef.addListenerForSingleValueEvent(valueEventListener);
+        }
+    }
+
+    private void configurarSpinnerSegunRol(String rol) {
+        if (rol.equals("AdminCallao")) {
+            spinnerSedes.setSelection(4);  // Poner en "Callao"
+            spinnerSedes.setEnabled(false); // Bloquear el spinner
+        } else if (rol.equals("AdminCentro")) {
+            spinnerSedes.setSelection(1);  // Poner en "Centro"
+            spinnerSedes.setEnabled(false); // Bloquear el spinner
+        } else if (rol.equals("AdminSMP")) {
+            spinnerSedes.setSelection(2);  // Poner en "SMP"
+            spinnerSedes.setEnabled(false); // Bloquear el spinner
+        } else if (rol.equals("AdminAte")) {
+            spinnerSedes.setSelection(3);  // Poner en "Ate"
+            spinnerSedes.setEnabled(false); // Bloquear el spinner
+        }
+    }
 
     @Override
     public void onClick(View view) {
