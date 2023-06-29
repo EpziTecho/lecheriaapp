@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,51 +29,47 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 
 public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<RecyclerProductoGestionAdapter.ProductoViewGestionHolder> {
-    private Context mcontext;
-    private DatabaseReference databaseReference;
-    private FirebaseAuth firebaseAuth;
+    private Context mContext;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
     private int layoutResource;
     private ArrayList<ProductoModel> arrayListProductos;
     private PresenterGestionProductos presenterGestionProductos;
     private PresentadorEditarProductos presentadorEditarProductos;
+    private static ArrayList<ProductoModel> filteredList;
 
-    public RecyclerProductoGestionAdapter(Context mcontext, int layoutResource, ArrayList<ProductoModel> arrayListProductos) {
-        this.mcontext = mcontext;
+    public RecyclerProductoGestionAdapter(Context mContext, int layoutResource, ArrayList<ProductoModel> arrayListProductos) {
+        this.mContext = mContext;
         this.layoutResource = layoutResource;
         this.arrayListProductos = arrayListProductos;
-        // Inicializa el presentador aquí
-        presenterGestionProductos = new PresenterGestionProductos(mcontext, databaseReference, firebaseAuth);
-        presentadorEditarProductos = new PresentadorEditarProductos(mcontext);
+        this.filteredList = new ArrayList<>(arrayListProductos);
+        presenterGestionProductos = new PresenterGestionProductos(mContext, mDatabase, mAuth);
+        presentadorEditarProductos = new PresentadorEditarProductos(mContext);
     }
-
 
     @NonNull
     @Override
-    public RecyclerProductoGestionAdapter.ProductoViewGestionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mcontext).inflate(layoutResource,parent,false);
-
-        return new RecyclerProductoGestionAdapter.ProductoViewGestionHolder(view);
+    public ProductoViewGestionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(layoutResource, parent, false);
+        return new ProductoViewGestionHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerProductoGestionAdapter.ProductoViewGestionHolder holder, @SuppressLint("RecyclerView") int position) {
-        ProductoModel productoModel = arrayListProductos.get(position);
+    public void onBindViewHolder(@NonNull ProductoViewGestionHolder holder, @SuppressLint("RecyclerView") int position) {
+        ProductoModel productoModel = filteredList.get(position);
         holder.mNombreProducto.setText(productoModel.getNombre());
         holder.mPrecioProducto.setText(productoModel.getPrecio());
         holder.mEstadoProducto.setText(productoModel.getEstado());
-        holder.mCaloria.setText(productoModel.getCaloria()+" Kcal");
-        // Cargar la imagen utilizando Glide
-        Glide.with(mcontext)
-                .load(productoModel.getImageUrl())  // Aquí deberías proporcionar la URL o el archivo local de la imagen
-                .placeholder(R.drawable.baseline_table_restaurant_24)  // Imagen de carga por defecto
-                .error(R.drawable.baseline_book_24)  // Imagen de error si no se puede cargar la imagen
+        holder.mCaloria.setText(productoModel.getCaloria() + " Kcal");
+        Glide.with(mContext)
+                .load(productoModel.getImageUrl())
+                .placeholder(R.drawable.baseline_table_restaurant_24)
+                .error(R.drawable.baseline_book_24)
                 .into(holder.mImagenProducto);
 
-        // Establecer clic del botón "Editar"
         holder.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Abrir el fragmento EditarProductosFragment con los datos del producto
                 String nombre = productoModel.getNombre();
                 String calorias = productoModel.getCaloria();
                 String precio = productoModel.getPrecio();
@@ -81,9 +78,10 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
                 String ingredientes = productoModel.getIngredientes();
                 String estado = productoModel.getEstado();
                 String imagen = productoModel.getImageUrl();
+                int position = getRealPosition(holder.getAdapterPosition());
 
-                Fragment editarFragment = EditarProductosFragment.newInstance(nombre, calorias, precio, disponibilidad, categoria, ingredientes, estado, imagen,position);
-                FragmentManager fragmentManager = ((AppCompatActivity) mcontext).getSupportFragmentManager();
+                Fragment editarFragment = EditarProductosFragment.newInstance(nombre, calorias, precio, disponibilidad, categoria, ingredientes, estado, imagen, position);
+                FragmentManager fragmentManager = ((AppCompatActivity) mContext).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, editarFragment);
                 fragmentTransaction.addToBackStack(null);
@@ -91,14 +89,10 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
             }
         });
 
-        // Establecer clic del botón "Eliminar"
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Acción al hacer clic en el botón "Eliminar"
-                // Puedes llamar a un método en tu presentador para manejar la acción
-                // por ejemplo: presenterGestionProductos.eliminarProducto(productoModel);
-                //Toast.makeText(mcontext, "Eliminar", Toast.LENGTH_SHORT).show();
+                int position = getRealPosition(holder.getAdapterPosition());
                 presenterGestionProductos.eliminarProductoFirebase(position);
             }
         });
@@ -106,16 +100,31 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
 
     @Override
     public int getItemCount() {
-        if(arrayListProductos != null && arrayListProductos.size() > 0) {
-            return arrayListProductos.size();
-        } else {
-            return 0;
-        }
+        return filteredList.size();
     }
 
-    public class ProductoViewGestionHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void filter(String searchText) {
+        filteredList.clear();
+        if (searchText.trim().isEmpty()) {
+            filteredList.addAll(arrayListProductos);
+        } else {
+            String query = searchText.toLowerCase().trim();
+            for (ProductoModel producto : arrayListProductos) {
+                if (producto.getNombre().toLowerCase().contains(query)) {
+                    filteredList.add(producto);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 
-        TextView mNombreProducto, mPrecioProducto, mEstadoProducto, mDescripcionProducto,mCaloria;
+    private int getRealPosition(int filteredPosition) {
+        ProductoModel filteredItem = filteredList.get(filteredPosition);
+        return arrayListProductos.indexOf(filteredItem);
+    }
+
+    public static class ProductoViewGestionHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView mNombreProducto, mPrecioProducto, mEstadoProducto, mCaloria;
         ImageView mImagenProducto;
         Button btnEditar, btnEliminar;
 
@@ -133,12 +142,12 @@ public class RecyclerProductoGestionAdapter extends RecyclerView.Adapter<Recycle
 
         @Override
         public void onClick(View view) {
-            // Acción al hacer clic en el elemento de la lista
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                ProductoModel productoModel = arrayListProductos.get(position);
-                // Aquí puedes abrir un fragmento o actividad para mostrar los detalles del producto
-                // por ejemplo: mostrarDetallesProducto(productoModel);
+                ProductoModel productoModel = filteredList.get(position);
+                // Puedes realizar alguna acción al hacer clic en el elemento de la lista
+                // por ejemplo, mostrar los detalles del producto
+                // Toast.makeText(view.getContext(), productoModel.getNombre(), Toast.LENGTH_SHORT).show();
             }
         }
     }

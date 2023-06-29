@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.lecheriaapp.Adaptadores.RecyclerProductoGestionAdapter;
 import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.R;
-import com.example.lecheriaapp.Vista.GestionProductosView.GestionProductosFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -52,10 +52,11 @@ public class PresenterGestionProductos implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
 
         }
     }
+
     public void eliminarProductoFirebase(int posicion) {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -119,6 +120,23 @@ public class PresenterGestionProductos implements View.OnClickListener {
                 }
             });
         }
+    }
+
+    public void setupSearchView(androidx.appcompat.widget.SearchView searchView, RecyclerView recyclerView) {
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (adapter != null) {
+                    adapter.filter(newText);
+                }
+                return true;
+            }
+        });
     }
 
 }
