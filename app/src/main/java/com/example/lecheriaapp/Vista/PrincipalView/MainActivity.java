@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     if (rol != null) {
                         if (rol.equals("AdminCentro") || rol.equals("AdminSMP") || rol.equals("AdminCallao") || rol.equals("AdminAte")) {
                             gestionProductosItem.setVisible(true);
-                            gestionProductosItemOculto1.setVisible(false);
-                            gestionProductosItemOculto2.setVisible(false);
+                            gestionProductosItemOculto1.setVisible(true);
+                            gestionProductosItemOculto2.setVisible(true);
                         } else if (rol.equals("cliente")) {
                             gestionProductosItem.setVisible(false);
                             gestionProductosItemOculto1.setVisible(true);

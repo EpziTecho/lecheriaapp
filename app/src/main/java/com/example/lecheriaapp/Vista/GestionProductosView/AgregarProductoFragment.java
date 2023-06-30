@@ -3,6 +3,7 @@ package com.example.lecheriaapp.Vista.GestionProductosView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -20,10 +21,16 @@ import android.widget.Toast;
 
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresentadorAgregarProductos;
 import com.example.lecheriaapp.R;
+import com.example.lecheriaapp.Vista.GestionProductosView.GestionProductosFragment;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,9 +93,6 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnAgregar) {
-            // Crear un diálogo de progreso para mostrar mientras se realiza el registro del usuario
-
-
             String nombreProducto = mTextNombreProducto.getText().toString().trim();
             String calorias = mTextCalorias.getText().toString().trim();
             String precio = mTextPrecio.getText().toString().trim();
@@ -98,50 +102,72 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
             String categoria = mSpinnerCategoria.getSelectedItem().toString();
 
             if (!nombreProducto.isEmpty() && !calorias.isEmpty() && !ingredientes.isEmpty() && !estado.isEmpty() && !disponibilidad.isEmpty() && !categoria.isEmpty() && imageUri != null) {
-                // Subir la imagen a Firebase Storage
+                // Generar el código QR
+                Bitmap qrBitmap = generateQRCode(nombreProducto);
+
+                // Subir el código QR a Firebase Storage
                 final ProgressDialog dialog = new ProgressDialog(requireContext());
                 dialog.setMessage("Agregando producto...");
                 dialog.setCancelable(false);
                 dialog.show();
-                StorageReference imageRef = mStorageRef.child("productos").child(imageUri.getLastPathSegment());
-                UploadTask uploadTask = imageRef.putFile(imageUri);
+                StorageReference qrRef = mStorageRef.child("QrProductos").child(nombreProducto +"-QR"+".png");
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                qrBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                byte[] qrData = baos.toByteArray();
+                UploadTask uploadTask = qrRef.putBytes(qrData);
                 uploadTask.addOnSuccessListener(taskSnapshot -> {
-                    // Obtener la URL de descarga de la imagen subida
-                    imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                        String imageUrl = uri.toString();
+                    // Obtener la URL de descarga del código QR subido
+                    qrRef.getDownloadUrl().addOnSuccessListener(qrUri -> {
+                        String qrUrl = qrUri.toString();
 
-                        // Crear el mapa de datos para el producto
-                        Map<String, Object> producto = new HashMap<>();
-                        producto.put("caloria", calorias);
-                        producto.put("categoria", imageUrl);
-                        producto.put("disponibilidad", disponibilidad);
-                        producto.put("estado", estado);
-                        producto.put("ingredientes", ingredientes);
-                        producto.put("nombre", nombreProducto);
-                        producto.put("precio", precio);
+                        // Subir la imagen del producto a Firebase Storage
+                        StorageReference imageRef = mStorageRef.child("productos").child(imageUri.getLastPathSegment());
+                        UploadTask imageUploadTask = imageRef.putFile(imageUri);
+                        imageUploadTask.addOnSuccessListener(imageTaskSnapshot -> {
+                            // Obtener la URL de descarga de la imagen del producto subida
+                            imageRef.getDownloadUrl().addOnSuccessListener(imageUri -> {
+                                String imageUrl = imageUri.toString();
 
-                        // Llamar al presentador para agregar el producto
-                        mPresentador.agregarProducto(
-                                estado,
-                                nombreProducto,
-                                calorias,
-                                precio,
-                                disponibilidad,
-                                categoria,
-                                ingredientes,
-                                imageUrl
-                        );
+                                // Crear el mapa de datos para el producto
+                                Map<String, Object> producto = new HashMap<>();
+                                producto.put("caloria", calorias);
+                                producto.put("categoria", imageUrl);
+                                producto.put("disponibilidad", disponibilidad);
+                                producto.put("estado", estado);
+                                producto.put("ingredientes", ingredientes);
+                                producto.put("nombre", nombreProducto);
+                                producto.put("precio", precio);
+                                producto.put("codigoQR", qrUrl);
 
-                        // Mostrar mensaje de éxito
-                        dialog.dismiss();
-                       // Toast.makeText(getActivity(), "Producto agregado", Toast.LENGTH_SHORT).show();
-                        // Ir al fragmento de gestión de productos
-                        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.fragment_container, new GestionProductosFragment()).commit();
+                                // Llamar al presentador para agregar el producto
+                                mPresentador.agregarProducto(
+                                        estado,
+                                        nombreProducto,
+                                        calorias,
+                                        precio,
+                                        disponibilidad,
+                                        categoria,
+                                        ingredientes,
+                                        imageUrl,
+                                        qrUrl
+                                );
+
+                                // Mostrar mensaje de éxito
+                                dialog.dismiss();
+                                Toast.makeText(getActivity(), "Producto agregado", Toast.LENGTH_SHORT).show();
+
+                                // Ir al fragmento de gestión de productos
+                                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                                fragmentManager.beginTransaction().replace(R.id.fragment_container, new GestionProductosFragment()).commit();
+                            });
+                        }).addOnFailureListener(e -> {
+                            // Mostrar mensaje de error en caso de falla en la carga de la imagen del producto
+                            Toast.makeText(getActivity(), "Error al subir la imagen del producto", Toast.LENGTH_SHORT).show();
+                        });
                     });
                 }).addOnFailureListener(e -> {
-                    // Mostrar mensaje de error en caso de falla en la carga de la imagen
-                    Toast.makeText(getActivity(), "Error al subir la imagen", Toast.LENGTH_SHORT).show();
+                    // Mostrar mensaje de error en caso de falla en la carga del código QR
+                    Toast.makeText(getActivity(), "Error al subir el código QR", Toast.LENGTH_SHORT).show();
                 });
             } else {
                 Toast.makeText(getActivity(), "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
@@ -163,6 +189,25 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
         if (requestCode == GALLERY_REQUEST_CODE && resultCode == getActivity().RESULT_OK && data != null) {
             imageUri = data.getData();
             mSelectedImageView.setImageURI(imageUri);
+        }
+    }
+
+    private Bitmap generateQRCode(String data) {
+        try {
+            QRCodeWriter writer = new QRCodeWriter();
+            BitMatrix bitMatrix = writer.encode(data, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            Bitmap qrBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    qrBitmap.setPixel(x, y, bitMatrix.get(x, y) ? getResources().getColor(R.color.black) : getResources().getColor(R.color.white));
+                }
+            }
+            return qrBitmap;
+        } catch (WriterException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
