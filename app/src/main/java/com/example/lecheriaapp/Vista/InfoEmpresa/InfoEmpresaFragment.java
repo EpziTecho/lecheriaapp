@@ -22,13 +22,28 @@ public class InfoEmpresaFragment extends Fragment {
         ImageView instagramImageView = view.findViewById(R.id.imageView5);
 
         // Configurar OnClickListener para WhatsApp
-        whatsappImageView.setOnClickListener(v -> openWhatsApp());
+        whatsappImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openWhatsApp();
+            }
+        });
 
         // Configurar OnClickListener para Facebook
-        facebookImageView.setOnClickListener(v -> openFacebook());
+        facebookImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFacebook();
+            }
+        });
 
         // Configurar OnClickListener para Instagram
-        instagramImageView.setOnClickListener(v -> openInstagram());
+        instagramImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInstagram();
+            }
+        });
 
         return view;
     }
