@@ -135,6 +135,7 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
                         args.putString("disponibilidad", productoModel.getDisponibilidad());
                         args.putString("categoria", productoModel.getCategoria());
                         args.putString("imageUrl", productoModel.getImageUrl());
+                        args.putString("codigoQR", productoModel.getCodigoQR());
                         DetallesProductoPromocionesFragment detallesProductoFragment = new DetallesProductoPromocionesFragment();
                         detallesProductoFragment.setArguments(args);
                         FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();

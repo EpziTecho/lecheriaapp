@@ -138,7 +138,7 @@ public class EditarProductosFragment extends Fragment implements View.OnClickLis
                     .load(imageUrl)
                     .into(mImageView);
         }
-    mTextQr.setText(args.getString("codigoQR"));
+   mTextQr.setText(args.getString("codigoQR"));
         return view;
     }
 

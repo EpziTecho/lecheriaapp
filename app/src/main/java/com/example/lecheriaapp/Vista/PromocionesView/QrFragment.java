@@ -42,7 +42,10 @@ public class QrFragment extends Fragment {
                 nombreProductoRow.setText(nombre);
                 precioProductoRow.setText(precio);
                 Glide.with(requireContext())
-                        .load(codigoQR).into(QrProductoRow);}
+                        .load(codigoQR)
+                        .into(QrProductoRow);
+
+            }
 
 
         return view;
