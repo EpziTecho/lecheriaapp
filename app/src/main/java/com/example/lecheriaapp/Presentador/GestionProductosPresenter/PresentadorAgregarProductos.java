@@ -91,7 +91,7 @@ public class PresentadorAgregarProductos {
     }
 
     public void agregarProducto(String estado, String nombre, String caloria, String precio,
-                                String disponibilidad, String categoria, String ingredientes, String imageUrl) {
+                                String disponibilidad, String categoria, String ingredientes, String imageUrl,String qrUrl) {
         // Creamos un mapa de valores para el nuevo producto
         Map<String, Object> producto = new HashMap<>();
         producto.put("estado", estado);
@@ -102,6 +102,7 @@ public class PresentadorAgregarProductos {
         producto.put("categoria", categoria);
         producto.put("ingredientes", ingredientes);
         producto.put("imageUrl", imageUrl);
+        producto.put("codigoQR",qrUrl);
 
         // Agregar el producto a la base de datos de Firebase
         cargaProductoFirebase(producto);
