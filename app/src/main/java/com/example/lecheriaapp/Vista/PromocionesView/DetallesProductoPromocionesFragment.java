@@ -38,6 +38,7 @@ public class DetallesProductoPromocionesFragment extends Fragment {
     private FirebaseAuth mAuth;
     private ArrayList<ProductoModel> productoModelList;
     private RecyclerProductoAdapter adapter;
+    private String codigoQR;
     public DetallesProductoPromocionesFragment() {
         // Required empty public constructor
     }
@@ -94,6 +95,7 @@ public class DetallesProductoPromocionesFragment extends Fragment {
             Glide.with(requireContext())
                     .load(imageUrl)
                     .into(imagenProductoRow);
+            codigoQR = args.getString("codigoQR");
         }
 
         // Configurar el click listener del botón "Quiero Promo"
@@ -105,6 +107,7 @@ public class DetallesProductoPromocionesFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("nombre", nombreProductoRow.getText().toString());
                 args.putString("precio", precioProductoRow.getText().toString());
+                args.putString("codigoQR", codigoQR);
                 QrFragment qrFragment = new QrFragment();
                 qrFragment.setArguments(args);
                 requireActivity().getSupportFragmentManager().beginTransaction()

@@ -60,6 +60,7 @@ public class ProductosPromocionesPresenter implements View.OnClickListener {
                         productoModel.setCaloria(productoSnapshot.child("caloria").getValue(String.class));
                         productoModel.setCategoria(productoSnapshot.child("categoria").getValue(String.class));
                         productoModel.setImageUrl(productoSnapshot.child("imageUrl").getValue(String.class));
+                        productoModel.setCodigoQR(productoSnapshot.child("codigoQR").getValue(String.class));
                         arrayListProductos.add(productoModel);
                     }
                 }
