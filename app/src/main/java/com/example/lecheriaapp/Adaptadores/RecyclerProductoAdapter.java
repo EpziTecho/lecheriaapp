@@ -1,6 +1,7 @@
 package com.example.lecheriaapp.Adaptadores;
 
 import android.content.Context;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +12,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.lecheriaapp.Modelo.ProductoModel;
 import com.example.lecheriaapp.R;
 import com.example.lecheriaapp.Vista.LoginView.LoginFragment;
 import com.example.lecheriaapp.Vista.ProductoView.DetallesProductoFragment;
+import com.example.lecheriaapp.Vista.PromocionesView.DetallesProductoPromocionesFragment;
+import com.example.lecheriaapp.Vista.PromocionesView.PromocionesFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,16 +68,27 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
         holder.mNombreProducto.setText(productoModel.getNombre());
         holder.mPrecioProducto.setText("S/. " + productoModel.getPrecio());
         holder.mEstadoProducto.setText(productoModel.getEstado());
-        holder.mImagenProducto.setImageResource(R.drawable.ic_launcher_background);
+        holder.mDisponibilidad.setText(productoModel.getDisponibilidad());
+        holder.mCaloria.setText(productoModel.getCaloria()+" Kcal");
+        if (productoModel.getImageUrl() != null) {
+            Glide.with(mcontext)
+                    .load(productoModel.getImageUrl())
+                    .placeholder(R.drawable.baseline_loading)
+                    .error(R.drawable.baseline_delete_24)
+                    .into(holder.mImagenProducto);
+        }
 
         // Establecer clic en el botón de favoritos
         holder.mBotonFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Agregar producto a favoritos
-                agregarAFavoritos(productoModel);
+                agregarAFavoritos(productoModel, holder.mBotonFavoritos);
             }
         });
+
+        // Verificar si el producto está en favoritos y cambiar el color del botón
+        verificarFavorito(productoModel, holder.mBotonFavoritos);
     }
 
     @Override
@@ -80,7 +97,7 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
     }
 
     public class ProductoViewHolder extends RecyclerView.ViewHolder {
-        TextView mNombreProducto, mPrecioProducto, mEstadoProducto;
+        TextView mNombreProducto, mPrecioProducto, mEstadoProducto,mDisponibilidad,mCaloria;
         ImageView mImagenProducto;
         Button mBotonFavoritos;
 
@@ -89,6 +106,8 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
             mNombreProducto = itemView.findViewById(R.id.nombreProductoRow);
             mPrecioProducto = itemView.findViewById(R.id.precioProductoRow);
             mEstadoProducto = itemView.findViewById(R.id.estadoProductoRow);
+            mDisponibilidad=itemView.findViewById(R.id.disponibilidadproductorow);
+            mCaloria=itemView.findViewById(R.id.caloriasproductorow);
             mImagenProducto = itemView.findViewById(R.id.imagenProductoRow);
             mBotonFavoritos = itemView.findViewById(R.id.btn_favorito);
 
@@ -99,29 +118,58 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
                     int position = getAdapterPosition();
                     ProductoModel productoModel = arrayListProductos.get(position);
 
-                    // Abrir fragmento de detalles del producto
-                    Bundle args = new Bundle();
-                    args.putString("nombre", productoModel.getNombre());
-                    args.putString("precio", productoModel.getPrecio());
-                    args.putString("estado", productoModel.getEstado());
-                    args.putString("caloria", productoModel.getCaloria());
-                    args.putString("ingredientes", productoModel.getIngredientes());
-                    args.putString("disponibilidad", productoModel.getDisponibilidad());
-                    args.putString("categoria", productoModel.getCategoria());
-                    args.putString("imagen", productoModel.getImagen());
-                    DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
-                    detallesProductoFragment.setArguments(args);
-                    FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, detallesProductoFragment)
-                            .addToBackStack(null)
-                            .commit();
+                    // Verificar el fragmento actual
+                    Fragment fragment = ((FragmentActivity) mcontext).getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                    if (fragment instanceof PromocionesFragment) {
+                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                        if (currentUser != null) {
+
+                        // Estás en el fragmento PromocionesFragment
+                        // Abrir fragmento de detalles del producto para PromocionesFragment
+                        Bundle args = new Bundle();
+                        args.putString("nombre", productoModel.getNombre());
+                        args.putString("precio", productoModel.getPrecio());
+                        args.putString("estado", productoModel.getEstado());
+                        args.putString("caloria", productoModel.getCaloria());
+                        args.putString("ingredientes", productoModel.getIngredientes());
+                        args.putString("disponibilidad", productoModel.getDisponibilidad());
+                        args.putString("categoria", productoModel.getCategoria());
+                        args.putString("imageUrl", productoModel.getImageUrl());
+                        DetallesProductoPromocionesFragment detallesProductoFragment = new DetallesProductoPromocionesFragment();
+                        detallesProductoFragment.setArguments(args);
+                        FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, detallesProductoFragment)
+                                .addToBackStack(null)
+                                .commit();}else{
+                            Toast.makeText(mcontext, "Inicie sesión para ver los detalles del producto", Toast.LENGTH_SHORT).show();
+                            redirigirALoginFragment();
+                        }
+                    } else {
+                        // Abrir fragmento de detalles del producto para otros fragmentos
+                        Bundle args = new Bundle();
+                        args.putString("nombre", productoModel.getNombre());
+                        args.putString("precio", productoModel.getPrecio());
+                        args.putString("estado", productoModel.getEstado());
+                        args.putString("caloria", productoModel.getCaloria());
+                        args.putString("ingredientes", productoModel.getIngredientes());
+                        args.putString("disponibilidad", productoModel.getDisponibilidad());
+                        args.putString("categoria", productoModel.getCategoria());
+                        args.putString("imageUrl", productoModel.getImageUrl());
+                        DetallesProductoFragment detallesProductoFragment = new DetallesProductoFragment();
+                        detallesProductoFragment.setArguments(args);
+                        FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, detallesProductoFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 }
             });
         }
     }
 
-    private void agregarAFavoritos(ProductoModel producto) {
+    private void agregarAFavoritos(ProductoModel producto, Button botonFavoritos) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // Usuario con sesión iniciada, agregar o eliminar el producto de favoritos
@@ -186,7 +234,52 @@ public class RecyclerProductoAdapter extends RecyclerView.Adapter<RecyclerProduc
         }
     }
 
+    private void verificarFavorito(ProductoModel producto, Button botonFavoritos) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String clienteId = user.getUid();
+            DatabaseReference usuarioRef = mDatabase.child("Usuarios").child(clienteId);
+            DatabaseReference favoritosRef = usuarioRef.child("Favoritos");
+            favoritosRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    boolean productoExiste = false;
+                    for (DataSnapshot productoSnapshot : dataSnapshot.getChildren()) {
+                        ProductoModel productoFavorito = productoSnapshot.getValue(ProductoModel.class);
+                        if (productoFavorito != null && productoFavorito.getNombre().equals(producto.getNombre())) {
+                            productoExiste = true;
+                            break;
+                        }
+                    }
+                    if (productoExiste) {
+                        // El producto está en favoritos
+                        botonFavoritos.setForeground(ContextCompat.getDrawable(mcontext, R.drawable.favoritoseleccionado));
+                    } else {
+                        // El producto no está en favoritos
+                        botonFavoritos.setForeground(ContextCompat.getDrawable(mcontext, R.drawable.favoritonoseleccionado));
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Manejar error de lectura/escritura de la base de datos
+                }
+            });
+        }
+    }
+
+
+    private void redirigirALoginFragment() {
+        // Crear el fragmento LoginFragment
+        LoginFragment loginFragment = new LoginFragment();
+
+        // Reemplazar el fragmento actual con LoginFragment
+        FragmentManager fragmentManager = ((FragmentActivity) mcontext).getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, loginFragment)
+                .addToBackStack(null)
+                .commit();
+    }
     public interface FavoritosUpdateListener {
         void onFavoritosUpdated();
     }
