@@ -92,6 +92,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/text_background" />
+                <EditText
+                    android:id="@+id/textQR"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_background"
+                    android:visibility="gone"
+                    />
 
                 <TextView
                     android:id="@+id/titulocalorias1"

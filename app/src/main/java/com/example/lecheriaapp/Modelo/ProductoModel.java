@@ -10,7 +10,9 @@ public class ProductoModel {
     private String imageUrl;
     private String categoria;
 
-    public ProductoModel(String nombre, String caloria, String precio, String estado, String disponibilidad, String ingredientes, String imageUrl, String categoria) {
+    private String codigoQR;
+
+    public ProductoModel(String nombre, String caloria, String precio, String estado, String disponibilidad, String ingredientes, String imageUrl, String categoria, String codigoQR) {
         this.nombre = nombre;
         this.caloria = caloria;
         this.precio = precio;
@@ -19,6 +21,15 @@ public class ProductoModel {
         this.ingredientes = ingredientes;
         this.imageUrl = imageUrl;
         this.categoria = categoria;
+        this.codigoQR = codigoQR;
+    }
+
+    public String getCodigoQR() {
+        return codigoQR;
+    }
+
+    public void setCodigoQR(String codigoQR) {
+        this.codigoQR = codigoQR;
     }
 
     public ProductoModel() {
