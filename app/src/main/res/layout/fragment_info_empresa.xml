@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="134dp"
         android:translationY="-40dp"
-        tools:srcCompat="@drawable/foto_trabajadores" />
+        app:srcCompat="@drawable/foto_trabajadores" />
 
     <LinearLayout
         android:layout_width="345dp"
