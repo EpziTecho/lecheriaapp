@@ -21,7 +21,7 @@
                 android:layout_height="170dp"
                 android:layout_gravity="center"
                 app:shapeAppearanceOverlay="@style/RoundedImageViewProd"
-                android:scaleType="centerInside"
+                android:scaleType="centerCrop"
                 app:strokeWidth="2dp"
                 android:layout_marginTop="15dp"
                 />
