@@ -25,12 +25,13 @@
 
         <LinearLayout
             android:layout_width="349dp"
-            android:layout_height="168dp"
-            android:layout_marginTop="16dp">
+            android:layout_height="230dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="135dp"
+                android:layout_height="200dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
@@ -49,29 +50,50 @@
                     android:layout_marginTop="26dp"
                     android:text="2"
                     app:cornerRadius="50dp" />
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="37dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:text="3"
+                    app:cornerRadius="50dp" />
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/lista_pasos"
-                android:layout_width="308dp"
-                android:layout_height="127dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_horizontal"
-                android:lineSpacingExtra="4dp"
-                android:textSize="16sp">
 
-            </ListView>
+            <LinearLayout
+                android:layout_width="308dp"
+                android:layout_height="200dp"
+                android:gravity="center_vertical"
+
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Acercate a cualquiera de nuestras sedes"
+                    android:layout_marginLeft="6dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:text="Muestra el QR en caja"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="6dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Disfruta tu promo!"
+                    android:gravity="bottom"
+                    android:layout_marginLeft="6dp"/>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="479dp">
+
 
             <androidx.cardview.widget.CardView
-                android:layout_width="325dp"
-                android:layout_height="396dp"
+                android:layout_width="306dp"
+                android:layout_height="301dp"
                 android:translationZ="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +105,8 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:paddingTop="16dp"
-                    android:paddingBottom="0dp">
+                    android:paddingBottom="0dp"
+                    android:elevation="10dp">
 
                     <TextView
                         android:id="@+id/nombreProductoRow"
@@ -111,13 +134,13 @@
                         android:layout_below="@id/lista_pasos"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center"
-                        android:layout_marginTop="16dp"
+                        android:layout_margin="20dp"
                         android:scaleType="centerCrop" />
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     </LinearLayout>

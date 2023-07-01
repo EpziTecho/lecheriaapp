@@ -20,7 +20,7 @@
         android:layout_height="84dp"
         android:layout_gravity="center"
         app:shapeAppearanceOverlay="@style/RoundedImageViewProd"
-        android:scaleType="centerInside"
+        android:scaleType="center"
         app:strokeWidth="2dp"
         android:layout_marginTop="20dp"/>
 
@@ -36,14 +36,15 @@
 
     <TextView
         android:id="@+id/nombreProductoRow"
-        android:layout_width="match_parent"
+        android:layout_width="138dp"
         android:layout_height="wrap_content"
         android:text="Chocofit tapa"
         android:textColor="#0E0E0E"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="-20dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="138dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -64,17 +65,17 @@
             android:id="@+id/precioProductoRow"
             android:layout_width="66dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="52dp"
+            android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:text="S/.9.00"
-            android:textColor="#050505"
+            android:textColor="#F44336"
             android:textStyle="bold" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/disponibilidadproductorow"
-        android:layout_width="match_parent"
+        android:layout_width="138dp"
         android:layout_height="wrap_content"
         android:text="Disponible en:"
         android:textSize="10sp" />
