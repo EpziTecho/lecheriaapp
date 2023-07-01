@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:layout_marginBottom="70dp"
-    tools:context=".Vista.UbicanosView.UbicanosFragment">
+    tools:context=".Vista.UbicanosView.UbicanosFragment"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -209,13 +210,6 @@
                 <!-- Botones -->
 
 
-                <Button
-                        android:id="@+id/btnVerCarta"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ver Carta"
-                        android:textSize="12sp"
-                        android:layout_gravity="center_horizontal"/>
 
 
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:id="@+id/producto_destacado"
@@ -14,7 +15,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="0dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
             android:id="@+id/PromSectionTitle"
@@ -28,19 +30,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="174dp"
+            android:layout_height="190dp"
             android:layout_marginBottom="128dp"
-            android:elevation="2dp"
+            android:elevation="5dp"
             android:gravity="center"
             android:paddingTop="10dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imagenProductoRow"
-                android:layout_width="134dp"
-                android:layout_height="wrap_content"
+                android:layout_width="190dp"
+                android:layout_height="140dp"
                 android:layout_marginStart="0dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/image_8" />
+                app:srcCompat="@drawable/image_8"
+
+                />
 
             <LinearLayout
                 android:layout_width="206dp"
@@ -57,18 +61,32 @@
                     android:paddingBottom="4dp"
                     android:text="Choco trio 3x1"
                     android:textColor="@color/grey"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/precioProductoRow"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="4dp"
-                    android:text="Precio: S/.20.00"
-                    android:textColor="@color/black"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Precio: "
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/precioProductoRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:paddingBottom="4dp"
+                        android:text="20.00"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/descripcionProductoRow"
@@ -78,30 +96,43 @@
                     android:text="LLevate 3 tazas por el precio de 1, hecha de pura leche de nuestras vacas"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
-                <Button
-                    android:id="@+id/btn_quiero_promo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center_horizontal"
-                    android:paddingBottom="4dp"
-                    android:text="Adquirir"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:textStyle="bold" />
+
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
+    <Button
+        android:id="@+id/btn_quiero_promo"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="4dp"
+        android:text="Adquirir"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="60dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="Productos relacionados"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_productos_relacionados"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="horizontal"
+
     />
     </LinearLayout>
 </LinearLayout>
