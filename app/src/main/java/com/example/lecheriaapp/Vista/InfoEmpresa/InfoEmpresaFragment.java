@@ -17,9 +17,9 @@ public class InfoEmpresaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_empresa, container, false);
 
-        ImageView whatsappImageView = view.findViewById(R.id.imageView7);
-        ImageView facebookImageView = view.findViewById(R.id.imageView6);
-        ImageView instagramImageView = view.findViewById(R.id.imageView5);
+        ImageView whatsappImageView = view.findViewById(R.id.logowhatsapp);
+        ImageView facebookImageView = view.findViewById(R.id.logofacebook);
+        ImageView instagramImageView = view.findViewById(R.id.logoinstagram);
 
         // Configurar OnClickListener para WhatsApp
         whatsappImageView.setOnClickListener(new View.OnClickListener() {

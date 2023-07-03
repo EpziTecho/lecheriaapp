@@ -10,12 +10,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +40,7 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
     private TextView tituloDireccionTextView;
     private TextView subtituloDireccionTextView;
     private TextView tituloDescripcionTextView;
-
+    private ImageView imagenProductoRow;
     private LatLng destinationLatLng;
 
     @Override
@@ -53,10 +55,11 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
         tituloDireccionTextView = view.findViewById(R.id.titulo_direccion);
         subtituloDireccionTextView = view.findViewById(R.id.subtitulo_direccion);
         tituloDescripcionTextView = view.findViewById(R.id.titulo_descripcion);
-
+        imagenProductoRow = view.findViewById(R.id.imagenProductoRow);
         tituloDireccionTextView.setVisibility(View.GONE);
         subtituloDireccionTextView.setVisibility(View.GONE);
         tituloDescripcionTextView.setVisibility(View.GONE);
+        imagenProductoRow.setVisibility(View.GONE);
 
         // Verificar y solicitar los permisos necesarios
         if (checkLocationPermission()) {
@@ -82,6 +85,7 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
                 double longitude = -77.03696647741637;
                 updateMapLocation(latitude, longitude);
                 setTextViews(1); // Actualizar los TextViews
+
             }
         });
 
@@ -183,27 +187,33 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
         tituloDireccionTextView.setVisibility(View.VISIBLE);
         subtituloDireccionTextView.setVisibility(View.VISIBLE);
         tituloDescripcionTextView.setVisibility(View.VISIBLE);
+        imagenProductoRow.setVisibility(View.VISIBLE);
 
         switch (buttonNumber) {
             case 1:
                 tituloDireccionTextView.setText(getString(R.string.titulo_direccion1));
                 subtituloDireccionTextView.setText(getString(R.string.titulo_subdireccion1));
                 tituloDescripcionTextView.setText(getString(R.string.titulo_descripcion1));
+                imagenProductoRow.setImageResource(R.drawable.sedecentro);
+
                 break;
             case 2:
                 tituloDireccionTextView.setText(getString(R.string.titulo_direccion2));
                 subtituloDireccionTextView.setText(getString(R.string.titulo_subdireccion2));
                 tituloDescripcionTextView.setText(getString(R.string.titulo_descripcion2));
+                imagenProductoRow.setImageResource(R.drawable.sedeate);
                 break;
             case 3:
                 tituloDireccionTextView.setText(getString(R.string.titulo_direccion3));
                 subtituloDireccionTextView.setText(getString(R.string.titulo_subdireccion3));
                 tituloDescripcionTextView.setText(getString(R.string.titulo_descripcion3));
+                imagenProductoRow.setImageResource(R.drawable.sedecentro);
                 break;
             case 4:
                 tituloDireccionTextView.setText(getString(R.string.titulo_direccion4));
                 subtituloDireccionTextView.setText(getString(R.string.titulo_subdireccion4));
                 tituloDescripcionTextView.setText(getString(R.string.titulo_descripcion4));
+                imagenProductoRow.setImageResource(R.drawable.sedeate);
                 break;
         }
     }
