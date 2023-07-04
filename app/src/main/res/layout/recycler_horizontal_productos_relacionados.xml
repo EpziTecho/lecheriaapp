@@ -9,7 +9,7 @@
     android:layout_marginLeft="17dp"
     android:layout_marginTop="10dp"
     android:elevation="10dp"
-
+    android:layout_marginRight="8dp"
     >
     <!-- android:layout_width="138dp"
         android:layout_height="84dp" -->
@@ -17,7 +17,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagenProductoRow"
         android:layout_width="138dp"
-        android:layout_height="84dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         app:shapeAppearanceOverlay="@style/RoundedImageViewProd"
         android:scaleType="center"
@@ -31,7 +31,7 @@
         android:background="#00FFFFFF"
         android:foreground="@drawable/favoritonoseleccionado"
         android:translationX="60dp"
-        android:translationY="-100dp"
+        android:translationY="-135dp"
         />
 
     <TextView
@@ -65,7 +65,7 @@
             android:id="@+id/precioProductoRow"
             android:layout_width="66dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:gravity="right"
             android:layout_weight="1"
             android:text="S/.9.00"
             android:textColor="#F44336"

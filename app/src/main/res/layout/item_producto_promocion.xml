@@ -7,7 +7,7 @@
     android:layout_marginLeft="17dp"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
-
+    android:layout_marginBottom="8dp"
     android:elevation="10dp"
 
     android:gravity="center"
@@ -15,20 +15,21 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagenProductoRow"
         android:layout_width="270dp"
-        android:layout_height="150dp"
+        android:layout_height="220dp"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
-        app:strokeWidth="2dp"
-        android:layout_marginTop="25dp"/>
+        android:elevation="1dp"
+        android:layout_marginTop="25dp"
+        app:shapeAppearanceOverlay="@style/RoundedImageViewProd"/>
 
     <Button
         android:id="@+id/btn_favorito"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:background="#00FFFFFF"
         android:foreground="@drawable/favoritonoseleccionado"
-        android:translationX="110dp"
-        android:translationY="-165dp"
+        android:translationX="130dp"
+        android:translationY="-235dp"
         />
 
     <TextView
