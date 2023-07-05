@@ -93,8 +93,8 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 // Redirigir a la ubicación correspondiente al botón 2
-                double latitude = 34.567;
-                double longitude = 12.345;
+                double latitude = -11.9530354;
+                double longitude = -77.0726801;
                 updateMapLocation(latitude, longitude);
                 setTextViews(2); // Actualizar los TextViews
             }
@@ -104,8 +104,8 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 // Redirigir a la ubicación correspondiente al botón 3
-                double latitude = 56.789;
-                double longitude = 34.567;
+                double latitude = -12.1852211;
+                double longitude = -76.9999967;
                 updateMapLocation(latitude, longitude);
                 setTextViews(3); // Actualizar los TextViews
             }
@@ -115,8 +115,8 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 // Redirigir a la ubicación correspondiente al botón 4
-                double latitude = 90.123;
-                double longitude = 56.789;
+                double latitude = -12.01388;
+                double longitude = -76.901659;
                 updateMapLocation(latitude, longitude);
                 setTextViews(4); // Actualizar los TextViews
             }
@@ -201,13 +201,13 @@ public class UbicanosFragment extends Fragment implements OnMapReadyCallback {
                 tituloDireccionTextView.setText(getString(R.string.titulo_direccion2));
                 subtituloDireccionTextView.setText(getString(R.string.titulo_subdireccion2));
                 tituloDescripcionTextView.setText(getString(R.string.titulo_descripcion2));
-                imagenProductoRow.setImageResource(R.drawable.sedeate);
+                imagenProductoRow.setImageResource(R.drawable.sedesmp);
                 break;
             case 3:
                 tituloDireccionTextView.setText(getString(R.string.titulo_direccion3));
                 subtituloDireccionTextView.setText(getString(R.string.titulo_subdireccion3));
                 tituloDescripcionTextView.setText(getString(R.string.titulo_descripcion3));
-                imagenProductoRow.setImageResource(R.drawable.sedecentro);
+                imagenProductoRow.setImageResource(R.drawable.sedecallao);
                 break;
             case 4:
                 tituloDireccionTextView.setText(getString(R.string.titulo_direccion4));

@@ -53,7 +53,7 @@ public class DetallesProductoFragment extends Fragment {
             precioTextView.setText("S/. " + precio);
             estadoTextView.setText(estado);
             ingredientesTextView.setText(ingredientes);
-            caloriasTextView.setText(calorias);
+            caloriasTextView.setText(calorias+" Kcal");
             disponibilidadTextView.setText(disponibilidad);
             categoriaTextView.setText(categoria);
 
