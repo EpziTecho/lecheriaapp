@@ -114,15 +114,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
+
+                <!-- Título de información -->
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imagenProductoRow"
                     android:layout_width="314dp"
-                    android:layout_height="140dp"
+                    android:layout_height="141dp"
 
+                    android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    app:strokeWidth="2dp"
-                    android:layout_gravity="center"/>
-                <!-- Título de información -->
+                    app:strokeWidth="2dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
