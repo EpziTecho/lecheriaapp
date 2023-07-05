@@ -117,7 +117,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imagenProductoRow"
                     android:layout_width="314dp"
-                    android:layout_height="91dp"
+                    android:layout_height="140dp"
 
                     android:scaleType="centerCrop"
                     app:strokeWidth="2dp"
