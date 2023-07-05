@@ -9,7 +9,6 @@ public class ProductoModel {
     private String ingredientes;
     private String imageUrl;
     private String categoria;
-
     private String codigoQR;
 
     public ProductoModel(String nombre, String caloria, String precio, String estado, String disponibilidad, String ingredientes, String imageUrl, String categoria, String codigoQR) {

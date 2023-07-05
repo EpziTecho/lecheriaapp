@@ -8,13 +8,15 @@
     android:background="@drawable/gestion_producto_background"
     android:elevation="10dp"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginBottom="8dp"
+    >
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imagenProductoRow"
         android:layout_width="117dp"
-        android:layout_height="77dp"
-        android:layout_marginLeft="11dp"
+        android:layout_height="100dp"
+        android:layout_margin="4dp"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/RoundedImageViewProd"
         app:strokeWidth="2dp" />
@@ -53,7 +55,7 @@
 
                 <Button
                     android:id="@+id/btnEditarProducto"
-                    android:layout_width="24dp"
+                    android:layout_width="20dp"
                     android:layout_height="24dp"
                     android:layout_margin="4dp"
                     android:layout_marginBottom="8dp"

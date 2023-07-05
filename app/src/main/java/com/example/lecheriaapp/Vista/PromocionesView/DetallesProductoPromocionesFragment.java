@@ -29,7 +29,7 @@ public class DetallesProductoPromocionesFragment extends Fragment {
     private TextView precioProductoRow;
     private TextView disponibilidadProductoRow;
     private TextView estadoProductoRow;
-    private TextView descripcionProductoRow;
+    private TextView descripcionProductoRow,QproductoRow;
     private Button btnFavorito;
     private Button btnQuieroPromo;
     private ShapeableImageView imagenProductoRow;
@@ -58,15 +58,11 @@ public class DetallesProductoPromocionesFragment extends Fragment {
         productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
         adapter = new RecyclerProductoAdapter(getContext(), R.layout.recycler_horizontal_productos_relacionados, productoModelList);
         recyclerView2.setAdapter(adapter);
-
         // Initialize views
         nombreProductoRow = view.findViewById(R.id.nombreProductoRow);
-       // caloriasProductoRow = view.findViewById(R.id.caloriasproductorow);
         precioProductoRow = view.findViewById(R.id.precioProductoRow);
-       // disponibilidadProductoRow = view.findViewById(R.id.disponibilidadproductorow);
-        //estadoProductoRow = view.findViewById(R.id.estadoProductoRow);
-        //btnFavorito = view.findViewById(R.id.btn_favorito);
         descripcionProductoRow = view.findViewById(R.id.descripcionProductoRow);
+        //QproductoRow = view.findViewById(R.id.QrProductoRow);
         imagenProductoRow = view.findViewById(R.id.imagenProductoRow);
         btnQuieroPromo = view.findViewById(R.id.btn_quiero_promo);
 
@@ -76,26 +72,19 @@ public class DetallesProductoPromocionesFragment extends Fragment {
             // Obtener los datos del producto seleccionado
             String nombre = args.getString("nombre");
             String precio = args.getString("precio");
-            String estado = args.getString("estado");
-            String calorias = args.getString("caloria");
-            String disponibilidad = args.getString("disponibilidad");
             String descripcion = args.getString("ingredientes");
             // Obtener la URL de la imagen del producto
             String imageUrl = args.getString("imageUrl");
-
+            codigoQR = args.getString("codigoQR");
             // Asignar los datos a las vistas
             nombreProductoRow.setText(nombre);
             precioProductoRow.setText("S/. " + precio);
             descripcionProductoRow.setText(descripcion);
-            //estadoProductoRow.setText(estado);
-            //caloriasProductoRow.setText(calorias);
-            //disponibilidadProductoRow.setText(disponibilidad);
-
+            //QproductoRow.setText(codigoQR);
             // Cargar la imagen utilizando Glide
             Glide.with(requireContext())
                     .load(imageUrl)
                     .into(imagenProductoRow);
-            codigoQR = args.getString("codigoQR");
         }
 
         // Configurar el click listener del botón "Quiero Promo"
@@ -107,6 +96,7 @@ public class DetallesProductoPromocionesFragment extends Fragment {
                 Bundle args = new Bundle();
                 args.putString("nombre", nombreProductoRow.getText().toString());
                 args.putString("precio", precioProductoRow.getText().toString());
+                //enviar el url de codigoQr
                 args.putString("codigoQR", codigoQR);
                 QrFragment qrFragment = new QrFragment();
                 qrFragment.setArguments(args);

@@ -43,17 +43,17 @@
 
     <string name="notificaciones">Notificaciones</string>
     <string name="API_KEY"></string>
-    <string name="titulo_direccion1">Dirección1</string>
-    <string name="titulo_subdireccion1">Subdirección1</string>
+    <string name="titulo_direccion1">Sede Centro</string>
+    <string name="titulo_subdireccion1">Av. Arequipa 265, Lima 15046</string>
     <string name="titulo_descripcion1">Descripción1</string>
-    <string name="titulo_direccion2">Dirección2</string>
-    <string name="titulo_subdireccion2">Subdirección2</string>
+    <string name="titulo_direccion2">Sede SMP</string>
+    <string name="titulo_subdireccion2">Av. Alfredo Mendiola 7042, San Martín de Porres 15314</string>
     <string name="titulo_descripcion2">Descripción2</string>
-    <string name="titulo_direccion3">Dirección3</string>
-    <string name="titulo_subdireccion3">Subdirección3</string>
+    <string name="titulo_direccion3">Sede Callao</string>
+    <string name="titulo_subdireccion3">Av. Argentina 3093, Callao 07001</string>
     <string name="titulo_descripcion3">Descripción3</string>
-    <string name="titulo_direccion4">Dirección4</string>
-    <string name="titulo_subdireccion4">Subdirección4</string>
+    <string name="titulo_direccion4">Sede Ate</string>
+    <string name="titulo_subdireccion4">Av. Nicolás Ayllón con, Ate 15487</string>
     <string name="titulo_descripcion4">Descripción4</string>
 
 

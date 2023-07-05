@@ -5,14 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".Vista.PrincipalView.MainActivity">
+    tools:context=".Vista.PrincipalView.MainActivity"
+    android:layout_marginBottom="40dp">
 
     <!-- Contenedor para título y lista -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -69,10 +68,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHome"
             android:layout_width="match_parent"
-            android:layout_height="606dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+
+            android:paddingBottom="16dp" />
 
     </LinearLayout>
 

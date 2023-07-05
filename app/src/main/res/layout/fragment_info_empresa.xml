@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="134dp"
         android:translationY="-40dp"
-        tools:srcCompat="@drawable/foto_trabajadores" />
+        app:srcCompat="@drawable/foto_trabajadores" />
 
     <LinearLayout
         android:layout_width="345dp"
@@ -89,21 +89,21 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <ImageView
+            android:id="@+id/logofacebook"
             android:layout_width="122dp"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/facebook" />
 
-        <ImageButton
-            android:id="@+id/imageButton4"
+        <ImageView
+            android:id="@+id/logoinstagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/iconoir_instagram" />
 
-        <ImageButton
-            android:id="@+id/imageButton3"
+        <ImageView
+            android:id="@+id/logowhatsapp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
