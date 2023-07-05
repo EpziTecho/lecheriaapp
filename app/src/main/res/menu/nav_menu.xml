@@ -23,7 +23,7 @@
             android:title="Gestionar Productos" />
         <item
             android:id="@+id/nav_infoEmpresa"
-            android:icon="@drawable/baseline_despliegue"
+            android:icon="@drawable/baseline_info_24"
             android:title="Info/Nosotros" />
     </group>
     <group android:checkableBehavior="single">
