@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.example.lecheriaapp.Presentador.GestionProductosPresenter.PresentadorAgregarProductos;
 import com.example.lecheriaapp.R;
-import com.example.lecheriaapp.Vista.GestionProductosView.GestionProductosFragment;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -185,7 +184,7 @@ public class AgregarProductoFragment extends Fragment implements View.OnClickLis
             intent.setType("image/*");
             startActivityForResult(intent, GALLERY_REQUEST_CODE);
         } else if (view.getId() == R.id.btnCancelar) {
-            Toast.makeText(getActivity(), "Cancelado", Toast.LENGTH_SHORT).show();
+           //Toast.makeText(getActivity(), "Cancelado", Toast.LENGTH_SHORT).show();
             FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container, new GestionProductosFragment()).commit();
         }
