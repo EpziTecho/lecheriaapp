@@ -52,7 +52,7 @@ public class PresentadorEditarProductos {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // Si se completa la actualización del producto, se muestra un mensaje de confirmación
-                        Toast.makeText(mContext, "Producto actualizado", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "Producto actualizado", Toast.LENGTH_SHORT).show();
                         FragmentManager fragmentManager = ((FragmentActivity) mContext).getSupportFragmentManager();
                         Fragment gestionProductosFragment = new GestionProductosFragment();
                         fragmentManager.beginTransaction().replace(R.id.fragment_container, gestionProductosFragment).commit();
