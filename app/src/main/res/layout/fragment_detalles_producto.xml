@@ -6,10 +6,10 @@
     >
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="719dp"
         android:layout_margin="15dp"
-        android:background="@drawable/producto_background"
+
         android:elevation="0dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
