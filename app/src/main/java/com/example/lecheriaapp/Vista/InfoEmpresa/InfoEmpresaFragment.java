@@ -16,11 +16,9 @@ public class InfoEmpresaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info_empresa, container, false);
-
         ImageView whatsappImageView = view.findViewById(R.id.logowhatsapp);
         ImageView facebookImageView = view.findViewById(R.id.logofacebook);
         ImageView instagramImageView = view.findViewById(R.id.logoinstagram);
-
         // Configurar OnClickListener para WhatsApp
         whatsappImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +26,6 @@ public class InfoEmpresaFragment extends Fragment {
                 openWhatsApp();
             }
         });
-
         // Configurar OnClickListener para Facebook
         facebookImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +33,6 @@ public class InfoEmpresaFragment extends Fragment {
                 openFacebook();
             }
         });
-
         // Configurar OnClickListener para Instagram
         instagramImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,10 +40,8 @@ public class InfoEmpresaFragment extends Fragment {
                 openInstagram();
             }
         });
-
         return view;
     }
-
     private void openWhatsApp() {
         String phoneNumber = "+51902216601"; //
         String message = "Hola, estoy interesado en tus productos."; //
@@ -64,9 +58,8 @@ public class InfoEmpresaFragment extends Fragment {
         }
     }
 
-
     private void openFacebook() {
-        String facebookUrl = "https://www.facebook.com/UTP.Peru/";
+        String facebookUrl = "https://www.facebook.com/lalecheria.ite/?locale=es_LA";
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl));
             startActivity(intent);
@@ -74,9 +67,8 @@ public class InfoEmpresaFragment extends Fragment {
             e.printStackTrace();
         }
     }
-
     private void openInstagram() {
-        String instagramUrl = "https://www.instagram.com/universidadutp/?hl=es";
+        String instagramUrl = "https://www.instagram.com/_lalecheria/";
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(instagramUrl));
             startActivity(intent);
