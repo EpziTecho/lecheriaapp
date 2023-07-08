@@ -122,10 +122,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         productoModelList = new ArrayList<>();  // Inicializar productoModelList aquí
-
         adapter = new ProductosAdapter(getContext(), productoModelList);  // Inicializar el adaptador
         recyclerView.setAdapter(adapter);
-
         productosHomePresenter.cargarRecyclerView(recyclerView);
     }
 
