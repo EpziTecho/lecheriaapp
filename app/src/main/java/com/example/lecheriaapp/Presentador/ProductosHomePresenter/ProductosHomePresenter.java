@@ -48,7 +48,7 @@ public class ProductosHomePresenter {
 
                     if (rol != null && rol.equals("cliente")) {
                         // Cargar productos de usuarios con rol "admin" y "adminSMP"
-                        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("AdminCentro").endAt("AdminSMP");
+                        Query query = mDatabase.child("Usuarios").orderByChild("rol").startAt("AdminAte").endAt("AdminSMP");
                         query.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
